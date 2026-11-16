@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -80,8 +81,8 @@ export class CreateExperimentModalImpl extends Component<
     const { experimentName } = this.state;
     return (
       <GenericInputModal
-        title="Create Experiment"
-        okText="Create"
+        title={sourceIntl.formatMessage({ defaultMessage: 'Create Experiment', description: 'Legacy UI label' })}
+        okText={sourceIntl.formatMessage({ defaultMessage: 'Create', description: 'Legacy UI label' })}
         isOpen={isOpen}
         handleSubmit={this.handleCreateExperiment}
         onClose={this.handleClose}

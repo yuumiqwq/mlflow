@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Link, useSearchParams } from '../../../common/utils/RoutingUtils';
 import {
   Alert,
@@ -579,7 +580,10 @@ export const EditEndpointFormRenderer = ({
                             checked={field.value}
                             onChange={(checked) => void onUsageTrackingUpdate(checked)}
                             disabled={isSubmitting}
-                            aria-label="Enable usage tracking"
+                            aria-label={sourceIntl.formatMessage({
+                              defaultMessage: 'Enable usage tracking',
+                              description: 'Legacy UI label',
+                            })}
                           />
                           <Typography.Text css={{ fontSize: theme.typography.fontSizeSm }}>
                             {field.value ? (

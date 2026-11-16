@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { isNil } from 'lodash';
 
 import { Empty, Typography, useDesignSystemTheme, XCircleIcon } from '@databricks/design-system';
@@ -53,7 +54,7 @@ export function ModelTraceExplorerEventsTab({
             <>
               <XCircleIcon css={{ marginRight: theme.spacing.sm }} color="danger" />
               <Typography.Text color="error" bold>
-                Exception
+                {sourceIntl.formatMessage({ defaultMessage: 'Exception', description: 'Legacy UI label' })}
               </Typography.Text>
             </>
           ) : (

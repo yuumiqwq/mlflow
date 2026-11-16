@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -130,7 +131,12 @@ export const PromptInputPanel = ({ messages, onChange }: Props) => {
                 ))}
                 {!message.content && getNamedToolCalls(message).length === 0 && (
                   <div css={cardStyles} data-testid="mlflow.playground.assistant.text_card">
-                    <GenAIMarkdownRenderer>(no text content)</GenAIMarkdownRenderer>
+                    <GenAIMarkdownRenderer>
+                      {sourceIntl.formatMessage({
+                        defaultMessage: '(no text content)',
+                        description: 'Legacy UI label',
+                      })}
+                    </GenAIMarkdownRenderer>
                   </div>
                 )}
               </div>
@@ -220,7 +226,9 @@ export const PromptInputPanel = ({ messages, onChange }: Props) => {
                       </Typography.Paragraph>
                       <ul css={{ margin: `${theme.spacing.xs}px 0 0`, paddingLeft: theme.spacing.lg }}>
                         <li>
-                          <Typography.Text bold>System</Typography.Text>{' '}
+                          <Typography.Text bold>
+                            {sourceIntl.formatMessage({ defaultMessage: 'System', description: 'Legacy UI label' })}
+                          </Typography.Text>{' '}
                           <FormattedMessage
                             defaultMessage="— instructions or persona for the model (e.g. {example})."
                             description="Description of the system role in the playground role-selector help popover"
@@ -228,14 +236,18 @@ export const PromptInputPanel = ({ messages, onChange }: Props) => {
                           />
                         </li>
                         <li>
-                          <Typography.Text bold>User</Typography.Text>{' '}
+                          <Typography.Text bold>
+                            {sourceIntl.formatMessage({ defaultMessage: 'User', description: 'Legacy UI label' })}
+                          </Typography.Text>{' '}
                           <FormattedMessage
                             defaultMessage="— what the human is asking. This is the typical input."
                             description="Description of the user role in the playground role-selector help popover"
                           />
                         </li>
                         <li>
-                          <Typography.Text bold>Assistant</Typography.Text>{' '}
+                          <Typography.Text bold>
+                            {sourceIntl.formatMessage({ defaultMessage: 'Assistant', description: 'Legacy UI label' })}
+                          </Typography.Text>{' '}
                           <FormattedMessage
                             defaultMessage="— what the model has previously said. Useful for priming with example responses."
                             description="Description of the assistant role in the playground role-selector help popover"

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import React, { useMemo, useState } from 'react';
 
 import {
@@ -114,7 +115,7 @@ export const EvaluationsOverviewColumnSelectorGrouped: React.FC<React.PropsWithC
   return (
     <DialogCombobox
       componentId="mlflow.evaluations_overview_grouped.column_selector_dropdown"
-      label="Columns"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Columns', description: 'Legacy UI label' })}
       multiSelect
     >
       <DialogComboboxCustomButtonTriggerWrapper>

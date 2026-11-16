@@ -162,12 +162,10 @@ export const ExperimentViewHeader = React.memo(
         <div
           css={{
             display: 'grid',
-            gridTemplateColumns: '1fr auto auto',
+            gridTemplateColumns: 'minmax(0, 1fr) auto auto',
           }}
         >
-          <div
-            css={{ display: 'flex', gap: theme.spacing.sm, alignItems: 'center', overflow: 'hidden', minWidth: 250 }}
-          >
+          <div css={{ display: 'flex', gap: theme.spacing.sm, alignItems: 'center', overflow: 'hidden', minWidth: 0 }}>
             {!shouldEnableWorkflowBasedNavigation() && (
               <Button
                 componentId="mlflow.experiment-page.header.back-icon-button"

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../i18n/SourceMessages';
 /**
  * Inline Yes/No prompt shown when the assistant wants to run a tool while the
  * session is not in full-access mode. The backend stream stays paused until the
@@ -41,7 +42,10 @@ export const ToolPermissionPrompt = ({
   return (
     <div
       role="group"
-      aria-label="Tool permission request"
+      aria-label={sourceIntl.formatMessage({
+        defaultMessage: 'Tool permission request',
+        description: 'Legacy UI label',
+      })}
       css={{
         display: 'flex',
         flexDirection: 'column',

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Typography, useDesignSystemTheme } from '@databricks/design-system';
 import type { ColumnDef } from '@tanstack/react-table';
 import { useIntl } from 'react-intl';
@@ -20,7 +21,10 @@ export const PromptVersionsTableCombinedCell: ColumnDef<RegisteredPromptVersion>
   return (
     <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
       <div css={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
-        <Typography.Text bold>Version {original.version}</Typography.Text>
+        <Typography.Text bold>
+          {sourceIntl.formatMessage({ defaultMessage: 'Version', description: 'Legacy UI label' })}
+          {original.version}
+        </Typography.Text>
         {registeredPrompt && (
           <ModelVersionTableAliasesCell
             modelName={registeredPrompt.name}

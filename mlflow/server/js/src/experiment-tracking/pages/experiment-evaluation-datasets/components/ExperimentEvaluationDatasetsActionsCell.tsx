@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { DropdownMenu, OverflowIcon, Spinner, TableRowAction, TrashIcon } from '@databricks/design-system';
 import { Button } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
@@ -31,7 +32,7 @@ export const ActionsCell = ({ row }: { row: Row<EvaluationDataset> }) => {
             componentId="mlflow.eval-datasets.dataset-actions-menu"
             size="small"
             icon={<OverflowIcon />}
-            aria-label="Dataset actions"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Dataset actions', description: 'Legacy UI label' })}
             css={{ padding: '4px' }}
           />
         </DropdownMenu.Trigger>

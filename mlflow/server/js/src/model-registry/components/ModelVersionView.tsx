@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -585,7 +586,7 @@ export class ModelVersionViewImpl extends React.Component<ModelVersionViewImplPr
 
     return (
       <Descriptions columns={1} data-testid="model-view-tags">
-        <Descriptions.Item label="Tags">
+        <Descriptions.Item label={sourceIntl.formatMessage({ defaultMessage: 'Tags', description: 'Legacy UI label' })}>
           <TagList tags={this.getTags()} onEdit={this.handleEditTags} />
         </Descriptions.Item>
       </Descriptions>

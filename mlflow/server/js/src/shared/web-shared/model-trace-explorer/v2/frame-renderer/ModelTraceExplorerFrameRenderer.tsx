@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import React, { useEffect, useRef } from 'react';
 
 import { useDesignSystemTheme, Typography, ChevronDownIcon, ChevronRightIcon, Button } from '@databricks/design-system';
@@ -124,15 +125,15 @@ export const ModelTraceExplorerFrameRenderer = ({
             onClick={() => setExpanded(!expanded)}
           />
           <Typography.Title level={4} withoutMargins>
-            MLflow Trace UI
+            {sourceIntl.formatMessage({ defaultMessage: 'MLflow Trace UI', description: 'Legacy UI label' })}
           </Typography.Title>
           <Typography.Link
             componentId="mlflow.notebook.trace-ui-learn-more-link"
             href="https://mlflow.org/docs/latest/llms/tracing/index.html"
             openInNewTab
-            title="Learn More"
+            title={sourceIntl.formatMessage({ defaultMessage: 'Learn More', description: 'Legacy UI label' })}
           >
-            Learn More
+            {sourceIntl.formatMessage({ defaultMessage: 'Learn More', description: 'Legacy UI label' })}
           </Typography.Link>
         </div>
       </div>
@@ -144,11 +145,13 @@ export const ModelTraceExplorerFrameRenderer = ({
             height,
           }}
         >
-          <ModelTraceExplorerSkeleton label="Frame Skeleton" />
+          <ModelTraceExplorerSkeleton
+            label={sourceIntl.formatMessage({ defaultMessage: 'Frame Skeleton', description: 'Legacy UI label' })}
+          />
         </div>
       )}
       <iframe
-        title="Model Trace Explorer"
+        title={sourceIntl.formatMessage({ defaultMessage: 'Model Trace Explorer', description: 'Legacy UI label' })}
         src={fullIframeSrc}
         ref={iframeRef}
         css={{

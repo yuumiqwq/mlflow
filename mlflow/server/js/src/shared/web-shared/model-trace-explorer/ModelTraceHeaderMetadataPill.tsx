@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useMemo } from 'react';
 
 import { HoverCard, ListIcon, Overflow, Tag, Typography, useDesignSystemTheme } from '@databricks/design-system';
@@ -102,7 +103,10 @@ export const ModelTraceHeaderMetadataPill = ({
                 </div>
               ))}
               {metadataItems.length > MAX_ITEMS && (
-                <Typography.Text color="secondary">+{metadataItems.length - MAX_ITEMS} more</Typography.Text>
+                <Typography.Text color="secondary">
+                  +{metadataItems.length - MAX_ITEMS}
+                  {sourceIntl.formatMessage({ defaultMessage: 'more', description: 'Legacy UI label' })}
+                </Typography.Text>
               )}
             </div>
           }

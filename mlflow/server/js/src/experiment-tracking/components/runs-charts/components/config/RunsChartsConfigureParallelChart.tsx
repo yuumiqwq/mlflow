@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { LegacySelect } from '@databricks/design-system';
 import { useCallback } from 'react';
 import type { RunsChartsCardConfig, RunsChartsParallelCardConfig } from '../../runs-charts.types';
@@ -46,7 +47,9 @@ export const RunsChartsConfigureParallelChart = ({
 
   return (
     <>
-      <RunsChartsConfigureField title="Params">
+      <RunsChartsConfigureField
+        title={sourceIntl.formatMessage({ defaultMessage: 'Params', description: 'Legacy UI label' })}
+      >
         <LegacySelect
           mode={emptyParamsList ? undefined : 'multiple'}
           onChange={updateSelectedParams}
@@ -63,7 +66,9 @@ export const RunsChartsConfigureParallelChart = ({
           ))}
         </LegacySelect>
       </RunsChartsConfigureField>
-      <RunsChartsConfigureField title="Metrics">
+      <RunsChartsConfigureField
+        title={sourceIntl.formatMessage({ defaultMessage: 'Metrics', description: 'Legacy UI label' })}
+      >
         <LegacySelect
           mode={emptyMetricsList ? undefined : 'multiple'}
           onChange={updateSelectedMetrics}

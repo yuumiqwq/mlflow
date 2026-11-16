@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { ImageIcon, Spinner, Tooltip } from '@databricks/design-system';
 import { useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
@@ -369,10 +370,13 @@ export const EmptyImageGridPlot = () => {
       }}
     >
       <Typography.Title css={{ marginTop: 16 }} color="secondary" level={3}>
-        Compare logged images
+        {sourceIntl.formatMessage({ defaultMessage: 'Compare logged images', description: 'Legacy UI label' })}
       </Typography.Title>
       <Typography.Text css={{ marginBottom: 16 }} color="secondary">
-        Use the image grid chart to compare logged images across runs.
+        {sourceIntl.formatMessage({
+          defaultMessage: 'Use the image grid chart to compare logged images across runs.',
+          description: 'Legacy UI label',
+        })}
       </Typography.Text>
     </div>
   );

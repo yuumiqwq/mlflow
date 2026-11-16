@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -191,14 +192,18 @@ export class CompareRunScatterImpl extends Component<CompareRunScatterImplProps,
         }}
         value={(this.state[axis].isMetric ? 'metric-' : 'param-') + this.state[axis].key}
       >
-        <SimpleSelectOptionGroup label="Parameter">
+        <SimpleSelectOptionGroup
+          label={sourceIntl.formatMessage({ defaultMessage: 'Parameter', description: 'Legacy UI label' })}
+        >
           {this.paramKeys.map((p: any) => (
             <SimpleSelectOption key={'param-' + p} value={'param-' + p}>
               {p}
             </SimpleSelectOption>
           ))}
         </SimpleSelectOptionGroup>
-        <SimpleSelectOptionGroup label="Metric">
+        <SimpleSelectOptionGroup
+          label={sourceIntl.formatMessage({ defaultMessage: 'Metric', description: 'Legacy UI label' })}
+        >
           {this.metricKeys.map((m: any) => (
             <SimpleSelectOption key={'metric-' + m} value={'metric-' + m}>
               {m}

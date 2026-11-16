@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { Overflow, useDesignSystemTheme } from '@databricks/design-system';
 import { KeyValueTag } from '../../common/components/KeyValueTag';
 import { inlineFlexRowStyles } from '../styles';
@@ -5,7 +6,13 @@ import { inlineFlexRowStyles } from '../styles';
 export const MCPServerTags = ({ tags }: { tags: Record<string, string> }) => {
   const { theme } = useDesignSystemTheme();
   const entries = Object.entries(tags);
-  if (entries.length === 0) return <span aria-label="No tags">—</span>;
+  if (entries.length === 0) {
+    return (
+      <span aria-label={sourceIntl.formatMessage({ defaultMessage: 'No tags', description: 'Legacy UI label' })}>
+        —
+      </span>
+    );
+  }
   return (
     <div
       css={inlineFlexRowStyles(theme)}

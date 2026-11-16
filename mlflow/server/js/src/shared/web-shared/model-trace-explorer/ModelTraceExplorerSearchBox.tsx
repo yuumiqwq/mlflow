@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -46,7 +47,7 @@ const ModelTraceExplorerSearchBox = ({
       <Input
         componentId="shared.model-trace-explorer.search-input"
         allowClear
-        placeholder="Search"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search', description: 'Legacy UI label' })}
         value={searchValue}
         onClear={() => {
           setSearchFilter('');

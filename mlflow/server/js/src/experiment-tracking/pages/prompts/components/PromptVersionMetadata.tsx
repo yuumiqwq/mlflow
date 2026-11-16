@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Button, ParagraphSkeleton, PencilIcon, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { ModelVersionTableAliasesCell } from '../../../../model-registry/components/aliases/ModelVersionTableAliasesCell';
 import type { PromptModelConfig, RegisteredPrompt, RegisteredPromptVersion } from '../types';
@@ -84,7 +85,9 @@ export const PromptVersionMetadata = ({
     >
       {onEditVersion && (
         <>
-          <Typography.Text bold>Version:</Typography.Text>
+          <Typography.Text bold>
+            {sourceIntl.formatMessage({ defaultMessage: 'Version:', description: 'Legacy UI label' })}
+          </Typography.Text>
           <Typography.Text>
             <Typography.Link
               componentId="mlflow.prompts.details.version.goto"

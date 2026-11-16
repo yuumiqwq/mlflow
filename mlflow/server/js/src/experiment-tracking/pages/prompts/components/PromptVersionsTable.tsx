@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { useReactTable_unverifiedWithReact18 as useReactTable } from '@databricks/web-shared/react-table';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -104,7 +105,14 @@ export const PromptVersionsTable = ({
 
   return (
     <div css={{ flex: 1, overflow: 'hidden' }}>
-      <Table scrollable empty={getEmptyState()} aria-label="Prompt versions table">
+      <Table
+        scrollable
+        empty={getEmptyState()}
+        aria-label={sourceIntl.formatMessage({
+          defaultMessage: 'Prompt versions table',
+          description: 'Legacy UI label',
+        })}
+      >
         <TableRow isHeader>
           {table.getLeafHeaders().map((header) => (
             <TableHeader componentId="mlflow.prompts.versions.table.header" key={header.id}>

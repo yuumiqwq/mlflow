@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { useCallback, useState, useMemo } from 'react';
 
 import { useDesignSystemTheme, Input } from '@databricks/design-system';
@@ -102,7 +103,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select run"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select run', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue={false}
       />
@@ -118,7 +119,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select version"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select version', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue={false}
       />
@@ -131,10 +132,10 @@ export const TableFilterItemValueInput = ({
       // Numeric assessments get a number input field
       return (
         <Input
-          aria-label="Value"
+          aria-label={sourceIntl.formatMessage({ defaultMessage: 'Value', description: 'Legacy UI label' })}
           componentId="mlflow.evaluations_review.table_ui.filter_value_numeric"
           id={id}
-          placeholder="Numeric value"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Numeric value', description: 'Legacy UI label' })}
           type="number"
           value={localValue as string}
           onChange={(e) => {
@@ -174,7 +175,7 @@ export const TableFilterItemValueInput = ({
           onChange={(value: string) => {
             onChange({ ...tableFilter, value: serializedStringToAssessmentValueV2(value) }, index);
           }}
-          placeholder="Select"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select', description: 'Legacy UI label' })}
           width={200}
           canSearchCustomValue={false}
         />
@@ -191,7 +192,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue={false}
       />
@@ -208,7 +209,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select source"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select source', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue={false}
       />
@@ -228,7 +229,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue={false}
       />
@@ -246,7 +247,7 @@ export const TableFilterItemValueInput = ({
         onChange={(value: string) => {
           onChange({ ...tableFilter, value }, index);
         }}
-        placeholder="Select prompt"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select prompt', description: 'Legacy UI label' })}
         width={200}
         canSearchCustomValue
       />
@@ -255,7 +256,7 @@ export const TableFilterItemValueInput = ({
 
   return (
     <Input
-      aria-label="Value"
+      aria-label={sourceIntl.formatMessage({ defaultMessage: 'Value', description: 'Legacy UI label' })}
       componentId="mlflow.evaluations_review.table_ui.filter_value"
       id={id}
       placeholder={tableFilter.column === EXECUTION_DURATION_COLUMN_ID ? 'Time in milliseconds' : 'Value'}

@@ -10,6 +10,8 @@
  * so that it can be mocked in tests.
  */
 export const DEFAULT_LOCALE = 'en';
+// The source messages remain English; the standalone UI starts in Simplified Chinese.
+export const DEFAULT_UI_LOCALE = 'zh-CN';
 
 export async function loadMessages(locale: any) {
   // No compiled messages for the default locale — react-intl renders the

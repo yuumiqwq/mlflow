@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
 import { DeleteConfirmationModal } from '../common';
@@ -83,7 +84,7 @@ export const DeleteApiKeyModal = ({ open, secret, endpoints, onClose, onSuccess 
       open={open}
       onClose={onClose}
       onConfirm={handleConfirm}
-      title="Delete API Key"
+      title={sourceIntl.formatMessage({ defaultMessage: 'Delete API Key', description: 'Legacy UI label' })}
       itemName={secret.secret_name}
       itemType="API key"
       componentId="mlflow.gateway.delete-api-key-modal"

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -91,7 +92,7 @@ export const ExperimentPageSideNavAssistantButton = () => {
           color="turquoise"
           css={{ marginLeft: 'auto' }}
         >
-          Beta
+          {sourceIntl.formatMessage({ defaultMessage: 'Beta', description: 'Legacy UI label' })}
         </Tag>
       </div>
     </div>

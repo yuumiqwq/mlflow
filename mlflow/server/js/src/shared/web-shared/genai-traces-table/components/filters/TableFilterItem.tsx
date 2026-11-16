@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { useMemo } from 'react';
 
 import {
@@ -260,7 +261,7 @@ export const TableFilterItem = ({
                 onChange({ column: value, operator: defaultOperator, value: '' }, index);
               }
             }}
-            placeholder="Select column"
+            placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select column', description: 'Legacy UI label' })}
             width={180}
             canSearchCustomValue={false}
           />
@@ -296,7 +297,7 @@ export const TableFilterItem = ({
                   index,
                 );
               }}
-              placeholder="Select name"
+              placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select name', description: 'Legacy UI label' })}
               width={200}
               canSearchCustomValue={false}
             />
@@ -333,7 +334,7 @@ export const TableFilterItem = ({
                   index,
                 );
               }}
-              placeholder="Select name"
+              placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select name', description: 'Legacy UI label' })}
               width={200}
               canSearchCustomValue={false}
             />
@@ -353,7 +354,7 @@ export const TableFilterItem = ({
               />
             </FormUI.Label>
             <Input
-              aria-label="Key"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'Key', description: 'Legacy UI label' })}
               componentId="mlflow.evaluations_review.table_ui.filter_key"
               id={'filter-key-' + index}
               type="text"
@@ -383,10 +384,10 @@ export const TableFilterItem = ({
               column !== '' && getAvailableOperators(column, key, usesV4APIs, assessmentInfos).length === 1;
             return (
               <SimpleSelect
-                aria-label="Operator"
+                aria-label={sourceIntl.formatMessage({ defaultMessage: 'Operator', description: 'Legacy UI label' })}
                 componentId="mlflow.evaluations_review.table_ui.filter_operator"
                 id={'filter-operator-' + index}
-                placeholder="Select"
+                placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select', description: 'Legacy UI label' })}
                 width={120}
                 contentProps={{
                   // Set the z-index to be higher than the Popover

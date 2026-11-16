@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React from 'react';
 import { Link } from '../../common/utils/RoutingUtils';
 import Routes from '../routes';
@@ -50,7 +51,9 @@ export class RunLinksPopover extends React.Component<Props> {
     const { handleClose } = this.props;
     return (
       <div>
-        <span>Jump to individual runs</span>
+        <span>
+          {sourceIntl.formatMessage({ defaultMessage: 'Jump to individual runs', description: 'Legacy UI label' })}
+        </span>
         <IconButton
           icon={<i className="fa fa-times" />}
           onClick={handleClose}

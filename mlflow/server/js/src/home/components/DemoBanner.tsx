@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { useState, useCallback } from 'react';
 import { Button, Empty, Spinner, BeakerIcon, CloseIcon, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
@@ -53,7 +54,7 @@ export const DemoBanner = () => {
     >
       <button
         onClick={handleDismiss}
-        aria-label="Dismiss"
+        aria-label={sourceIntl.formatMessage({ defaultMessage: 'Dismiss', description: 'Legacy UI label' })}
         css={{
           position: 'absolute',
           top: theme.spacing.sm,

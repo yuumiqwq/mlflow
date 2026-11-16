@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   DialogCombobox,
   DialogComboboxContent,
@@ -72,7 +73,11 @@ export const ExperimentEvaluationRunsTableGroupBySelector = ({
   };
 
   return (
-    <DialogCombobox componentId="mlflow.eval-runs.table-column-selector" label="Group by" multiSelect>
+    <DialogCombobox
+      componentId="mlflow.eval-runs.table-column-selector"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Group by', description: 'Legacy UI label' })}
+      multiSelect
+    >
       <DialogComboboxTrigger />
       <DialogComboboxContent>
         <DialogComboboxOptionList>

@@ -1,3 +1,5 @@
+import { getRunAttributeLabel } from '../../../../../i18n/RunAttributeLabels';
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -100,7 +102,7 @@ const ExperimentViewRunsSortSelectorV2Body = ({
           value={filter}
           type="search"
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Search"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search', description: 'Legacy UI label' })}
           autoFocus
           ref={inputElementRef}
           onKeyDown={(e) => {
@@ -122,7 +124,7 @@ const ExperimentViewRunsSortSelectorV2Body = ({
             icon={<ArrowDownIcon />}
             componentId="mlflow.experiment_page.sort_select_v2.sort_desc"
             onClick={() => setOrder(false)}
-            aria-label="Sort descending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort descending', description: 'Legacy UI label' })}
             data-testid="sort-select-desc"
           />
           <ToggleIconButton
@@ -130,7 +132,7 @@ const ExperimentViewRunsSortSelectorV2Body = ({
             icon={<ArrowUpIcon />}
             componentId="mlflow.experiment_page.sort_select_v2.sort_asc"
             onClick={() => setOrder(true)}
-            aria-label="Sort ascending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort ascending', description: 'Legacy UI label' })}
             data-testid="sort-select-asc"
           />
         </div>
@@ -188,7 +190,7 @@ export const ExperimentViewRunsSortSelectorV2 = React.memo(
     const attributeSortOptions = useMemo(
       () =>
         Object.keys(ATTRIBUTE_COLUMN_SORT_LABEL).map((sortLabelKey) => ({
-          label: ATTRIBUTE_COLUMN_SORT_LABEL[sortLabelKey as SORT_KEY_TYPE],
+          label: getRunAttributeLabel(ATTRIBUTE_COLUMN_SORT_LABEL[sortLabelKey as SORT_KEY_TYPE]),
           value: ATTRIBUTE_COLUMN_SORT_KEY[sortLabelKey as SORT_KEY_TYPE],
         })),
       [],

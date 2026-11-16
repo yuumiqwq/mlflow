@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Typography } from '@databricks/design-system';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -518,7 +519,10 @@ client.models.generate_content(model="gemini-2.5-flash", contents="Hello!")`,
             code: <code>@mlflow.trace</code>,
             a: (text: string) => (
               <Typography.Link
-                title="official documentation"
+                title={sourceIntl.formatMessage({
+                  defaultMessage: 'official documentation',
+                  description: 'Legacy UI label',
+                })}
                 componentId="codegen_no_dynamic_mlflow_web_js_src_experiment_tracking_components_traces_quickstart_tracetablequickstart.utils_366"
                 href="https://mlflow.org/docs/latest/genai/tracing/app-instrumentation/manual-tracing/"
                 openInNewTab

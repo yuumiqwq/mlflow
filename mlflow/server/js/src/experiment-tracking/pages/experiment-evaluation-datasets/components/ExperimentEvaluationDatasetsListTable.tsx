@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import React, { useState } from 'react';
 import {
   Empty,
@@ -213,7 +214,11 @@ export const ExperimentEvaluationDatasetsListTable = ({
   });
 
   if (error) {
-    return <div>Error loading datasets</div>;
+    return (
+      <div>
+        {sourceIntl.formatMessage({ defaultMessage: 'Error loading datasets', description: 'Legacy UI label' })}
+      </div>
+    );
   }
 
   return (
@@ -221,7 +226,10 @@ export const ExperimentEvaluationDatasetsListTable = ({
       <div css={{ display: 'flex', gap: theme.spacing.sm, alignItems: 'center', marginBottom: theme.spacing.sm }}>
         <Input
           allowClear
-          placeholder="Search by dataset name"
+          placeholder={sourceIntl.formatMessage({
+            defaultMessage: 'Search by dataset name',
+            description: 'Legacy UI label',
+          })}
           value={internalSearchFilter}
           onChange={(e) => {
             setInternalSearchFilter(e.target.value);

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   Button,
@@ -209,7 +210,11 @@ const ExperimentPageTabsImpl = () => {
       fallback={
         <>
           {[...Array(8).keys()].map((i) => (
-            <ParagraphSkeleton label="Loading..." key={i} seed={`s-${i}`} />
+            <ParagraphSkeleton
+              label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+              key={i}
+              seed={`s-${i}`}
+            />
           ))}
         </>
       }

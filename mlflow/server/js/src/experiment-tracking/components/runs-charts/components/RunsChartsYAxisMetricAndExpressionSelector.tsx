@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Button,
   CloseIcon,
@@ -217,7 +218,10 @@ export const RunsChartsYAxisMetricAndExpressionSelector = ({
   return (
     <>
       {usingChartExpressions && (
-        <RunsChartsConfigureField title="Metric type" compact>
+        <RunsChartsConfigureField
+          title={sourceIntl.formatMessage({ defaultMessage: 'Metric type', description: 'Legacy UI label' })}
+          compact
+        >
           <Radio.Group
             componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_runschartsyaxismetricandexpressionselector.tsx_221"
             name="runs-charts-field-group-metric-type-y-axis"
@@ -240,7 +244,10 @@ export const RunsChartsYAxisMetricAndExpressionSelector = ({
         </RunsChartsConfigureField>
       )}
       {usingChartExpressions && state.yAxisKey === RunsChartsLineChartYAxisType.EXPRESSION ? (
-        <RunsChartsConfigureField title="Expression" compact>
+        <RunsChartsConfigureField
+          title={sourceIntl.formatMessage({ defaultMessage: 'Expression', description: 'Legacy UI label' })}
+          compact
+        >
           <div css={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: theme.spacing.sm }}>
             {temporaryChartExpressions.map((chartExpression, index) => {
               return (
@@ -259,12 +266,15 @@ export const RunsChartsYAxisMetricAndExpressionSelector = ({
               icon={<PlusIcon />}
               onClick={addNewYAxisExpressionTemporary}
             >
-              Add new
+              {sourceIntl.formatMessage({ defaultMessage: 'Add new', description: 'Legacy UI label' })}
             </Button>
           </div>
         </RunsChartsConfigureField>
       ) : (
-        <RunsChartsConfigureField title="Metric" compact>
+        <RunsChartsConfigureField
+          title={sourceIntl.formatMessage({ defaultMessage: 'Metric', description: 'Legacy UI label' })}
+          compact
+        >
           {renderMetricSelectorV2({
             metricKeyList,
             selectedMetricKeys: state.selectedMetricKeys,

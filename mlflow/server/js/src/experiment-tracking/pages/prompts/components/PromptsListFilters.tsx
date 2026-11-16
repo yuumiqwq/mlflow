@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { TableFilterInput, TableFilterLayout } from '@databricks/design-system';
 import { ModelSearchInputHelpTooltip } from '../../../../model-registry/components/model-list/ModelListFilters';
 
@@ -13,7 +14,10 @@ export const PromptsListFilters = ({
   return (
     <TableFilterLayout>
       <TableFilterInput
-        placeholder="Search prompts by name"
+        placeholder={sourceIntl.formatMessage({
+          defaultMessage: 'Search prompts by name',
+          description: 'Legacy UI label',
+        })}
         componentId={componentId}
         value={searchFilter}
         onChange={(e) => onSearchFilterChange(e.target.value)}

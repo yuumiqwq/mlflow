@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { useIntl, defineMessages, FormattedMessage } from 'react-intl';
 import {
   Button,
@@ -185,7 +186,7 @@ const GroupBySelectorBody = ({
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           prefix={<SearchIcon />}
-          placeholder="Search"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search', description: 'Legacy UI label' })}
           autoFocus
           ref={inputElementRef}
           onKeyDown={(e) => {
@@ -217,7 +218,10 @@ const GroupBySelectorBody = ({
                 componentId="codegen_mlflow_app_src_experiment-tracking_components_experiment-page_components_runs_experimentviewrunsgroupbyselector.tsx_168"
                 icon={<GearIcon />}
                 css={{ minWidth: 32 }}
-                aria-label="Change aggregation function"
+                aria-label={sourceIntl.formatMessage({
+                  defaultMessage: 'Change aggregation function',
+                  description: 'Legacy UI label',
+                })}
               />
             </DropdownMenu.Trigger>
           </Tooltip>
@@ -229,7 +233,10 @@ const GroupBySelectorBody = ({
               onCheckedChange={onUseGroupedValuesInChartsChange}
             >
               <DropdownMenu.ItemIndicator />
-              Use grouping from the runs table in charts
+              {sourceIntl.formatMessage({
+                defaultMessage: 'Use grouping from the runs table in charts',
+                description: 'Legacy UI label',
+              })}
             </DropdownMenu.CheckboxItem>
             <DropdownMenu.Separator />
             <DropdownMenu.RadioGroup

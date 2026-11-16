@@ -1,3 +1,5 @@
+import { CursorPagination } from '../../common/components/CursorPagination';
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -25,13 +27,7 @@ import { setRegisteredModelTagApi, deleteRegisteredModelTagApi } from '../action
 import { connect } from 'react-redux';
 import { OverflowMenu, PageHeader } from '../../shared/building_blocks/PageHeader';
 import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
-import {
-  Button,
-  SegmentedControlGroup,
-  SegmentedControlButton,
-  DangerModal,
-  CursorPagination,
-} from '@databricks/design-system';
+import { Button, SegmentedControlGroup, SegmentedControlButton, DangerModal } from '@databricks/design-system';
 import type { KeyValueEntity } from '../../common/types';
 import { Descriptions } from '../../common/components/Descriptions';
 import { TagList } from '../../common/components/TagList';
@@ -369,7 +365,9 @@ export class ModelViewImpl extends React.Component<ModelViewImplProps, ModelView
         </Descriptions>
         {this.sharedTaggingUIEnabled && (
           <Descriptions columns={1} data-testid="model-view-tags">
-            <Descriptions.Item label="Tags">
+            <Descriptions.Item
+              label={sourceIntl.formatMessage({ defaultMessage: 'Tags', description: 'Legacy UI label' })}
+            >
               <TagList tags={this.getTags()} onEdit={this.handleEditTags} />
             </Descriptions.Item>
           </Descriptions>

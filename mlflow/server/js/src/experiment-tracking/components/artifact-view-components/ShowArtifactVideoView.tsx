@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import React, { useEffect, useState } from 'react';
 import { ArtifactViewSkeleton } from './ArtifactViewSkeleton';
 import { ArtifactViewErrorState } from './ArtifactViewErrorState';
@@ -76,7 +77,7 @@ const ShowArtifactVideoView = ({
             src={videoUrl}
             controls
             preload="auto"
-            aria-label="video"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'video', description: 'Legacy UI label' })}
           >
             <track kind="captions" srcLang="en" src="" default />
           </video>

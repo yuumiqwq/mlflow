@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Empty, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import datasetsEmptyImg from '@mlflow/mlflow/src/common/static/eval-datasets-empty.svg';
 import { FormattedMessage } from 'react-intl';
@@ -43,7 +44,7 @@ export const ExperimentEvaluationDatasetsEmptyState = ({ experimentId }: { exper
       <img
         css={{ marginBottom: theme.spacing.md, maxWidth: 'min(100%, 600px)' }}
         src={datasetsEmptyImg}
-        alt="No datasets found"
+        alt={sourceIntl.formatMessage({ defaultMessage: 'No datasets found', description: 'Legacy UI label' })}
       />
       <CreateEvaluationDatasetButton experimentId={experimentId} />
     </div>

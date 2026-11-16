@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { DesignSystemProvider, DesignSystemThemeProvider } from '@databricks/design-system';
 import { ColorsPaletteDatalist } from './ColorsPaletteDatalist';
+import { readableTypography } from './ReadabilityStyles';
 
 const isInsideShadowDOM = (element: HTMLDivElement | null): boolean =>
   element instanceof window.Node && element.getRootNode() !== document;
@@ -48,7 +49,11 @@ export const DesignSystemContainer = (props: DesignSystemContainerProps) => {
 
   return (
     <ThemeProvider isDarkTheme={isDarkTheme}>
-      <DesignSystemProvider getPopupContainer={getPopupContainer} {...props}>
+      <DesignSystemProvider
+        getPopupContainer={getPopupContainer}
+        themeOverrides={{ typography: readableTypography }}
+        {...props}
+      >
         <MLflowImagePreviewContainer.Provider value={{ getImagePreviewPopupContainer }}>
           {children}
           <div ref={modalContainerElement} />

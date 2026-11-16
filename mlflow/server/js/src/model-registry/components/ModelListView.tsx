@@ -1,3 +1,4 @@
+import { CursorPagination } from '../../common/components/CursorPagination';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -21,7 +22,6 @@ import { PageHeader } from '../../shared/building_blocks/PageHeader';
 import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import {
   Alert,
-  CursorPagination,
   ModelsIcon,
   Spacer as DuBoisSpacer,
   Spacer,

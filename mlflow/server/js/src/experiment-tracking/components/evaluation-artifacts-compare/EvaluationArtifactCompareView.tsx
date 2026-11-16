@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   CopyIcon,
   DialogCombobox,
@@ -458,7 +459,10 @@ const EvaluationArtifactCompareViewImpl = ({
                   allowClear={false}
                   showTagAfterValueCount={1}
                   css={{ maxWidth: 300, backgroundColor: theme.colors.backgroundPrimary }}
-                  aria-label='Select "group by" columns'
+                  aria-label={sourceIntl.formatMessage({
+                    defaultMessage: 'Select "group by" columns',
+                    description: 'Legacy UI label',
+                  })}
                 />
                 <DialogComboboxContent css={{ maxWidth: 300 }}>
                   <DialogComboboxOptionList>

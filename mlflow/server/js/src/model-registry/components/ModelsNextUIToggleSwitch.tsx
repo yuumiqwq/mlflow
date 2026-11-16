@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Switch, Typography, useDesignSystemTheme } from '@databricks/design-system';
@@ -41,7 +42,7 @@ export const ModelsNextUIToggleSwitch = () => {
             description="Model registry > Switcher for the new model registry UI containing aliases > disable confirmation modal title"
           />
         }
-        okText="Disable"
+        okText={sourceIntl.formatMessage({ defaultMessage: 'Disable', description: 'Legacy UI label' })}
         onCancel={() => {
           setConfirmDisableModalVisible(false);
         }}

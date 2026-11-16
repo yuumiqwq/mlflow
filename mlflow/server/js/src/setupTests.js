@@ -49,6 +49,7 @@ if (!testPath?.includes('.enzyme.')) {
 jest.mock('./i18n/loadMessages', () => ({
   __esModule: true,
   DEFAULT_LOCALE: 'en',
+  DEFAULT_UI_LOCALE: 'zh-CN',
   loadMessages: async (locale) => {
     if (locale.endsWith('unknown')) {
       return {};

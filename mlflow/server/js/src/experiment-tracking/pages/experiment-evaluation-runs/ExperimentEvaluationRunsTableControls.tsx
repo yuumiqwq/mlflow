@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   useDesignSystemTheme,
   Button,
@@ -222,7 +223,11 @@ export const ExperimentEvaluationRunsTableControls = ({
         </Tooltip>
       </div>
       <div css={{ display: 'flex', gap: theme.spacing.sm }}>
-        <DialogCombobox componentId="mlflow.eval-runs.table-column-selector" label="Columns" multiSelect>
+        <DialogCombobox
+          componentId="mlflow.eval-runs.table-column-selector"
+          label={sourceIntl.formatMessage({ defaultMessage: 'Columns', description: 'Legacy UI label' })}
+          multiSelect
+        >
           <DialogComboboxTrigger />
           <DialogComboboxContent>
             <DialogComboboxOptionList>

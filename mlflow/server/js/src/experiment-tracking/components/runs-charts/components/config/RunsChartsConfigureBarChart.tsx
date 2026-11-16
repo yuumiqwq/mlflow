@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { LegacySelect } from '@databricks/design-system';
 import { useCallback, useEffect } from 'react';
 import { isEmpty, isUndefined } from 'lodash';
@@ -92,7 +93,9 @@ export const RunsChartsConfigureBarChart = ({
 
   return (
     <>
-      <RunsChartsConfigureField title="Metric">
+      <RunsChartsConfigureField
+        title={sourceIntl.formatMessage({ defaultMessage: 'Metric', description: 'Legacy UI label' })}
+      >
         {!isEmpty(metricKeysByDataset) ? (
           <RunsChartsConfigureMetricWithDatasetSelect
             metricKeysByDataset={metricKeysByDataset}

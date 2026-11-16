@@ -10,7 +10,7 @@ export const EXPERIMENT_FIELD_PREFIX_METRIC = '$$$metric$$$';
 export const EXPERIMENT_FIELD_PREFIX_TAG = '$$$tag$$$';
 export const EXPERIMENT_PARENT_ID_TAG = 'mlflow.parentRunId';
 export const EXPERIMENT_LOG_MODEL_HISTORY_TAG = 'mlflow.log-model.history';
-export const EXPERIMENT_RUNS_TABLE_ROW_HEIGHT = 32;
+export const EXPERIMENT_RUNS_TABLE_ROW_HEIGHT = 40;
 
 const MLFLOW_NOTEBOOK_TYPE = 'NOTEBOOK';
 const MLFLOW_EXPERIMENT_TYPE = 'MLFLOW_EXPERIMENT';

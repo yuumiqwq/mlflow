@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { useEffect } from 'react';
 import { Button, CloseIcon, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -40,7 +41,7 @@ const renderSourceValue = (
     const traceId = source.trace.trace_id;
     return (
       <>
-        Trace (
+        {sourceIntl.formatMessage({ defaultMessage: 'Trace (', description: 'Legacy UI label' })}
         <Typography.Link
           componentId="mlflow.eval-datasets-v2.side-panel.source-trace-link"
           onClick={() => onOpenTraceModal?.(traceId)}

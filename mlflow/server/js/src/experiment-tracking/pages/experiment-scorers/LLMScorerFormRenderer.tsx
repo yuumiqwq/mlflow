@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import React, { useCallback, useEffect, useRef } from 'react';
 import type { Control, UseFormSetValue, UseFormGetValues } from 'react-hook-form';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
@@ -213,7 +214,7 @@ const NameSection: React.FC<NameSectionProps> = ({ mode, control, onUserSelect }
             componentId="mlflow.experiment-scorers.name-input"
             id="mlflow-experiment-scorers-name"
             disabled={mode !== SCORER_FORM_MODE.CREATE}
-            placeholder="Custom"
+            placeholder={sourceIntl.formatMessage({ defaultMessage: 'Custom', description: 'Legacy UI label' })}
             css={{ cursor: mode === SCORER_FORM_MODE.CREATE ? 'text' : 'auto' }}
             onClick={stopPropagationClick}
             onBlur={(event) => {

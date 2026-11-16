@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type { RunInfoEntity } from '@mlflow/mlflow/src/experiment-tracking/types';
 import type { ScrollParams } from 'react-virtualized';
@@ -240,7 +241,7 @@ function CompareRunMetricTableHeaderCell({
       <Link
         componentId="mlflow.experiment_tracking.compare_runs.metric_chart_link"
         to={metricPageRoute}
-        title="Plot chart"
+        title={sourceIntl.formatMessage({ defaultMessage: 'Plot chart', description: 'Legacy UI label' })}
       >
         {metricRowKey}
         <i className="fa fa-chart-line" css={{ paddingLeft: '6px' }} />

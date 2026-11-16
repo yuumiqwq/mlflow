@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -135,7 +136,11 @@ const getSelectFileView = () => {
       <Empty
         image={
           <>
-            <img alt="Preview icon." src={previewIcon} css={{ width: 64, height: 64 }} />
+            <img
+              alt={sourceIntl.formatMessage({ defaultMessage: 'Preview icon.', description: 'Legacy UI label' })}
+              src={previewIcon}
+              css={{ width: 64, height: 64 }}
+            />
             <Spacer size="sm" />
           </>
         }
@@ -162,7 +167,11 @@ const getFileTooLargeView = () => {
       <Empty
         image={
           <>
-            <img alt="Preview icon." src={warningSvg} css={{ width: 64, height: 64 }} />
+            <img
+              alt={sourceIntl.formatMessage({ defaultMessage: 'Preview icon.', description: 'Legacy UI label' })}
+              src={warningSvg}
+              css={{ width: 64, height: 64 }}
+            />
             <Spacer size="sm" />
           </>
         }

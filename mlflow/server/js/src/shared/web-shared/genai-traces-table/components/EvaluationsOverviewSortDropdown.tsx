@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
@@ -308,7 +309,7 @@ const EvaluationsOverviewSortDropdownBodyGrouped = ({
           ref={inputRef}
           componentId="mlflow.genai_traces_table.sort_dropdown.search"
           prefix={<SearchIcon />}
-          placeholder="Search"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search', description: 'Legacy UI label' })}
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           type="search"
@@ -325,14 +326,14 @@ const EvaluationsOverviewSortDropdownBodyGrouped = ({
             icon={<ArrowDownIcon />}
             componentId="mlflow.genai_traces_table.sort_dropdown.sort_desc"
             onClick={() => setOrder(false)}
-            aria-label="Sort descending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort descending', description: 'Legacy UI label' })}
           />
           <ToggleButton
             pressed={tableSort?.asc === true}
             icon={<ArrowUpIcon />}
             componentId="mlflow.experiment_page.sort_dropdown.sort_asc"
             onClick={() => setOrder(true)}
-            aria-label="Sort ascending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort ascending', description: 'Legacy UI label' })}
           />
         </div>
       </div>
@@ -441,7 +442,7 @@ const EvaluationsOverviewSortDropdownBody = ({
           value={filter}
           type="search"
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Search"
+          placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search', description: 'Legacy UI label' })}
           autoFocus
           ref={inputElementRef}
           onKeyDown={(e) => {
@@ -463,7 +464,7 @@ const EvaluationsOverviewSortDropdownBody = ({
             icon={<ArrowDownIcon />}
             componentId="mlflow.experiment_page.sort_dropdown.sort_desc"
             onClick={() => setOrder(false)}
-            aria-label="Sort descending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort descending', description: 'Legacy UI label' })}
             data-testid="sort-select-desc"
           />
           <ToggleButton
@@ -471,7 +472,7 @@ const EvaluationsOverviewSortDropdownBody = ({
             icon={<ArrowUpIcon />}
             componentId="mlflow.experiment_page.sort_dropdown.sort_asc"
             onClick={() => setOrder(true)}
-            aria-label="Sort ascending"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Sort ascending', description: 'Legacy UI label' })}
             data-testid="sort-select-asc"
           />
         </div>

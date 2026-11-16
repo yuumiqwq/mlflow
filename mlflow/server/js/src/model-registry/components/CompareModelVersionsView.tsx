@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -557,7 +558,7 @@ export class CompareModelVersionsViewImpl extends Component<
             [runInfos[0].experimentId],
           )}
           target="_blank"
-          title="Plot chart"
+          title={sourceIntl.formatMessage({ defaultMessage: 'Plot chart', description: 'Legacy UI label' })}
         >
           {key}
           {chartIcon}

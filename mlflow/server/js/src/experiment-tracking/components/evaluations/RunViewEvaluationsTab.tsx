@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import type { RowSelectionState } from '@tanstack/react-table';
 import { isNil } from 'lodash';
 import { ParagraphSkeleton, Typography, Empty, Drawer, useDesignSystemTheme } from '@databricks/design-system';
@@ -559,7 +560,11 @@ const LoadingSkeleton = () => {
   return (
     <div css={{ display: 'block', marginTop: theme.spacing.md, height: '100%', width: '100%' }}>
       {[...Array(10).keys()].map((i) => (
-        <ParagraphSkeleton label="Loading..." key={i} seed={`s-${i}`} />
+        <ParagraphSkeleton
+          label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+          key={i}
+          seed={`s-${i}`}
+        />
       ))}
     </div>
   );

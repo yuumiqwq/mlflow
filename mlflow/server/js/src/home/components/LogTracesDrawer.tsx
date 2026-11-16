@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { useState } from 'react';
 import {
   Drawer,
@@ -229,7 +230,14 @@ export const LogTracesDrawer = () => {
                   }}
                 >
                   {logoSrc && (
-                    <img src={logoSrc} width={28} height={28} alt="icon" aria-hidden css={{ display: 'block' }} />
+                    <img
+                      src={logoSrc}
+                      width={28}
+                      height={28}
+                      alt={sourceIntl.formatMessage({ defaultMessage: 'icon', description: 'Legacy UI label' })}
+                      aria-hidden
+                      css={{ display: 'block' }}
+                    />
                   )}
                   {framework.message}
                 </button>

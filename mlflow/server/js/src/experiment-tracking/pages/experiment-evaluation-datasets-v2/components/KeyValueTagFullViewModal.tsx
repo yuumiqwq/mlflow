@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { useState, useEffect } from 'react';
 import { Modal, Typography, Button, Input, useDesignSystemTheme } from '@databricks/design-system';
 import { useIntl } from '@databricks/i18n';
@@ -154,7 +155,10 @@ export const KeyValueTagFullViewModal = ({
             <Input
               value={key}
               onChange={(e) => setKey(e.target.value)}
-              placeholder="Enter tag key"
+              placeholder={sourceIntl.formatMessage({
+                defaultMessage: 'Enter tag key',
+                description: 'Legacy UI label',
+              })}
               componentId="mlflow.eval-datasets.tag-key-input"
               disabled={isLoading || isDeleting}
             />
@@ -173,7 +177,10 @@ export const KeyValueTagFullViewModal = ({
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder="Enter tag value"
+              placeholder={sourceIntl.formatMessage({
+                defaultMessage: 'Enter tag value',
+                description: 'Legacy UI label',
+              })}
               componentId="mlflow.eval-datasets.tag-value-input"
               disabled={isLoading || isDeleting}
             />

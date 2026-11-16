@@ -1,3 +1,5 @@
+import { getRunAttributeLabel } from '../../../../../i18n/RunAttributeLabels';
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -172,7 +174,9 @@ export const ExperimentViewRunsColumnSelector = React.memo(
     const treeData = useMemo(() => {
       const result = [];
 
-      const filteredAttributes = findMatching(attributeColumnNames, filter);
+      const filteredAttributes = attributeColumnNames.filter((key) =>
+        getRunAttributeLabel(key).toLowerCase().includes(filter.toLowerCase()),
+      );
       const filteredParams = findMatching(runsData.paramKeyList, filter);
       const filteredMetrics = findMatching(runsData.metricKeyList, filter);
       const filteredTags = findMatching(tagsKeyList, filter);
@@ -180,17 +184,20 @@ export const ExperimentViewRunsColumnSelector = React.memo(
       if (filteredAttributes.length) {
         result.push({
           key: GROUP_KEY_ATTRIBUTES,
-          title: `Attributes`,
+          title: sourceIntl.formatMessage({ defaultMessage: 'Attributes', description: 'Run column selector group' }),
           children: filteredAttributes.map((attributeKey) => ({
             key: makeCanonicalSortKey(COLUMN_TYPES.ATTRIBUTES, attributeKey),
-            title: createHighlightedNode(attributeKey, filter),
+            title: createHighlightedNode(getRunAttributeLabel(attributeKey), filter),
           })),
         });
       }
       if (filteredMetrics.length) {
         result.push({
           key: GROUP_KEY_METRICS,
-          title: `Metrics (${filteredMetrics.length})`,
+          title: sourceIntl.formatMessage(
+            { defaultMessage: 'Metrics ({count})', description: 'Run column selector group' },
+            { count: filteredMetrics.length },
+          ),
           children: filteredMetrics.map((metricKey) => {
             const customColumnDef = customMetricBehaviorDefs[metricKey];
             return {
@@ -203,7 +210,10 @@ export const ExperimentViewRunsColumnSelector = React.memo(
       if (filteredParams.length) {
         result.push({
           key: GROUP_KEY_PARAMS,
-          title: `Parameters (${filteredParams.length})`,
+          title: sourceIntl.formatMessage(
+            { defaultMessage: 'Parameters ({count})', description: 'Run column selector group' },
+            { count: filteredParams.length },
+          ),
           children: filteredParams.map((paramKey) => ({
             key: makeCanonicalSortKey(COLUMN_TYPES.PARAMS, paramKey),
             title: createHighlightedNode(paramKey, filter),
@@ -213,7 +223,10 @@ export const ExperimentViewRunsColumnSelector = React.memo(
       if (filteredTags.length) {
         result.push({
           key: GROUP_KEY_TAGS,
-          title: `Tags (${filteredTags.length})`,
+          title: sourceIntl.formatMessage(
+            { defaultMessage: 'Tags ({count})', description: 'Run column selector group' },
+            { count: filteredTags.length },
+          ),
           children: filteredTags.map((tagKey) => ({
             key: makeCanonicalSortKey(COLUMN_TYPES.TAGS, tagKey),
             title: tagKey,
@@ -390,7 +403,7 @@ export const ExperimentViewRunsColumnSelector = React.memo(
             componentId="codegen_mlflow_app_src_experiment-tracking_components_experiment-page_components_runs_experimentviewrunscolumnselector.tsx_300"
             value={filter}
             prefix={<SearchIcon />}
-            placeholder="Search columns"
+            placeholder={sourceIntl.formatMessage({ defaultMessage: 'Search columns', description: 'Legacy UI label' })}
             allowClear
             ref={searchInputRef}
             onChange={(e) => {

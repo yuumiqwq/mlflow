@@ -1,3 +1,4 @@
+import { CursorPagination } from '../../../common/components/CursorPagination';
 import React, { useState } from 'react';
 import {
   Alert,
@@ -8,7 +9,6 @@ import {
   Spacer,
   SplitButton,
   DropdownMenu,
-  CursorPagination,
 } from '@databricks/design-system';
 import { FormattedMessage, useIntl } from '@databricks/i18n';
 import ScorerCardContainer from './ScorerCardContainer';

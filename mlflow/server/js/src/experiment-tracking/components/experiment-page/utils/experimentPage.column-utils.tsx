@@ -1,3 +1,5 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
+import { getRunAttributeLabel } from '../../../../i18n/RunAttributeLabels';
 import type {
   CellClassParams,
   ColDef,
@@ -290,7 +292,7 @@ export const useRunsColumnDefinitions = ({
 
     // Run name column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.RUN_NAME,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.RUN_NAME),
       colId: isRunColumnDynamicSized ? undefined : TAGS_TO_COLUMNS_MAP[ATTRIBUTE_COLUMN_SORT_KEY.RUN_NAME],
       headerTooltip: ATTRIBUTE_COLUMN_SORT_KEY.RUN_NAME,
       pinned: usingCompactViewport ? undefined : 'left',
@@ -321,7 +323,7 @@ export const useRunsColumnDefinitions = ({
 
     // Date and expander selection column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.DATE,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.DATE),
       headerTooltip: ATTRIBUTE_COLUMN_SORT_KEY.DATE,
       pinned: usingCompactViewport ? undefined : 'left',
       sortable: true,
@@ -342,9 +344,9 @@ export const useRunsColumnDefinitions = ({
 
     // Datasets column - guarded by a feature flag
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.DATASET,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.DATASET),
       colId: makeCanonicalSortKey(COLUMN_TYPES.ATTRIBUTES, ATTRIBUTE_COLUMN_LABELS.DATASET),
-      headerTooltip: ATTRIBUTE_COLUMN_LABELS.DATASET,
+      headerTooltip: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.DATASET),
       sortable: false,
       field: 'datasets',
       cellRenderer: 'DatasetsCellRenderer',
@@ -356,7 +358,7 @@ export const useRunsColumnDefinitions = ({
 
     // Duration column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.DURATION,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.DURATION),
       field: 'duration',
       initialWidth: 80,
     });
@@ -364,7 +366,7 @@ export const useRunsColumnDefinitions = ({
     // Experiment name column
     if (compareExperiments) {
       columns.push({
-        headerName: ATTRIBUTE_COLUMN_LABELS.EXPERIMENT_NAME,
+        headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.EXPERIMENT_NAME),
         colId: makeCanonicalSortKey(COLUMN_TYPES.ATTRIBUTES, ATTRIBUTE_COLUMN_LABELS.EXPERIMENT_NAME),
         field: 'experimentName',
         cellRenderer: 'ExperimentNameCellRenderer',
@@ -377,7 +379,7 @@ export const useRunsColumnDefinitions = ({
 
     // User column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.USER,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.USER),
       colId: TAGS_TO_COLUMNS_MAP[ATTRIBUTE_COLUMN_SORT_KEY.USER],
       headerTooltip: ATTRIBUTE_COLUMN_SORT_KEY.USER,
       field: 'user',
@@ -393,7 +395,7 @@ export const useRunsColumnDefinitions = ({
 
     // Source column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.SOURCE,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.SOURCE),
       colId: TAGS_TO_COLUMNS_MAP[ATTRIBUTE_COLUMN_SORT_KEY.SOURCE],
       field: 'tags',
       cellRenderer: 'SourceCellRenderer',
@@ -411,7 +413,7 @@ export const useRunsColumnDefinitions = ({
 
     // Version column
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.VERSION,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.VERSION),
       colId: TAGS_TO_COLUMNS_MAP[ATTRIBUTE_COLUMN_SORT_KEY.VERSION],
       field: 'version',
       cellRenderer: 'VersionCellRenderer',
@@ -439,7 +441,7 @@ export const useRunsColumnDefinitions = ({
     });
 
     columns.push({
-      headerName: ATTRIBUTE_COLUMN_LABELS.DESCRIPTION,
+      headerName: getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.DESCRIPTION),
       colId: TAGS_TO_COLUMNS_MAP[ATTRIBUTE_COLUMN_SORT_KEY.DESCRIPTION],
       field: 'tags',
       cellRenderer: 'RunDescriptionCellRenderer',
@@ -459,7 +461,7 @@ export const useRunsColumnDefinitions = ({
     // Metrics columns
     if (metricKeys.length) {
       columns.push({
-        headerName: 'Metrics',
+        headerName: sourceIntl.formatMessage({ defaultMessage: 'Metrics', description: 'Run table column group' }),
         groupId: COLUMN_TYPES.METRICS,
         children: metricKeys.map((metricKey) => {
           const canonicalSortKey = makeCanonicalSortKey(COLUMN_TYPES.METRICS, metricKey);
@@ -496,7 +498,7 @@ export const useRunsColumnDefinitions = ({
     // Parameter columns
     if (paramKeys.length) {
       columns.push({
-        headerName: 'Parameters',
+        headerName: sourceIntl.formatMessage({ defaultMessage: 'Parameters', description: 'Run table column group' }),
         groupId: COLUMN_TYPES.PARAMS,
         children: paramKeys.map((paramKey) => {
           const canonicalSortKey = makeCanonicalSortKey(COLUMN_TYPES.PARAMS, paramKey);
@@ -524,7 +526,7 @@ export const useRunsColumnDefinitions = ({
     // Tags columns
     if (tagKeys.length) {
       columns.push({
-        headerName: 'Tags',
+        headerName: sourceIntl.formatMessage({ defaultMessage: 'Tags', description: 'Run table column group' }),
         colId: COLUMN_TYPES.TAGS,
         children: tagKeys.map((tagKey) => {
           const canonicalSortKey = makeCanonicalSortKey(COLUMN_TYPES.TAGS, tagKey);

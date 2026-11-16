@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 /**
  * TODO: implement actual UI for this modal, it's a crude placeholder with minimal logic for now
  */
@@ -305,7 +306,9 @@ export const RunsChartsConfigureModal = ({
           }}
         >
           {!isEditing && (
-            <RunsChartsConfigureField title="Chart type">
+            <RunsChartsConfigureField
+              title={sourceIntl.formatMessage({ defaultMessage: 'Chart type', description: 'Legacy UI label' })}
+            >
               <SimpleSelect
                 componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_runschartsconfiguremodal.tsx_296"
                 id="chart-type-select"

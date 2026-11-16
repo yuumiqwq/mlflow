@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React, { useMemo, useState } from 'react';
 import {
   Table,
@@ -65,7 +66,13 @@ function ColumnName({ spec }: { spec: ColumnSpec | TensorSpec }): React.ReactEle
   } else if (spec.optional !== undefined && spec.optional) {
     required = false;
   }
-  const requiredTag = required ? <Text bold>(required)</Text> : <Text color="secondary">(optional)</Text>;
+  const requiredTag = required ? (
+    <Text bold>{sourceIntl.formatMessage({ defaultMessage: '(required)', description: 'Legacy UI label' })}</Text>
+  ) : (
+    <Text color="secondary">
+      {sourceIntl.formatMessage({ defaultMessage: '(optional)', description: 'Legacy UI label' })}
+    </Text>
+  );
 
   const name = 'name' in spec ? spec.name : '-';
 

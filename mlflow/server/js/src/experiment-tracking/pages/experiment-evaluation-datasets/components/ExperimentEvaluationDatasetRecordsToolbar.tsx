@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Button,
   ColumnsIcon,
@@ -155,7 +156,10 @@ export const ExperimentEvaluationDatasetRecordsToolbar = ({
         <Input
           componentId="mlflow.eval-datasets.records-toolbar.search-input"
           prefix={<SearchIcon />}
-          placeholder="Search inputs and expectations"
+          placeholder={sourceIntl.formatMessage({
+            defaultMessage: 'Search inputs and expectations',
+            description: 'Legacy UI label',
+          })}
           value={searchFilter}
           onChange={(e) => setSearchFilter(e.target.value)}
           css={{ maxWidth: '540px', flex: 1 }}

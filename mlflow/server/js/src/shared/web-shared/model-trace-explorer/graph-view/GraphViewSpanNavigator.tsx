@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Button, ChevronLeftIcon, ChevronRightIcon, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from '@databricks/i18n';
 
@@ -50,7 +51,7 @@ export const GraphViewSpanNavigator = ({
             size="small"
             onClick={onNavigatePrev}
             disabled={currentSpanIndex <= 0}
-            aria-label="Previous span"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Previous span', description: 'Legacy UI label' })}
           />
           <Typography.Text size="sm">
             {currentSpanIndex + 1} / {totalSpans}
@@ -61,7 +62,7 @@ export const GraphViewSpanNavigator = ({
             size="small"
             onClick={onNavigateNext}
             disabled={currentSpanIndex >= totalSpans - 1}
-            aria-label="Next span"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Next span', description: 'Legacy UI label' })}
           />
           <Typography.Text size="sm" bold>
             {selectedWorkflowNode.displayName}

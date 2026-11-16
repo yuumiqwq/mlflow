@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import spinner from '../static/mlflow-spinner.png';
 import type { Interpolation, Theme } from '@emotion/react';
 import { keyframes } from '@emotion/react';
@@ -9,7 +10,10 @@ type Props = {
 export function Spinner({ showImmediately }: Props) {
   return (
     <div css={(theme) => styles.spinner(theme, showImmediately)}>
-      <img alt="Page loading..." src={spinner} />
+      <img
+        alt={sourceIntl.formatMessage({ defaultMessage: 'Page loading...', description: 'Legacy UI label' })}
+        src={spinner}
+      />
     </div>
   );
 }

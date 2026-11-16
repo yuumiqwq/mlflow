@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import type { Interpolation, Theme } from '@emotion/react';
 import { isNil } from 'lodash';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -126,11 +127,16 @@ function ModelTraceExplorerRightPaneTabsImpl({
         )}
         {/* no i18n for attributes and events as these are properties specified by code,
             and it might be confusing for users to have different labels here */}
-        <Tabs.Trigger value="attributes">Attributes</Tabs.Trigger>
-        <Tabs.Trigger value="events">
-          Events {hasException && <ModelTraceExplorerBadge count={exceptionCount} />}
+        <Tabs.Trigger value="attributes">
+          {sourceIntl.formatMessage({ defaultMessage: 'Attributes', description: 'Legacy UI label' })}
         </Tabs.Trigger>
-        <Tabs.Trigger value="links">Links</Tabs.Trigger>
+        <Tabs.Trigger value="events">
+          {sourceIntl.formatMessage({ defaultMessage: 'Events', description: 'Legacy UI label' })}
+          {hasException && <ModelTraceExplorerBadge count={exceptionCount} />}
+        </Tabs.Trigger>
+        <Tabs.Trigger value="links">
+          {sourceIntl.formatMessage({ defaultMessage: 'Links', description: 'Legacy UI label' })}
+        </Tabs.Trigger>
         {displayReadOnlyAssessments && (
           <Tabs.Trigger value="assessments">
             <FormattedMessage

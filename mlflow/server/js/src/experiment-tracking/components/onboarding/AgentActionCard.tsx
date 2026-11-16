@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useState, type ReactNode } from 'react';
 import { Button, CopyIcon, ParagraphSkeleton, Tabs, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
@@ -240,7 +241,13 @@ export const AgentActionCard = ({
             >
               {codeSnippet.isLoading ? (
                 <div css={{ padding: `${theme.spacing.sm}px ${theme.spacing.md}px` }}>
-                  <ParagraphSkeleton seed={`${componentId}.snippet`} label="Loading code snippet" />
+                  <ParagraphSkeleton
+                    seed={`${componentId}.snippet`}
+                    label={sourceIntl.formatMessage({
+                      defaultMessage: 'Loading code snippet',
+                      description: 'Legacy UI label',
+                    })}
+                  />
                 </div>
               ) : (
                 <>

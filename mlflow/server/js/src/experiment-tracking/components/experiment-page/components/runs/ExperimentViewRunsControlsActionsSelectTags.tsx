@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   Button,
   DialogCombobox,
@@ -175,7 +176,7 @@ export const ExperimentViewRunsControlsActionsSelectTags = ({
       <DialogCombobox
         componentId="codegen_mlflow_app_src_experiment-tracking_components_experiment-page_components_runs_experimentviewrunscontrolsactionsselecttags.tsx_162"
         open={isMultiSelectOpen}
-        label="Add tags"
+        label={sourceIntl.formatMessage({ defaultMessage: 'Add tags', description: 'Legacy UI label' })}
         id="runs-tag-multiselect"
         multiSelect
       >

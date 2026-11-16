@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Button,
   FullscreenExitIcon,
@@ -79,7 +80,7 @@ export const GraphViewFloatingToolbar = ({
           componentId="graph-view-toolbar.fit-view-button"
           icon={<ZoomToFitIcon />}
           size="small"
-          aria-label="Fit to view"
+          aria-label={sourceIntl.formatMessage({ defaultMessage: 'Fit to view', description: 'Legacy UI label' })}
           onClick={onFitView}
           css={toolbarButtonStyle(theme)}
         />
@@ -95,7 +96,7 @@ export const GraphViewFloatingToolbar = ({
           componentId="graph-view-toolbar.zoom-in-button"
           icon={<ZoomInIcon />}
           size="small"
-          aria-label="Zoom in"
+          aria-label={sourceIntl.formatMessage({ defaultMessage: 'Zoom in', description: 'Legacy UI label' })}
           onClick={onZoomIn}
           css={toolbarButtonStyle(theme)}
         />
@@ -114,7 +115,7 @@ export const GraphViewFloatingToolbar = ({
           componentId="graph-view-toolbar.zoom-out-button"
           icon={<ZoomOutIcon />}
           size="small"
-          aria-label="Zoom out"
+          aria-label={sourceIntl.formatMessage({ defaultMessage: 'Zoom out', description: 'Legacy UI label' })}
           onClick={onZoomOut}
           css={toolbarButtonStyle(theme)}
         />

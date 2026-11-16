@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import type { Interpolation, Theme } from '@emotion/react';
 import { isNil } from 'lodash';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -242,13 +243,17 @@ function ModelTraceExplorerRightPaneTabsImpl({
                 {hasException && <ModelTraceExplorerBadge count={exceptionCount} />}
               </>
             ) : (
-              <>Events {hasException && <ModelTraceExplorerBadge count={exceptionCount} />}</>
+              <>
+                {sourceIntl.formatMessage({ defaultMessage: 'Events', description: 'Legacy UI label' })}
+                {hasException && <ModelTraceExplorerBadge count={exceptionCount} />}
+              </>
             )}
           </Tabs.Trigger>
         )}
         {hasLinks && (
           <Tabs.Trigger value="links">
-            Links <ModelTraceExplorerBadge count={linkCount} variant="neutral" />
+            {sourceIntl.formatMessage({ defaultMessage: 'Links', description: 'Legacy UI label' })}
+            <ModelTraceExplorerBadge count={linkCount} variant="neutral" />
           </Tabs.Trigger>
         )}
         {showReadOnlyAssessments && (

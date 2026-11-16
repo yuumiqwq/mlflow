@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -53,13 +54,14 @@ class ExpandableList extends Component<Props, State> {
         <div className="expanded-list-elems">
           {expandedElems}
           <div onClick={this.handleToggle} className="expander-text">
-            Less
+            {sourceIntl.formatMessage({ defaultMessage: 'Less', description: 'Legacy UI label' })}
           </div>
         </div>
       );
       const showMore = (
         <div onClick={this.handleToggle} className="expander-text">
-          +{(this.props.children as any).length - (this.props.showLines ?? 1)} more
+          +{(this.props.children as any).length - (this.props.showLines ?? 1)}
+          {sourceIntl.formatMessage({ defaultMessage: 'more', description: 'Legacy UI label' })}
         </div>
       );
       return (

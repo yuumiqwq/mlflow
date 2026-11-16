@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Switch, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
 
@@ -23,7 +24,10 @@ export const UsageTrackingConfigurator = ({
           componentId={`${componentId}.toggle`}
           checked={value}
           onChange={(checked) => onChange(checked)}
-          aria-label="Enable usage tracking"
+          aria-label={sourceIntl.formatMessage({
+            defaultMessage: 'Enable usage tracking',
+            description: 'Legacy UI label',
+          })}
         />
         <Typography.Text>
           <FormattedMessage defaultMessage="Enable usage tracking" description="Label for usage tracking toggle" />

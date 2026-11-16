@@ -1,3 +1,4 @@
+import { sourceIntl } from '../i18n/SourceMessages';
 /**
  * Assistant Welcome Carousel component.
  * Displays a carousel of feature images with dot navigation.
@@ -101,7 +102,7 @@ export const AssistantWelcomeCarousel = () => {
         }}
       >
         <Typography.Title level={3} css={{ margin: 0 }}>
-          Welcome to MLflow Assistant
+          {sourceIntl.formatMessage({ defaultMessage: 'Welcome to MLflow Assistant', description: 'Legacy UI label' })}
         </Typography.Title>
       </div>
 
@@ -124,7 +125,7 @@ export const AssistantWelcomeCarousel = () => {
           {/* Left arrow */}
           <button
             onClick={handlePrevSlide}
-            aria-label="Previous slide"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Previous slide', description: 'Legacy UI label' })}
             css={{
               display: 'flex',
               alignItems: 'center',
@@ -185,7 +186,7 @@ export const AssistantWelcomeCarousel = () => {
           {/* Right arrow */}
           <button
             onClick={handleNextSlide}
-            aria-label="Next slide"
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Next slide', description: 'Legacy UI label' })}
             css={{
               display: 'flex',
               alignItems: 'center',

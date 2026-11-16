@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useState, useCallback } from 'react';
 import { ArrowRightIcon, Button, Spinner, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
@@ -46,7 +47,7 @@ export const LaunchDemoCard = () => {
     >
       <img
         src={theme.isDarkMode ? demoScreenshotDark : demoScreenshot}
-        alt="MLflow Tracing UI"
+        alt={sourceIntl.formatMessage({ defaultMessage: 'MLflow Tracing UI', description: 'Legacy UI label' })}
         css={{
           width: 200,
           height: 'auto',

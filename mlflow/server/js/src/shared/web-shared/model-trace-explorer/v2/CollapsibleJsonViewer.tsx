@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 /* eslint-disable @databricks/no-hardcoded-colors */
 import { ChevronDownIcon, ChevronRightIcon, useDesignSystemTheme } from '@databricks/design-system';
 import type { CSSObject } from '@emotion/react';
@@ -178,7 +179,7 @@ function JsonNode({
             ...monoTextStyle,
           }}
         >
-          [Max depth reached]
+          {sourceIntl.formatMessage({ defaultMessage: '[Max depth reached]', description: 'Legacy UI label' })}
         </div>
       </div>
     );
@@ -415,7 +416,7 @@ export function CollapsibleJsonViewer({ data, initialExpanded = false }: Collaps
           fontStyle: 'italic',
         }}
       >
-        [Invalid JSON]
+        {sourceIntl.formatMessage({ defaultMessage: '[Invalid JSON]', description: 'Legacy UI label' })}
       </div>
     );
   }

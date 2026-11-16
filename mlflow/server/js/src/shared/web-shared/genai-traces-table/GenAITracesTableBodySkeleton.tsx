@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import type { Table } from '@tanstack/react-table';
 
 import { ParagraphSkeleton, TableSkeletonRows, useDesignSystemTheme } from '@databricks/design-system';
@@ -25,9 +26,19 @@ export const GenAITracesTableBodySkeleton = ({
       className={className}
     >
       {table ? (
-        <TableSkeletonRows label="Loading..." numRows={3} table={table} />
+        <TableSkeletonRows
+          label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+          numRows={3}
+          table={table}
+        />
       ) : (
-        [...Array(10).keys()].map((i) => <ParagraphSkeleton label="Loading..." key={i} seed={`s-${i}`} />)
+        [...Array(10).keys()].map((i) => (
+          <ParagraphSkeleton
+            label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+            key={i}
+            seed={`s-${i}`}
+          />
+        ))
       )}
     </div>
   );

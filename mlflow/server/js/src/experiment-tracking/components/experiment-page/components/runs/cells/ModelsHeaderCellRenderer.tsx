@@ -1,3 +1,4 @@
+import { getRunAttributeLabel } from '../../../../../../i18n/RunAttributeLabels';
 import React from 'react';
 import {
   SortAscendingIcon,
@@ -37,7 +38,7 @@ export const ModelsHeaderCellRenderer = React.memo(() => {
     >
       {isUsingUnifiedModels ? (
         <>
-          {ATTRIBUTE_COLUMN_LABELS.MODELS}
+          {getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.MODELS)}
           <InfoTooltip
             componentId="mlflow.experiment_view_runs_table.column_header.models.tooltip"
             disableHoverableContent={false}
@@ -59,7 +60,7 @@ export const ModelsHeaderCellRenderer = React.memo(() => {
             />
           }
         >
-          <span>{ATTRIBUTE_COLUMN_LABELS.MODELS}</span>
+          <span>{getRunAttributeLabel(ATTRIBUTE_COLUMN_LABELS.MODELS)}</span>
         </Tooltip>
       )}
     </div>

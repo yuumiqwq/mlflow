@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import type { RunsChartsRunData } from '../RunsCharts.common';
 import LazyParallelCoordinatesPlot from '../charts/LazyParallelCoordinatesPlot';
 import { isParallelChartConfigured, processParallelCoordinateData } from '../../utils/parallelCoordinatesPlot.utils';
@@ -49,7 +50,10 @@ export const RunsChartsConfigureParallelChartPreview = ({
   if (!isConfigured) {
     return (
       <div css={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        Select at least two metrics and params first
+        {sourceIntl.formatMessage({
+          defaultMessage: 'Select at least two metrics and params first',
+          description: 'Legacy UI label',
+        })}
       </div>
     );
   }

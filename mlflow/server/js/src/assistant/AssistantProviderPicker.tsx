@@ -1,3 +1,4 @@
+import { sourceIntl } from '../i18n/SourceMessages';
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -246,7 +247,10 @@ const ProviderMenu = ({
     <button
       type="button"
       disabled={disabled}
-      aria-label="Change assistant provider"
+      aria-label={sourceIntl.formatMessage({
+        defaultMessage: 'Change assistant provider',
+        description: 'Legacy UI label',
+      })}
       css={{
         display: 'inline-flex',
         alignItems: 'center',

@@ -1,3 +1,4 @@
+import { CursorPagination } from '../../common/components/CursorPagination';
 import { useReactTable_unverifiedWithReact18 as useReactTable } from '@databricks/web-shared/react-table';
 import { useMemo } from 'react';
 import type { CursorPaginationProps } from '@databricks/design-system';
@@ -10,7 +11,6 @@ import {
   NoIcon,
   PlusIcon,
   Table,
-  CursorPagination,
   TableRow,
   TableHeader,
   TableCell,
@@ -223,6 +223,7 @@ export const ExperimentListTable = ({
   return (
     <Table
       scrollable
+      css={{ '& [role="row"]': { minWidth: 900, minHeight: 44 }, '& [role="columnheader"]': { minHeight: 44 } }}
       pagination={
         cursorPaginationProps ? (
           <CursorPagination {...cursorPaginationProps} componentId="mlflow.experiment_list_view.pagination" />
@@ -248,7 +249,7 @@ export const ExperimentListTable = ({
         <TableSkeletonRows table={table} />
       ) : (
         table.getRowModel().rows.map((row) => (
-          <TableRow key={row.id} css={{ height: theme.general.buttonHeight }} data-testid="experiment-list-item">
+          <TableRow key={row.id} css={{ minHeight: 44 }} data-testid="experiment-list-item">
             {row.getAllCells().map((cell) => (
               <TableCell
                 key={cell.id}

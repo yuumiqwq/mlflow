@@ -1,6 +1,6 @@
+import { CursorPagination } from '../../../../common/components/CursorPagination';
 import { useReactTable_unverifiedWithReact18 as useReactTable } from '@databricks/web-shared/react-table';
 import {
-  CursorPagination,
   Empty,
   NoIcon,
   Table,

@@ -1,8 +1,8 @@
+import { CursorPagination } from '../../common/components/CursorPagination';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useReactTable_unverifiedWithReact18 as useReactTable } from '@databricks/web-shared/react-table';
 import type { CursorPaginationProps } from '@databricks/design-system';
 import {
-  CursorPagination,
   Table,
   TableCell,
   TableHeader,

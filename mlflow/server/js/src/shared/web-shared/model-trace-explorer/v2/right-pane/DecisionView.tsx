@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { ChevronRightIcon, Progress, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { FormattedMessage, useIntl } from '@databricks/i18n';
 
@@ -323,7 +324,7 @@ export const DecisionInputs = ({
       {decision.questions?.length ? (
         <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
           <Typography.Text bold color="secondary" size="sm">
-            questions
+            {sourceIntl.formatMessage({ defaultMessage: 'questions', description: 'Legacy UI label' })}
           </Typography.Text>
           <DecisionList testId="decision-questions">
             {decision.questions.map((entry, index) => (

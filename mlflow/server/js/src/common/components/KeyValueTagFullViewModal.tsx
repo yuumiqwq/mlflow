@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React from 'react';
 import { Modal, Typography, CopyIcon, useDesignSystemTheme } from '@databricks/design-system';
 import { CopyButton } from '@mlflow/mlflow/src/shared/building_blocks/CopyButton';
@@ -40,7 +41,12 @@ export const KeyValueTagFullViewModal = React.memo((props: KeyValueTagFullViewMo
             marginTop: theme.spacing.sm,
           }}
         >
-          <CopyButton copyText={props.tagValue} showLabel={false} icon={<CopyIcon />} aria-label="Copy" />
+          <CopyButton
+            copyText={props.tagValue}
+            showLabel={false}
+            icon={<CopyIcon />}
+            aria-label={sourceIntl.formatMessage({ defaultMessage: 'Copy', description: 'Legacy UI label' })}
+          />
         </div>
       </div>
     </Modal>

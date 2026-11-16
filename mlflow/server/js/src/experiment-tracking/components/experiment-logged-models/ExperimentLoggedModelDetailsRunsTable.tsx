@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useReactTable_unverifiedWithReact18 as useReactTable } from '@databricks/web-shared/react-table';
 import {
   Empty,
@@ -254,7 +255,9 @@ export const ExperimentLoggedModelDetailsPageRunsTable = ({
 
   return (
     <div css={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', maxHeight: 400 }}>
-      <Typography.Title css={{ fontSize: 16 }}>Runs</Typography.Title>
+      <Typography.Title css={{ fontSize: 16 }}>
+        {sourceIntl.formatMessage({ defaultMessage: 'Runs', description: 'Legacy UI label' })}
+      </Typography.Title>
       <div
         css={{
           padding: theme.spacing.sm,

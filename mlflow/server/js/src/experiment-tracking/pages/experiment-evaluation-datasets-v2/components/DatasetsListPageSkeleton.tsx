@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { GenericSkeleton, useDesignSystemTheme } from '@databricks/design-system';
 
 // Enough rows to cover any reasonable laptop/desktop viewport; the container clips
@@ -16,7 +17,7 @@ export const DatasetsListPageSkeleton = () => {
   return (
     <div
       role="status"
-      aria-label="Loading datasets"
+      aria-label={sourceIntl.formatMessage({ defaultMessage: 'Loading datasets', description: 'Legacy UI label' })}
       css={{
         display: 'flex',
         flexDirection: 'column',

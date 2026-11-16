@@ -107,11 +107,13 @@ const MlflowRootLayout = ({
               <main
                 css={{
                   width: '100%',
+                  minWidth: 0,
                   backgroundColor: theme.colors.backgroundPrimary,
                   margin: theme.spacing.sm,
                   borderRadius: theme.borders.borderRadiusMd,
                   boxShadow: theme.shadows.md,
                   overflowX: 'auto',
+                  '@media (max-width: 767px)': { marginLeft: showSidebar ? 56 : theme.spacing.sm },
                 }}
               >
                 <React.Suspense fallback={<LegacySkeleton />}>
@@ -140,7 +142,11 @@ const MlflowRootRoute = () => {
   const routeTitle = usePageTitle();
   useDocumentTitle({ title: routeTitle });
 
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(() => !window.matchMedia('(max-width: 767px)').matches);
+  const location = useLocation();
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) setShowSidebar(false);
+  }, [location.pathname]);
   const { experimentId } = useParams();
   const enableWorkflowBasedNavigation = shouldEnableWorkflowBasedNavigation();
 

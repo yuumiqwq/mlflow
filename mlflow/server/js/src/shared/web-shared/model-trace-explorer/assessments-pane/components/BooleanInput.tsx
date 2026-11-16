@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { SegmentedControlButton, SegmentedControlGroup } from '@databricks/design-system';
 
 import type { AssessmentValueInputFieldProps } from './types';
@@ -22,8 +23,12 @@ export const BooleanInput = ({
           setValueError(null);
         }}
       >
-        <SegmentedControlButton value>True</SegmentedControlButton>
-        <SegmentedControlButton value={false}>False</SegmentedControlButton>
+        <SegmentedControlButton value>
+          {sourceIntl.formatMessage({ defaultMessage: 'True', description: 'Legacy UI label' })}
+        </SegmentedControlButton>
+        <SegmentedControlButton value={false}>
+          {sourceIntl.formatMessage({ defaultMessage: 'False', description: 'Legacy UI label' })}
+        </SegmentedControlButton>
       </SegmentedControlGroup>
       {valueError && <div css={{ marginTop: '8px', color: 'red' }}>{valueError}</div>}
     </div>

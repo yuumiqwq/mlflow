@@ -2,6 +2,11 @@
 import React, { useCallback, useMemo } from 'react';
 import { ApolloProvider } from '@mlflow/mlflow/src/common/utils/graphQLHooks';
 import { RawIntlProvider } from 'react-intl';
+import { ConfigProvider } from 'antd';
+// eslint-disable-next-line @databricks/no-restricted-imports-regexp -- AntD locale data has no root export.
+import zhCN from 'antd/es/locale/zh_CN';
+// eslint-disable-next-line @databricks/no-restricted-imports-regexp -- AntD locale data has no root export.
+import enUS from 'antd/es/locale/en_US';
 
 import 'font-awesome/css/font-awesome.css';
 import './index.css';
@@ -23,6 +28,7 @@ import { useMLflowDarkTheme } from './common/hooks/useMLflowDarkTheme';
 import { DarkThemeProvider } from './common/contexts/DarkThemeContext';
 import { telemetryClient } from './telemetry';
 import { ServerInfoProvider } from './experiment-tracking/hooks/useServerInfo';
+import { ReadabilityStyles } from './common/components/ReadabilityStyles';
 
 export function MLFlowRoot() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -52,21 +58,24 @@ export function MLFlowRoot() {
   return (
     <ApolloProvider client={apolloClient}>
       <RawIntlProvider value={intl} key={intl.locale}>
-        <Provider store={store}>
-          <DesignSystemEventProvider callback={logObservabilityEvent}>
-            <DesignSystemContainer isDarkTheme={isDarkTheme}>
-              <ApplyGlobalStyles />
-              <MlflowThemeGlobalStyles />
-              <DarkThemeProvider setIsDarkTheme={setIsDarkTheme}>
-                <QueryClientProvider client={queryClient}>
-                  <ServerInfoProvider>
-                    <MlflowRouter />
-                  </ServerInfoProvider>
-                </QueryClientProvider>
-              </DarkThemeProvider>
-            </DesignSystemContainer>
-          </DesignSystemEventProvider>
-        </Provider>
+        <ConfigProvider locale={intl.locale.startsWith('zh') ? zhCN : enUS}>
+          <Provider store={store}>
+            <DesignSystemEventProvider callback={logObservabilityEvent}>
+              <DesignSystemContainer isDarkTheme={isDarkTheme}>
+                <ApplyGlobalStyles />
+                <MlflowThemeGlobalStyles />
+                <ReadabilityStyles />
+                <DarkThemeProvider setIsDarkTheme={setIsDarkTheme}>
+                  <QueryClientProvider client={queryClient}>
+                    <ServerInfoProvider>
+                      <MlflowRouter />
+                    </ServerInfoProvider>
+                  </QueryClientProvider>
+                </DarkThemeProvider>
+              </DesignSystemContainer>
+            </DesignSystemEventProvider>
+          </Provider>
+        </ConfigProvider>
       </RawIntlProvider>
     </ApolloProvider>
   );

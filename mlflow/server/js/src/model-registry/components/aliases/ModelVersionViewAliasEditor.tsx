@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Button, PencilIcon } from '@databricks/design-system';
 import type { ModelEntity } from '../../../experiment-tracking/types';
 import { useEditAliasesModal } from '../../../common/hooks/useEditAliasesModal';
@@ -64,9 +65,9 @@ export const ModelVersionViewAliasEditor = ({
           size="small"
           type="link"
           onClick={onAddEdit}
-          title="Add aliases"
+          title={sourceIntl.formatMessage({ defaultMessage: 'Add aliases', description: 'Legacy UI label' })}
         >
-          Add
+          {sourceIntl.formatMessage({ defaultMessage: 'Add', description: 'Legacy UI label' })}
         </Button>
       ) : (
         <div css={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -78,7 +79,7 @@ export const ModelVersionViewAliasEditor = ({
             size="small"
             icon={<PencilIcon />}
             onClick={onAddEdit}
-            title="Edit aliases"
+            title={sourceIntl.formatMessage({ defaultMessage: 'Edit aliases', description: 'Legacy UI label' })}
           />
         </div>
       )}

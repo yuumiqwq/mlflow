@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -106,7 +107,7 @@ class EditableTagsTableViewImpl extends Component<Props> {
             >
               <Input
                 componentId="codegen_mlflow_app_src_common_components_editabletagstableview.tsx_107"
-                aria-label="tag name"
+                aria-label={sourceIntl.formatMessage({ defaultMessage: 'tag name', description: 'Legacy UI label' })}
                 data-testid="tags-form-input-name"
                 placeholder={this.props.intl.formatMessage({
                   defaultMessage: 'Name',
@@ -117,7 +118,7 @@ class EditableTagsTableViewImpl extends Component<Props> {
             <LegacyForm.Item name="value" rules={[]}>
               <Input
                 componentId="codegen_mlflow_app_src_common_components_editabletagstableview.tsx_117"
-                aria-label="tag value"
+                aria-label={sourceIntl.formatMessage({ defaultMessage: 'tag value', description: 'Legacy UI label' })}
                 data-testid="tags-form-input-value"
                 placeholder={this.props.intl.formatMessage({
                   defaultMessage: 'Value',

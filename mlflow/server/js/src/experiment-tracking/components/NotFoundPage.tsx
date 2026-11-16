@@ -1,8 +1,11 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React, { Component } from 'react';
 
 class NotFoundPage extends Component {
   render() {
-    return <div>Resource not found.</div>;
+    return (
+      <div>{sourceIntl.formatMessage({ defaultMessage: 'Resource not found.', description: 'Legacy UI label' })}</div>
+    );
   }
 }
 

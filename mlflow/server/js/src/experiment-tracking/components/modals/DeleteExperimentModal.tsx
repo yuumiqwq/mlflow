@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -63,26 +64,38 @@ export class DeleteExperimentModalImpl extends Component<Props> {
         isOpen={this.props.isOpen}
         onClose={this.props.onClose}
         handleSubmit={this.handleSubmit}
-        title={`Delete Experiment "${this.props.experimentName}"`}
+        title={sourceIntl.formatMessage(
+          { defaultMessage: 'Delete experiment "{name}"', description: 'Delete experiment dialog title' },
+          { name: this.props.experimentName },
+        )}
         helpText={
           <div>
             <p>
               <b>
-                Experiment "{this.props.experimentName}" (Experiment ID: {this.props.experimentId}) will be deleted.
+                {sourceIntl.formatMessage(
+                  {
+                    defaultMessage: 'Experiment "{name}" (ID: {id}) will be deleted.',
+                    description: 'Delete experiment confirmation',
+                  },
+                  { name: this.props.experimentName, id: this.props.experimentId },
+                )}
               </b>
             </p>
             {/* @ts-expect-error TS(4111): Property 'MLFLOW_SHOW_GDPR_PURGING_MESSAGES' comes from a... Remove this comment to see the full error message */}
             {process.env.MLFLOW_SHOW_GDPR_PURGING_MESSAGES === 'true' ? (
               <p>
-                Deleted experiments are restorable for 30 days, after which they are purged along with their associated
-                runs, including metrics, params, tags, and artifacts.
+                {sourceIntl.formatMessage({
+                  defaultMessage:
+                    'Deleted experiments are restorable for 30 days, after which they are purged along with their associated runs, including metrics, params, tags, and artifacts.',
+                  description: 'Legacy UI label',
+                })}
               </p>
             ) : (
               ''
             )}
           </div>
         }
-        confirmButtonText="Delete"
+        confirmButtonText={sourceIntl.formatMessage({ defaultMessage: 'Delete', description: 'Legacy UI label' })}
       />
     );
   }

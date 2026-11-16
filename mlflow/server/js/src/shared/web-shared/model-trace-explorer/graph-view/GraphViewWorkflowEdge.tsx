@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { memo, useMemo } from 'react';
 
 import { EdgeLabelRenderer, getBezierPath, type Position } from '@xyflow/react';
@@ -161,7 +162,7 @@ export const WorkflowEdge = memo(function WorkflowEdge({
                 color: strokeColor,
               }}
             >
-              nested
+              {sourceIntl.formatMessage({ defaultMessage: 'nested', description: 'Legacy UI label' })}
             </span>
           </div>
         </EdgeLabelRenderer>

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Button,
   Checkbox,
@@ -218,7 +219,10 @@ export const TimelineTreeFilterButton = ({
             />
           </div>
           <div
-            aria-label="Minimum log level"
+            aria-label={sourceIntl.formatMessage({
+              defaultMessage: 'Minimum log level',
+              description: 'Legacy UI label',
+            })}
             css={{
               display: 'flex',
               flexDirection: 'column',
@@ -250,7 +254,12 @@ export const TimelineTreeFilterButton = ({
               <Slider.Track>
                 <Slider.Range />
               </Slider.Track>
-              <Slider.Thumb aria-label="Minimum log level" />
+              <Slider.Thumb
+                aria-label={sourceIntl.formatMessage({
+                  defaultMessage: 'Minimum log level',
+                  description: 'Legacy UI label',
+                })}
+              />
             </Slider.Root>
             <div
               css={{

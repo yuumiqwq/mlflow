@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -22,7 +23,14 @@ export class SectionErrorBoundary extends React.Component<Props, State> {
   }
 
   renderErrorMessage(error: any) {
-    return this.props.showServerError ? <div>Error message: {error.message}</div> : '';
+    return this.props.showServerError ? (
+      <div>
+        {sourceIntl.formatMessage({ defaultMessage: 'Error message:', description: 'Legacy UI label' })}
+        {error.message}
+      </div>
+    ) : (
+      ''
+    );
   }
 
   render() {
@@ -37,12 +45,22 @@ export class SectionErrorBoundary extends React.Component<Props, State> {
               className="fa fa-exclamation-triangle mlflow-icon-fail"
               css={classNames.wrapper}
             />
-            <span> Something went wrong with this section. </span>
-            <span>If this error persists, please report an issue </span>
+            <span>
+              {sourceIntl.formatMessage({
+                defaultMessage: 'Something went wrong with this section.',
+                description: 'Legacy UI label',
+              })}
+            </span>
+            <span>
+              {sourceIntl.formatMessage({
+                defaultMessage: 'If this error persists, please report an issue',
+                description: 'Legacy UI label',
+              })}
+            </span>
             {/* Reported during ESLint upgrade */}
             {/* eslint-disable-next-line react/jsx-no-target-blank */}
             <a href={Utils.getSupportPageUrl()} target="_blank">
-              here
+              {sourceIntl.formatMessage({ defaultMessage: 'here', description: 'Legacy UI label' })}
             </a>
             .{this.renderErrorMessage(error)}
           </p>

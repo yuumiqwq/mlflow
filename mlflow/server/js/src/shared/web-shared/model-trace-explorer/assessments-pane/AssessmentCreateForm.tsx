@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { isNil } from 'lodash';
 import { forwardRef, useCallback, useState } from 'react';
 
@@ -218,7 +219,7 @@ export const AssessmentCreateForm = forwardRef<HTMLDivElement, AssessmentCreateF
         <SimpleSelect
           id="shared.model-trace-explorer.assessment-data-type-select"
           componentId="shared.model-trace-explorer.assessment-data-type-select"
-          label="Data Type"
+          label={sourceIntl.formatMessage({ defaultMessage: 'Data Type', description: 'Legacy UI label' })}
           value={dataType}
           disabled={isLoading}
           onChange={(e) => {

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Alert,
   Empty,
@@ -177,7 +178,10 @@ export const ExportTracesToDatasetModal = ({
         <div css={{ display: 'flex', gap: theme.spacing.sm, alignItems: 'center', marginBottom: theme.spacing.sm }}>
           <Input
             allowClear
-            placeholder="Search by dataset name"
+            placeholder={sourceIntl.formatMessage({
+              defaultMessage: 'Search by dataset name',
+              description: 'Legacy UI label',
+            })}
             value={internalSearchFilter}
             onChange={(e) => {
               setInternalSearchFilter(e.target.value);

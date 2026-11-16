@@ -7,9 +7,10 @@
 
 import type { IntlShape } from 'react-intl';
 import { createIntlCache, createIntl } from 'react-intl';
-import { DEFAULT_LOCALE, loadMessages } from './loadMessages';
+import { DEFAULT_LOCALE, DEFAULT_UI_LOCALE, loadMessages } from './loadMessages';
 import { useEffect, useState } from 'react';
-import Utils from '../common/utils/Utils';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
 
 // eslint-disable-next-line @databricks/no-const-object-record-string -- TODO(FEINF-2058)
 const FALLBACK_LOCALES: Record<string, string> = {
@@ -48,7 +49,7 @@ export const I18nUtils = {
    */
   createIntlWithLocale() {
     const params = I18nUtils.getIntlProviderParams();
-    const intl = createIntl({ locale: params.locale, messages: params.messages }, cache);
+    const intl = createIntl({ locale: params.locale, defaultLocale: DEFAULT_LOCALE, messages: params.messages }, cache);
 
     return intl;
   },
@@ -62,13 +63,13 @@ export const I18nUtils = {
         window.localStorage.setItem('locale', langFromQuery);
       }
       // eslint-disable-next-line @databricks/no-direct-storage -- go/no-direct-storage
-      return window.localStorage.getItem('locale') || DEFAULT_LOCALE;
+      return window.localStorage.getItem('locale') || DEFAULT_UI_LOCALE;
     };
     const locale = getLocale();
 
     // _ in the locale causes createIntl to throw, so convert to default locale
     if (locale.includes('_')) {
-      return DEFAULT_LOCALE;
+      return DEFAULT_UI_LOCALE;
     }
     return locale;
   },
@@ -105,6 +106,8 @@ export const useI18nInit = () => {
   useEffect(() => {
     I18nUtils.initI18n()
       .then((initializedIntlState) => {
+        document.documentElement.lang = initializedIntlState.locale;
+        moment.locale(initializedIntlState.locale);
         setIntl(initializedIntlState);
       })
       .catch((error) => {

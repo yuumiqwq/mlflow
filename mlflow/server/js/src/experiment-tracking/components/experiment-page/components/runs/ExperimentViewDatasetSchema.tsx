@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   Header,
   TableIcon,
@@ -44,7 +45,13 @@ export const ExperimentViewDatasetSchema = ({ datasetWithTags }: DatasetsCellRen
             alignContent: 'center',
           }}
         >
-          <Header title={<div css={{ color: theme.colors.grey600 }}>No schema available</div>} />
+          <Header
+            title={
+              <div css={{ color: theme.colors.grey600 }}>
+                {sourceIntl.formatMessage({ defaultMessage: 'No schema available', description: 'Legacy UI label' })}
+              </div>
+            }
+          />
         </div>
       </div>
     );
@@ -71,7 +78,10 @@ export const ExperimentViewDatasetSchema = ({ datasetWithTags }: DatasetsCellRen
             <TableFilterInput
               componentId="codegen_mlflow_app_src_experiment-tracking_components_experiment-page_components_runs_experimentviewdatasetschema.tsx_92"
               value={filter}
-              placeholder="Search fields"
+              placeholder={sourceIntl.formatMessage({
+                defaultMessage: 'Search fields',
+                description: 'Legacy UI label',
+              })}
               onChange={(e) => setFilter(e.target.value)}
               onClear={() => {
                 setFilter('');
@@ -104,7 +114,13 @@ export const ExperimentViewDatasetSchema = ({ datasetWithTags }: DatasetsCellRen
             }}
           >
             <TableIcon css={{ fontSize: '56px', color: theme.colors.grey600 }} />
-            <Header title={<div css={{ color: theme.colors.grey600 }}>Array Datasource</div>} />
+            <Header
+              title={
+                <div css={{ color: theme.colors.grey600 }}>
+                  {sourceIntl.formatMessage({ defaultMessage: 'Array Datasource', description: 'Legacy UI label' })}
+                </div>
+              }
+            />
             {/* @ts-expect-error Type 'string' is not assignable to type '"primary" | "secondary" | "info" | "error" | "success" | "warning" | undefined' */}
             <Typography.Text color={theme.colors.grey600} css={{ textAlign: 'center' }}>
               <FormattedMessage
@@ -120,7 +136,16 @@ export const ExperimentViewDatasetSchema = ({ datasetWithTags }: DatasetsCellRen
       return (
         <div css={{ marginLeft: theme.spacing.lg, marginTop: theme.spacing.md, width: '100%' }}>
           <div css={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-            <Header title={<div css={{ color: theme.colors.grey600 }}>Unrecognized Schema Format</div>} />
+            <Header
+              title={
+                <div css={{ color: theme.colors.grey600 }}>
+                  {sourceIntl.formatMessage({
+                    defaultMessage: 'Unrecognized Schema Format',
+                    description: 'Legacy UI label',
+                  })}
+                </div>
+              }
+            />
             {/* @ts-expect-error Type 'string' is not assignable to type '"primary" | "secondary" | "info" | "error" | "success" | "warning" | undefined' */}
             <Typography.Text color={theme.colors.grey600}>
               <FormattedMessage
@@ -137,7 +162,13 @@ export const ExperimentViewDatasetSchema = ({ datasetWithTags }: DatasetsCellRen
     return (
       <div css={{ marginLeft: theme.spacing.lg, marginTop: theme.spacing.md, width: '100%' }}>
         <div css={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-          <Header title={<div css={{ color: theme.colors.grey600 }}>No schema available</div>} />
+          <Header
+            title={
+              <div css={{ color: theme.colors.grey600 }}>
+                {sourceIntl.formatMessage({ defaultMessage: 'No schema available', description: 'Legacy UI label' })}
+              </div>
+            }
+          />
         </div>
       </div>
     );

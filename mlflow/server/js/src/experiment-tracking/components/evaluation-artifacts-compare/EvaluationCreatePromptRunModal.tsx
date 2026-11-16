@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   Button,
   DialogCombobox,
@@ -469,7 +470,11 @@ export const EvaluationCreatePromptRunModal = ({
             <FormattedMessage defaultMessage="New run" description="Experiment page > new run modal > modal title" />
           </Typography.Title>
           <Typography.Hint css={{ marginTop: 0, fontWeight: 'normal' }}>
-            Create a new run using a large-language model by giving it a prompt template and model parameters
+            {sourceIntl.formatMessage({
+              defaultMessage:
+                'Create a new run using a large-language model by giving it a prompt template and model parameters',
+              description: 'Legacy UI label',
+            })}
           </Typography.Hint>
         </div>
       }

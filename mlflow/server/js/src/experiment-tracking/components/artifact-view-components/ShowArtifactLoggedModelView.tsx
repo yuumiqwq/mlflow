@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -251,10 +252,20 @@ mlflow.models.predict(
             />
             <ul>
               <li>
-                <a href={PyfuncDocUrl}>API reference for the mlflow.pyfunc module</a>
+                <a href={PyfuncDocUrl}>
+                  {sourceIntl.formatMessage({
+                    defaultMessage: 'API reference for the mlflow.pyfunc module',
+                    description: 'Legacy UI label',
+                  })}
+                </a>
               </li>
               <li>
-                <a href={CustomPyfuncModelsDocUrl}>Creating custom Pyfunc models</a>
+                <a href={CustomPyfuncModelsDocUrl}>
+                  {sourceIntl.formatMessage({
+                    defaultMessage: 'Creating custom Pyfunc models',
+                    description: 'Legacy UI label',
+                  })}
+                </a>
               </li>
             </ul>
           </div>

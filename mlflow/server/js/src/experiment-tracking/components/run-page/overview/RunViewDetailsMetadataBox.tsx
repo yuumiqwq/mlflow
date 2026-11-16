@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, FileIcon, InfoSmallIcon, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import Utils from '../../../../common/utils/Utils';
@@ -216,7 +217,11 @@ export const RunViewDetailsMetadataBox = ({
                 />
               </Typography.Text>
             }
-            value={<Typography.Text withoutMargins>Training</Typography.Text>}
+            value={
+              <Typography.Text withoutMargins>
+                {sourceIntl.formatMessage({ defaultMessage: 'Training', description: 'Legacy UI label' })}
+              </Typography.Text>
+            }
           />
           <PairsContentSection
             title={

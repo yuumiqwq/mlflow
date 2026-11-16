@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { memo, useCallback, useMemo, useState } from 'react';
 
 import { Handle, Position } from '@xyflow/react';
@@ -78,9 +79,14 @@ const WorkflowNodeTooltipContent = ({
       >
         {displayName}
       </div>
-      <div css={{ color: tooltipTextSecondary, marginBottom: theme.spacing.xs }}>Type: {nodeType}</div>
+      <div css={{ color: tooltipTextSecondary, marginBottom: theme.spacing.xs }}>
+        {sourceIntl.formatMessage({ defaultMessage: 'Type:', description: 'Legacy UI label' })}
+        {nodeType}
+      </div>
       <div css={{ color: tooltipTextSecondary }}>
-        {count} execution{count !== 1 ? 's' : ''}
+        {count}
+        {sourceIntl.formatMessage({ defaultMessage: 'execution', description: 'Legacy UI label' })}
+        {count !== 1 ? 's' : ''}
       </div>
 
       {count > 0 && (
@@ -109,7 +115,9 @@ const WorkflowNodeTooltipContent = ({
             ) : (
               <ChevronRightIcon css={{ width: 14, height: 14 }} />
             )}
-            {isExpanded ? 'Hide' : 'Show'} {count} span{count !== 1 ? 's' : ''}
+            {isExpanded ? 'Hide' : 'Show'} {count}
+            {sourceIntl.formatMessage({ defaultMessage: 'span', description: 'Legacy UI label' })}
+            {count !== 1 ? 's' : ''}
           </div>
 
           {isExpanded && (
@@ -195,7 +203,10 @@ const WorkflowNodeTooltipContent = ({
           color: tooltipTextSecondary,
         }}
       >
-        Click node to highlight • Click a span above for details
+        {sourceIntl.formatMessage({
+          defaultMessage: 'Click node to highlight • Click a span above for details',
+          description: 'Legacy UI label',
+        })}
       </div>
     </div>
   );

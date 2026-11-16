@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -49,7 +50,11 @@ export const ApiKeysColumnsButton = ({ visibleColumns, onColumnsChange }: ApiKey
   };
 
   return (
-    <DialogCombobox componentId="mlflow.gateway.api-keys.columns-dropdown" label="Columns" multiSelect>
+    <DialogCombobox
+      componentId="mlflow.gateway.api-keys.columns-dropdown"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Columns', description: 'Legacy UI label' })}
+      multiSelect
+    >
       <DialogComboboxCustomButtonTriggerWrapper>
         <Button
           componentId="mlflow.gateway.api-keys.columns-button"

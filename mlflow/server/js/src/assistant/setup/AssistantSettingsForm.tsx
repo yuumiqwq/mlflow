@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { useState, useCallback, useEffect, type ReactNode } from 'react';
 import {
   Button,
@@ -228,7 +229,10 @@ export const AssistantSettingsForm = ({
             }}
           >
             <Typography.Text color="secondary">
-              Need to update API keys? Manage them in{' '}
+              {sourceIntl.formatMessage({
+                defaultMessage: 'Need to update API keys? Manage them in',
+                description: 'Legacy UI label',
+              })}{' '}
               <Link
                 componentId="mlflow.assistant.setup.llm_connections_link"
                 to={Routes.getSettingsSectionRoute(SETTINGS_SECTION_LLM_CONNECTIONS)}
@@ -238,7 +242,7 @@ export const AssistantSettingsForm = ({
                   '&:hover': { textDecoration: 'underline' },
                 }}
               >
-                LLM Connections
+                {sourceIntl.formatMessage({ defaultMessage: 'LLM Connections', description: 'Legacy UI label' })}
               </Link>
               .
             </Typography.Text>
@@ -247,10 +251,13 @@ export const AssistantSettingsForm = ({
           {/* Permissions Section */}
           <div>
             <Typography.Text bold css={{ fontSize: 18, marginBottom: theme.spacing.sm, display: 'block' }}>
-              Permissions
+              {sourceIntl.formatMessage({ defaultMessage: 'Permissions', description: 'Legacy UI label' })}
             </Typography.Text>
             <Typography.Text color="secondary" css={{ display: 'block', marginBottom: theme.spacing.md }}>
-              Configure what actions the assistant can perform.
+              {sourceIntl.formatMessage({
+                defaultMessage: 'Configure what actions the assistant can perform.',
+                description: 'Legacy UI label',
+              })}
             </Typography.Text>
 
             <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
@@ -261,7 +268,12 @@ export const AssistantSettingsForm = ({
                   disabled
                   onChange={() => {}}
                 >
-                  <Typography.Text>Execute MLflow CLI (required)</Typography.Text>
+                  <Typography.Text>
+                    {sourceIntl.formatMessage({
+                      defaultMessage: 'Execute MLflow CLI (required)',
+                      description: 'Legacy UI label',
+                    })}
+                  </Typography.Text>
                 </Checkbox>
                 <Tooltip
                   componentId="mlflow.assistant.setup.project.perm_mlflow_cli_tooltip"
@@ -283,7 +295,9 @@ export const AssistantSettingsForm = ({
                     if (error) setError(null);
                   }}
                 >
-                  <Typography.Text>Read MLflow doc</Typography.Text>
+                  <Typography.Text>
+                    {sourceIntl.formatMessage({ defaultMessage: 'Read MLflow doc', description: 'Legacy UI label' })}
+                  </Typography.Text>
                 </Checkbox>
                 <Tooltip
                   componentId="mlflow.assistant.setup.project.perm_read_docs_tooltip"
@@ -305,7 +319,9 @@ export const AssistantSettingsForm = ({
                     if (error) setError(null);
                   }}
                 >
-                  <Typography.Text>Edit project code</Typography.Text>
+                  <Typography.Text>
+                    {sourceIntl.formatMessage({ defaultMessage: 'Edit project code', description: 'Legacy UI label' })}
+                  </Typography.Text>
                 </Checkbox>
                 <Tooltip
                   componentId="mlflow.assistant.setup.project.perm_edit_files_tooltip"
@@ -329,7 +345,7 @@ export const AssistantSettingsForm = ({
                   }}
                 >
                   <Typography.Text color={!canEditServerSettings ? 'secondary' : undefined}>
-                    Full access
+                    {sourceIntl.formatMessage({ defaultMessage: 'Full access', description: 'Legacy UI label' })}
                   </Typography.Text>
                 </Checkbox>
                 <Tooltip
@@ -351,16 +367,23 @@ export const AssistantSettingsForm = ({
           {/* Project Configuration Section */}
           <div>
             <Typography.Text bold css={{ fontSize: 18, marginBottom: theme.spacing.sm, display: 'block' }}>
-              Project Path
+              {sourceIntl.formatMessage({ defaultMessage: 'Project Path', description: 'Legacy UI label' })}
             </Typography.Text>
             <Typography.Text color="secondary" css={{ display: 'block', marginBottom: theme.spacing.md }}>
-              Link this experiment to your local codebase (optional) to enable the assistant to understand your project
-              context.
+              {sourceIntl.formatMessage({
+                defaultMessage:
+                  'Link this experiment to your local codebase (optional) to enable the assistant to understand your project context.',
+                description: 'Legacy UI label',
+              })}
             </Typography.Text>
 
             {!canEditServerSettings ? (
               <InfoNote>
-                Project paths point at the MLflow server host&apos;s filesystem and can only be configured{' '}
+                {sourceIntl.formatMessage({
+                  defaultMessage:
+                    "Project paths point at the MLflow server host's filesystem and can only be configured",
+                  description: 'Legacy UI label',
+                })}{' '}
                 {serverSettingsRestriction}.
               </InfoNote>
             ) : experimentId ? (
@@ -375,7 +398,12 @@ export const AssistantSettingsForm = ({
                 css={{ width: '100%' }}
               />
             ) : (
-              <InfoNote>No experiment selected. You can configure project mappings later in Settings.</InfoNote>
+              <InfoNote>
+                {sourceIntl.formatMessage({
+                  defaultMessage: 'No experiment selected. You can configure project mappings later in Settings.',
+                  description: 'Legacy UI label',
+                })}
+              </InfoNote>
             )}
           </div>
 
@@ -383,23 +411,33 @@ export const AssistantSettingsForm = ({
           {PROVIDERS_WITH_SKILLS.has(provider) && (
             <div>
               <Typography.Text bold css={{ fontSize: 18, marginBottom: theme.spacing.sm, display: 'block' }}>
-                Skills Location
+                {sourceIntl.formatMessage({ defaultMessage: 'Skills Location', description: 'Legacy UI label' })}
               </Typography.Text>
               <Typography.Text color="secondary" css={{ display: 'block', marginBottom: theme.spacing.md }}>
-                Extend the assistant with specialized MLflow workflows. See{' '}
+                {sourceIntl.formatMessage({
+                  defaultMessage: 'Extend the assistant with specialized MLflow workflows. See',
+                  description: 'Legacy UI label',
+                })}{' '}
                 <Typography.Link
                   componentId="mlflow.assistant.setup.project.skills_link"
                   href="https://github.com/mlflow/skills"
                   target="_blank"
                 >
-                  MLflow Skills
+                  {sourceIntl.formatMessage({ defaultMessage: 'MLflow Skills', description: 'Legacy UI label' })}
                 </Typography.Link>{' '}
-                to find list of skills to be installed.
+                {sourceIntl.formatMessage({
+                  defaultMessage: 'to find list of skills to be installed.',
+                  description: 'Legacy UI label',
+                })}
               </Typography.Text>
 
               {!canEditServerSettings ? (
                 <InfoNote>
-                  Skills are installed on the MLflow server host&apos;s filesystem and can only be configured{' '}
+                  {sourceIntl.formatMessage({
+                    defaultMessage:
+                      "Skills are installed on the MLflow server host's filesystem and can only be configured",
+                    description: 'Legacy UI label',
+                  })}{' '}
                   {serverSettingsRestriction}.
                 </InfoNote>
               ) : (
@@ -414,7 +452,9 @@ export const AssistantSettingsForm = ({
                 >
                   <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
                     <Radio componentId="mlflow.assistant.setup.project.skills_global" value="global">
-                      <Typography.Text>Global</Typography.Text>
+                      <Typography.Text>
+                        {sourceIntl.formatMessage({ defaultMessage: 'Global', description: 'Legacy UI label' })}
+                      </Typography.Text>
                       <Typography.Text color="secondary" css={{ marginLeft: theme.spacing.xs }}>
                         (~/{getSkillsDir(provider)}/)
                       </Typography.Text>
@@ -425,7 +465,9 @@ export const AssistantSettingsForm = ({
                       value="project"
                       disabled={!projectPath.trim()}
                     >
-                      <Typography.Text color={!projectPath.trim() ? 'secondary' : undefined}>Project</Typography.Text>
+                      <Typography.Text color={!projectPath.trim() ? 'secondary' : undefined}>
+                        {sourceIntl.formatMessage({ defaultMessage: 'Project', description: 'Legacy UI label' })}
+                      </Typography.Text>
                       <Typography.Text color="secondary" css={{ marginLeft: theme.spacing.xs }}>
                         {projectPath.trim()
                           ? `(${projectPath.trim()}/${getSkillsDir(provider)}/)`
@@ -435,7 +477,12 @@ export const AssistantSettingsForm = ({
 
                     <div>
                       <Radio componentId="mlflow.assistant.setup.project.skills_custom" value="custom">
-                        <Typography.Text>Custom location</Typography.Text>
+                        <Typography.Text>
+                          {sourceIntl.formatMessage({
+                            defaultMessage: 'Custom location',
+                            description: 'Legacy UI label',
+                          })}
+                        </Typography.Text>
                       </Radio>
                       {skillsLocation === 'custom' && (
                         <div css={{ marginTop: theme.spacing.sm, paddingLeft: 24 }}>

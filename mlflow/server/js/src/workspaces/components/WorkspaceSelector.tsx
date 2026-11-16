@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import { useCallback, useMemo, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import {
   DialogCombobox,
@@ -168,13 +169,13 @@ export const WorkspaceSelector = () => {
   return (
     <DialogCombobox
       componentId="workspace_selector"
-      label="Workspace"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Workspace', description: 'Legacy UI label' })}
       value={!currentWorkspace ? [] : [currentWorkspace]}
       onOpenChange={handleOpenChange}
     >
       <DialogComboboxTrigger
         withInlineLabel={false}
-        placeholder="Select workspace"
+        placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select workspace', description: 'Legacy UI label' })}
         renderDisplayedValue={() => currentWorkspace}
         onClear={() => navigate(Routes.rootRoute)}
         width="100%"
@@ -182,7 +183,7 @@ export const WorkspaceSelector = () => {
       <DialogComboboxContent style={{ zIndex: theme.options.zIndexBase + 100 }} loading={isLoading}>
         {isError && (
           <div css={{ padding: theme.spacing.sm, color: theme.colors.textValidationDanger }}>
-            Failed to load workspaces
+            {sourceIntl.formatMessage({ defaultMessage: 'Failed to load workspaces', description: 'Legacy UI label' })}
           </div>
         )}
 
@@ -201,7 +202,7 @@ export const WorkspaceSelector = () => {
               {showEmptyState ? (
                 // Provide a dummy item when no results to prevent crash
                 <DialogComboboxOptionListSelectItem value="" onChange={() => {}} checked={false} disabled>
-                  No workspaces found
+                  {sourceIntl.formatMessage({ defaultMessage: 'No workspaces found', description: 'Legacy UI label' })}
                 </DialogComboboxOptionListSelectItem>
               ) : (
                 filteredOptions.map((workspace) => {

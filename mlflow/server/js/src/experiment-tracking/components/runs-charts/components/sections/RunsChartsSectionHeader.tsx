@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   Button,
   DangerModal,
@@ -56,6 +57,16 @@ export const RunsChartsSectionHeader = ({
   const { theme } = useDesignSystemTheme();
   // Change name locally for better performance
   const [tmpSectionName, setTmpSectionName] = useState(section.name);
+  // Localize generated section labels without changing stored names or user-defined sections.
+  const generatedSectionNames = {
+    'Model metrics': sourceIntl.formatMessage({ defaultMessage: 'Model metrics', description: 'Generated chart section' }),
+    'System metrics': sourceIntl.formatMessage({ defaultMessage: 'System metrics', description: 'Generated chart section' }),
+    'Node system metrics': sourceIntl.formatMessage({ defaultMessage: 'Node system metrics', description: 'Generated chart section' }),
+    'GPU system metrics': sourceIntl.formatMessage({ defaultMessage: 'GPU system metrics', description: 'Generated chart section' }),
+  };
+  const displaySectionName = 'isGenerated' in section && section.isGenerated === true
+    ? generatedSectionNames[tmpSectionName as keyof typeof generatedSectionNames] ?? tmpSectionName
+    : tmpSectionName;
   // State to check if element is being dragged
   const [isDraggingHandle, setIsDraggingHandle] = useState(false);
 
@@ -214,7 +225,7 @@ export const RunsChartsSectionHeader = ({
               whiteSpace: 'pre',
             }}
           >
-            {tmpSectionName}
+            {displaySectionName}
           </div>
           {editSection === index && (
             <Input
@@ -260,7 +271,7 @@ export const RunsChartsSectionHeader = ({
               <Button
                 componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-compare_sections_runscomparesectionheader.tsx_246"
                 onClick={onEdit}
-                aria-label="Icon label"
+                aria-label={sourceIntl.formatMessage({ defaultMessage: 'Icon label', description: 'Legacy UI label' })}
                 icon={<PencilIcon />}
               />
             </div>
@@ -353,7 +364,7 @@ export const RunsChartsSectionHeader = ({
                 visible={isDeleteSectionModalOpen}
                 onOk={deleteModalConfirm}
                 onCancel={deleteModalCancel}
-                title="Delete section"
+                title={sourceIntl.formatMessage({ defaultMessage: 'Delete section', description: 'Legacy UI label' })}
               >
                 <FormattedMessage
                   defaultMessage="Deleting the section will permanently remove it and the charts it contains. This cannot be undone."

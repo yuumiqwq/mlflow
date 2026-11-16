@@ -55,7 +55,7 @@ export const MlflowSidebarWorkflowSwitch = ({
       <div
         css={{
           display: 'flex',
-          width: 'min-content',
+          width: '100%',
           position: 'relative',
           alignItems: 'center',
           background: theme.colors.backgroundSecondary,
@@ -70,12 +70,12 @@ export const MlflowSidebarWorkflowSwitch = ({
             top: -1,
             bottom: -1,
             left: -1,
-            width: `${isGenAi ? 39 : 67}%`,
+            width: 'calc(50% + 1px)',
             background: borderColor,
             borderRadius: theme.borders.borderRadiusFull,
             padding: 1,
             transition: 'transform 200ms ease-out, width 200ms ease-out, background 200ms ease-out',
-            transform: isGenAi ? 'translateX(0)' : `translateX(calc(51%))`,
+            transform: isGenAi ? 'translateX(0)' : 'translateX(100%)',
             pointerEvents: 'none',
           }}
         >
@@ -93,16 +93,19 @@ export const MlflowSidebarWorkflowSwitch = ({
         <div
           css={{
             zIndex: 1,
+            flex: 1,
+            minWidth: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             padding: theme.spacing.xs,
-            paddingRight: theme.spacing.md,
-            paddingLeft: theme.spacing.md,
+            paddingRight: theme.spacing.sm,
+            paddingLeft: theme.spacing.sm,
             whiteSpace: 'nowrap' as const,
           }}
           role="button"
+          aria-pressed={isGenAi}
           tabIndex={0}
           onClick={() => handleChangeWorkflowType(WorkflowType.GENAI)}
           onKeyDown={(e) => {
@@ -120,16 +123,19 @@ export const MlflowSidebarWorkflowSwitch = ({
         <div
           css={{
             zIndex: 1,
+            flex: 1,
+            minWidth: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             padding: theme.spacing.xs,
-            paddingRight: theme.spacing.md,
+            paddingRight: theme.spacing.sm,
             paddingLeft: theme.spacing.sm,
             whiteSpace: 'nowrap' as const,
           }}
           role="button"
+          aria-pressed={!isGenAi}
           tabIndex={0}
           onClick={() => handleChangeWorkflowType(WorkflowType.MACHINE_LEARNING)}
           onKeyDown={(e) => {

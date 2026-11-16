@@ -2,7 +2,7 @@
   "name": "@mlflow/mlflow",
   "version": "0.1.0",
   "scripts": {
-    "start": "craco start",
+    "start": "yarn i18n:compile && craco start",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "test": "craco --max_old_space_size=8192 test --env=jsdom --colors --watchAll=false",
@@ -16,11 +16,13 @@
     "i18n:check": "yarn i18n --lint",
     "i18n": "node scripts/extract-i18n.js",
     "knip": "knip --reporter markdown --preprocessor ./knip-preprocessor.ts",
-    "build": "GENERATE_SOURCEMAP=false craco --max_old_space_size=8192 build",
+    "build": "yarn i18n:compile && GENERATE_SOURCEMAP=false craco --max_old_space_size=8192 build",
     "prettier": "prettier --ignore-unknown",
     "graphql-codegen": "python ../../../dev/proto_to_graphql/code_generator.py && yarn graphql-codegen:clean && yarn graphql-codegen:base",
     "graphql-codegen:base": "graphql-codegen --config ./src/graphql/graphql-codegen.ts",
-    "graphql-codegen:clean": "find . -path '**/__generated__/*.ts' | xargs rm"
+    "graphql-codegen:clean": "find . -path '**/__generated__/*.ts' | xargs rm",
+    "i18n:compile": "node scripts/compile-locales.js",
+    "i18n:audit": "node scripts/audit-locales.js"
   },
   "dependencies": {
     "@a2ui/react": "^0.9.0",
@@ -43,6 +45,7 @@
     "@tanstack/react-virtual": "^3.8.1",
     "@types/react-virtualized": "^9.21.9",
     "@xyflow/react": "^12.10.0",
+    "antd": "4.16.8",
     "babel-jest": "^30.2.0",
     "buffer": "^6.0.3",
     "bytes": "3.0.0",

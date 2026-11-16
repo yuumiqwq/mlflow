@@ -1,9 +1,9 @@
+import { CursorPagination } from '../../../common/components/CursorPagination';
 import { useMemo } from 'react';
 
 import {
   Button,
   CalendarClockIcon,
-  CursorPagination,
   DangerIcon,
   Empty,
   Spacer,

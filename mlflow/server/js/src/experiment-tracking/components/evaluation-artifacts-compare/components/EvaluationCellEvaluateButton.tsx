@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { Button, InfoSmallIcon, PlayIcon, RefreshIcon, Tooltip } from '@databricks/design-system';
 import { FormattedMessage } from 'react-intl';
 import { usePromptEngineeringContext } from '../contexts/PromptEngineeringContext';
@@ -75,7 +76,7 @@ export const EvaluationCellEvaluateButton = ({
       }}
       icon={<PlayIcon />}
     >
-      <>Evaluate</>
+      <>{sourceIntl.formatMessage({ defaultMessage: 'Evaluate', description: 'Legacy UI label' })}</>
     </Button>
   );
 };

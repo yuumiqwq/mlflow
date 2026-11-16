@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import invariant from 'invariant';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Global, keyframes } from '@emotion/react';
@@ -732,7 +733,11 @@ const ExperimentEvaluationRunsPageImpl = ({ baseline }: { baseline?: EvalRunsBas
             />
           </Typography.Paragraph>
         </div>
-        <img css={{ maxWidth: '100%', maxHeight: 160 }} src={evalRunsEmptyImg} alt="No runs found" />
+        <img
+          css={{ maxWidth: '100%', maxHeight: 160 }}
+          src={evalRunsEmptyImg}
+          alt={sourceIntl.formatMessage({ defaultMessage: 'No runs found', description: 'Legacy UI label' })}
+        />
         <div css={{ width: '100%', marginTop: theme.spacing.lg }}>
           <EvalRunsEmptyStateCard experimentId={experimentId} />
         </div>

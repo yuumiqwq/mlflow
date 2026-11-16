@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import type { RowSelectionState } from '@tanstack/react-table';
 import { isNil } from 'lodash';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -369,7 +370,7 @@ function GenAiTracesTableImpl({
                 <GenAiTracesTableSearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
                 <DialogCombobox
                   componentId="mlflow.genai_traces_table.filter_dropdown"
-                  label="Filters"
+                  label={sourceIntl.formatMessage({ defaultMessage: 'Filters', description: 'Legacy UI label' })}
                   value={Array.from(assessmentFilters).map((filter) => filter.assessmentName)}
                   multiSelect
                 >
@@ -628,7 +629,8 @@ const SampledInfoBadge = (props: { totalRowCount: number; sampledInfo?: SampleIn
           },
         )}
       >
-        Sampled {displayPercentage(sampledInfo.sampledCount / sampledInfo.totalCount)}%
+        {sourceIntl.formatMessage({ defaultMessage: 'Sampled', description: 'Legacy UI label' })}
+        {displayPercentage(sampledInfo.sampledCount / sampledInfo.totalCount)}%
       </Tooltip>
     </GenAiEvaluationBadge>
   );

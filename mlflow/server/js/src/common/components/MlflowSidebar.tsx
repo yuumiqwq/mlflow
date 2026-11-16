@@ -28,7 +28,7 @@ import AdminRoutes from '../../admin/routes';
 import { useCurrentUserIsAdmin, useCurrentUserQuery, useIsBasicAuth } from '../../account/hooks';
 import { performLogout } from '../../account/auth-utils';
 import { GatewayLabel, GatewayNewTag } from './GatewayNewTag';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useWorkflowType, WorkflowType } from '../contexts/WorkflowTypeContext';
 import { shouldEnableWorkflowBasedNavigation, shouldEnableWorkspaces } from '../utils/FeatureUtils';
 import { SERVER_FEATURE_KEYS, useFeatureEnabled } from '../../experiment-tracking/hooks/useServerInfo';
@@ -94,6 +94,7 @@ export function MlflowSidebar({
   setShowSidebar: (showSidebar: boolean) => void;
 }) {
   const location = useLocation();
+  const intl = useIntl();
   const [searchParams] = useSearchParams();
   const { theme } = useDesignSystemTheme();
   const enableWorkflowBasedNavigation = shouldEnableWorkflowBasedNavigation();
@@ -281,15 +282,59 @@ export function MlflowSidebar({
   return (
     <aside
       css={{
-        width: showSidebar ? 190 : theme.spacing.lg + theme.spacing.md,
+        width: showSidebar ? 248 : 48,
         flexShrink: 0,
         padding: theme.spacing.sm,
         paddingRight: 0,
         display: 'inline-flex',
         flexDirection: 'column',
         gap: theme.spacing.md,
+        '@media (max-width: 767px)': showSidebar
+          ? {
+              position: 'fixed',
+              inset: '0 auto 0 0',
+              zIndex: 900,
+              background: theme.colors.backgroundSecondary,
+              boxShadow: theme.shadows.md,
+              paddingRight: theme.spacing.sm,
+              overflowY: 'auto',
+            }
+          : {},
       }}
     >
+      <a
+        href="/"
+        aria-label="返回 11tiger 导航页"
+        title="返回导航页"
+        css={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          alignSelf: 'flex-start',
+          minHeight: showSidebar ? 34 : 27,
+          maxWidth: '100%',
+          gap: showSidebar ? 12 : 0,
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontStyle: 'italic',
+          fontSize: showSidebar ? 27 : 18,
+          lineHeight: 1,
+          letterSpacing: '-1px',
+          whiteSpace: 'nowrap',
+          textDecoration: 'none',
+          color: theme.colors.textPrimary,
+          '&:hover': { textDecoration: 'underline', textUnderlineOffset: '4px' },
+          '&:focus-visible': { outline: '2px solid currentColor', outlineOffset: 3 },
+        }}
+      >
+        <span>{showSidebar ? '11tiger' : '11t'}</span>
+        {showSidebar && (
+          <>
+            <span css={{ font: '300 18px/1 sans-serif', color: '#c2c4c8' }}>/</span>
+            <strong css={{ font: '500 15px/1 "Segoe UI", "Microsoft YaHei", sans-serif', letterSpacing: '1px' }}>
+              MLflow
+            </strong>
+          </>
+        )}
+      </a>
       <div css={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         {showSidebar && (
           <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
@@ -310,7 +355,10 @@ export function MlflowSidebar({
         <Button
           componentId="mlflow_header.toggle_sidebar_button"
           onClick={toggleSidebar}
-          aria-label="Toggle sidebar"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Toggle sidebar',
+            description: 'Toggle sidebar navigation',
+          })}
           icon={showSidebar ? <SidebarCollapseIcon /> : <SidebarExpandIcon />}
         />
       </div>

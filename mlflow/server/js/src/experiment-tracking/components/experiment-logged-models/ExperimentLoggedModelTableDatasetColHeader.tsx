@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useMemo, useState } from 'react';
 
 import type { LoggedModelProto } from '../../types';
@@ -49,7 +50,7 @@ export const ExperimentLoggedModelTableDatasetColHeader = ({ columnGroup }: { co
   }
   return (
     <span css={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xs, overflow: 'hidden' }}>
-      Dataset:{' '}
+      {sourceIntl.formatMessage({ defaultMessage: 'Dataset:', description: 'Legacy UI label' })}{' '}
       <Typography.Link
         css={{
           '.anticon': {

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -58,14 +59,18 @@ const Selector = ({
         onChange({ key, isParam });
       }}
     >
-      <SimpleSelectOptionGroup label="Parameters">
+      <SimpleSelectOptionGroup
+        label={sourceIntl.formatMessage({ defaultMessage: 'Parameters', description: 'Legacy UI label' })}
+      >
         {paramKeys.map((key) => (
           <SimpleSelectOption key={key} value={paramOptionPrefix + key}>
             {key}
           </SimpleSelectOption>
         ))}
       </SimpleSelectOptionGroup>
-      <SimpleSelectOptionGroup label="Metrics">
+      <SimpleSelectOptionGroup
+        label={sourceIntl.formatMessage({ defaultMessage: 'Metrics', description: 'Legacy UI label' })}
+      >
         {metricKeys.map((key) => (
           <SimpleSelectOption key={key} value={metricOptionPrefix + key}>
             {key}

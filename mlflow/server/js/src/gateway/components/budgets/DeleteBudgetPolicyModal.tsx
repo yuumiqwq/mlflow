@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { DeleteConfirmationModal } from '../common';
 import { useDeleteBudgetPolicy } from '../../hooks/useDeleteBudgetPolicy';
 import { formatBudgetPolicySummary } from './budgetFormatUtils';
@@ -26,7 +27,7 @@ export const DeleteBudgetPolicyModal = ({ open, policy, onClose, onSuccess }: De
       open={open}
       onClose={onClose}
       onConfirm={handleConfirm}
-      title="Delete Budget Policy"
+      title={sourceIntl.formatMessage({ defaultMessage: 'Delete Budget Policy', description: 'Legacy UI label' })}
       itemName={formatBudgetPolicySummary(policy)}
       itemType="budget policy"
       componentId="mlflow.gateway.delete-budget-policy-modal"

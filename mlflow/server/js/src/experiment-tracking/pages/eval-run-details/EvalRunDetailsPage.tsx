@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -52,7 +53,11 @@ const EvalRunDetailsLoadingSkeleton = () => {
   return (
     <div css={{ padding: theme.spacing.lg }}>
       {[...Array(8).keys()].map((i) => (
-        <ParagraphSkeleton label="Loading..." key={i} seed={`eval-run-details-${i}`} />
+        <ParagraphSkeleton
+          label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+          key={i}
+          seed={`eval-run-details-${i}`}
+        />
       ))}
     </div>
   );
@@ -210,7 +215,7 @@ const EvalRunDetailsPageContent = ({ experimentId, runUuid }: { experimentId: st
       }}
     >
       {!revampEnabled && (
-        <nav aria-label="Breadcrumb">
+        <nav aria-label={sourceIntl.formatMessage({ defaultMessage: 'Breadcrumb', description: 'Legacy UI label' })}>
           <Breadcrumb includeTrailingCaret>
             <Breadcrumb.Item>
               <Link

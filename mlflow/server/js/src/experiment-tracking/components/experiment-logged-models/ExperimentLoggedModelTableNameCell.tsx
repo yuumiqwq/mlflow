@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Overflow, ParagraphSkeleton, Tag, Tooltip, useDesignSystemTheme } from '@databricks/design-system';
 import { Link } from '../../../common/utils/RoutingUtils';
 import Routes from '../../routes';
@@ -103,7 +104,9 @@ export const ExperimentLoggedModelTableNameCell = (props: { data: LoggedModelsTa
         }}
       >
         <RunColorPill color={getStableColorForRun(data.info?.model_id || '')} />
-        <ParagraphSkeleton label="Loading..." />
+        <ParagraphSkeleton
+          label={sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+        />
       </div>
     );
   }

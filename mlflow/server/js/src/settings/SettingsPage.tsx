@@ -11,6 +11,7 @@ import { useDarkThemeContext } from '../common/contexts/DarkThemeContext';
 import { ApiKeysPageInner } from '../gateway/pages/ApiKeysPage';
 import Routes from '../experiment-tracking/routes';
 import WebhooksSettings from './WebhooksSettings';
+import { LanguageSelector } from './LanguageSelector';
 import {
   isSettingsPathSegment,
   SETTINGS_RETURN_TO_PARAM,
@@ -53,6 +54,7 @@ const SettingsRow = ({ children, trailing, isFirst }: SettingsRowProps) => {
         gap: theme.spacing.md,
         padding: theme.spacing.md,
         borderTop: isFirst ? undefined : `1px solid ${theme.colors.borderDecorative}`,
+        '@media (max-width: 575px)': { flexDirection: 'column', gap: theme.spacing.sm },
       }}
     >
       <div
@@ -181,8 +183,12 @@ const SettingsPage = () => {
               }
             />
             <Card componentId="mlflow.settings.general.preferences-card" css={{ padding: 0, overflow: 'hidden' }}>
+              <SettingsRow isFirst trailing={<LanguageSelector />}>
+                <Typography.Title level={4} withoutMargins>
+                  <FormattedMessage defaultMessage="Language" description="UI language selector" />
+                </Typography.Title>
+              </SettingsRow>
               <SettingsRow
-                isFirst
                 trailing={
                   <Switch
                     componentId="mlflow.settings.theme.toggle-switch"

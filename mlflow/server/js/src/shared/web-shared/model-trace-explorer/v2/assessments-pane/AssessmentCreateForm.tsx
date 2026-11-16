@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { isNil } from 'lodash';
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { forwardRef, useCallback, useState } from 'react';
@@ -221,7 +222,7 @@ export const AssessmentCreateForm: ForwardRefExoticComponent<
         <SimpleSelect
           id="shared.model-trace-explorer.assessment-data-type-select"
           componentId="shared.model-trace-explorer.assessment-data-type-select"
-          label="Data Type"
+          label={sourceIntl.formatMessage({ defaultMessage: 'Data Type', description: 'Legacy UI label' })}
           value={dataType}
           disabled={isLoading}
           onChange={(e) => {

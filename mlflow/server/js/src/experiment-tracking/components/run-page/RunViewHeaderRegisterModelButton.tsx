@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -252,7 +253,7 @@ export const RunViewHeaderRegisterModelButton = ({
           endIcon={<NewWindowIcon />}
           type="link"
         >
-          Model registered
+          {sourceIntl.formatMessage({ defaultMessage: 'Model registered', description: 'Legacy UI label' })}
         </Button>
       </Link>
     );

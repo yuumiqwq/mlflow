@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import {
   Button,
   DragIcon,
@@ -251,14 +252,14 @@ const RunsChartCardWrapperRaw = ({
               onClick={onEdit}
               data-testid="experiment-view-compare-runs-card-edit"
             >
-              Configure
+              {sourceIntl.formatMessage({ defaultMessage: 'Configure', description: 'Legacy UI label' })}
             </DropdownMenu.Item>
             <DropdownMenu.Item
               componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_cards_chartcard.common.tsx_291"
               onClick={onDelete}
               data-testid="experiment-view-compare-runs-card-delete"
             >
-              Delete
+              {sourceIntl.formatMessage({ defaultMessage: 'Delete', description: 'Legacy UI label' })}
             </DropdownMenu.Item>
             {supportedDownloadFormats.length > 0 && onClickDownload && (
               <>

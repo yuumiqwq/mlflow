@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import invariant from 'invariant';
 import { useDispatch } from 'react-redux';
 import { usePromptDetailsQuery } from './hooks/usePromptDetailsQuery';
@@ -166,7 +167,7 @@ const PromptsDetailsPage = ({ experimentId }: { experimentId?: string } = {}) =>
     <Breadcrumb>
       <Breadcrumb.Item>
         <Link componentId="mlflow.prompts.details.breadcrumb_link" to={Routes.promptsPageRoute}>
-          Prompts
+          {sourceIntl.formatMessage({ defaultMessage: 'Prompts', description: 'Legacy UI label' })}
         </Link>
       </Breadcrumb.Item>
     </Breadcrumb>
@@ -193,7 +194,10 @@ const PromptsDetailsPage = ({ experimentId }: { experimentId?: string } = {}) =>
                 <Button
                   componentId="mlflow.prompts.details.actions"
                   icon={<OverflowIcon />}
-                  aria-label="More actions"
+                  aria-label={sourceIntl.formatMessage({
+                    defaultMessage: 'More actions',
+                    description: 'Legacy UI label',
+                  })}
                 />
               </DropdownMenu.Trigger>
               <DropdownMenu.Content>

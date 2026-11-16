@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -80,7 +81,7 @@ export const ExperimentLoggedModelListPageDatasetDropdown = ({
           componentId="mlflow.logged_model.list_page.datasets_filter.toggle"
           icon={<TableIcon />}
         >
-          Datasets
+          {sourceIntl.formatMessage({ defaultMessage: 'Datasets', description: 'Legacy UI label' })}
           {serializedSelectedDatasets.length > 0 ? (
             <>
               <DialogComboboxCountBadge css={{ marginLeft: 4 }}>

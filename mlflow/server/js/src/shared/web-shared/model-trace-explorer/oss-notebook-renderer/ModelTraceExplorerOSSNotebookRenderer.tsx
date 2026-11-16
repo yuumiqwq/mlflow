@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { useState, useEffect, useMemo } from 'react';
 
 import {
@@ -129,7 +130,7 @@ export const ModelTraceExplorerOSSNotebookRenderer = () => {
           }}
         >
           <Typography.Title level={4} withoutMargins>
-            MLflow Trace UI
+            {sourceIntl.formatMessage({ defaultMessage: 'MLflow Trace UI', description: 'Legacy UI label' })}
           </Typography.Title>
           <InfoTooltip
             componentId="mlflow.notebook.trace-ui-info"
@@ -150,7 +151,7 @@ export const ModelTraceExplorerOSSNotebookRenderer = () => {
             componentId="mlflow.notebook.trace-ui-learn-more-link"
             href={MLFLOW_DOCS_URI}
             openInNewTab
-            title="Learn More"
+            title={sourceIntl.formatMessage({ defaultMessage: 'Learn More', description: 'Legacy UI label' })}
           >
             <FormattedMessage
               defaultMessage="Learn More"
@@ -162,7 +163,7 @@ export const ModelTraceExplorerOSSNotebookRenderer = () => {
           componentId="mlflow.notebook.trace-ui-see-in-mlflow-link"
           href={getMlflowUILinkForTrace(traceIds[activeTraceIndex], experimentIds[activeTraceIndex])}
           openInNewTab
-          title="View in MLflow UI"
+          title={sourceIntl.formatMessage({ defaultMessage: 'View in MLflow UI', description: 'Legacy UI label' })}
         >
           <FormattedMessage
             defaultMessage="View in MLflow UI"

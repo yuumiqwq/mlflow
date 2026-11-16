@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import type { ThemeType } from '@databricks/design-system';
 import {
   Radio,
@@ -408,9 +409,12 @@ export const RunsChartsConfigureLineChart = ({
   return (
     <>
       <Typography.Title level={4} color="secondary">
-        X-axis
+        {sourceIntl.formatMessage({ defaultMessage: 'X-axis', description: 'Legacy UI label' })}
       </Typography.Title>
-      <RunsChartsConfigureField title="Type" compact>
+      <RunsChartsConfigureField
+        title={sourceIntl.formatMessage({ defaultMessage: 'Type', description: 'Legacy UI label' })}
+        compact
+      >
         {usingChartExpressions ? (
           <SimpleSelect
             componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_config_runschartsconfigurelinechart.tsx_436"
@@ -487,7 +491,9 @@ export const RunsChartsConfigureLineChart = ({
               </Tooltip>
             </SimpleSelectOption>
             {metricKeyList.length > 0 && (
-              <SimpleSelectOptionGroup label="Metrics">
+              <SimpleSelectOptionGroup
+                label={sourceIntl.formatMessage({ defaultMessage: 'Metrics', description: 'Legacy UI label' })}
+              >
                 {metricKeyList.map((metric) => (
                   <SimpleSelectOption
                     key={metric}
@@ -573,31 +579,40 @@ export const RunsChartsConfigureLineChart = ({
       </RunsChartsConfigureField>
       {state.xAxisKey === RunsChartsLineChartXAxisType.STEP && (
         <>
-          <RunsChartsConfigureField title="X-axis scale" compact>
+          <RunsChartsConfigureField
+            title={sourceIntl.formatMessage({ defaultMessage: 'X-axis scale', description: 'Legacy UI label' })}
+            compact
+          >
             <div css={{ display: 'flex', gap: theme.spacing.sm }}>
               <div>
                 <Input
                   componentId="mlflow.charts.line_chart_configure.x_axis_min"
-                  aria-label="x-axis-min"
+                  aria-label={sourceIntl.formatMessage({
+                    defaultMessage: 'x-axis-min',
+                    description: 'Legacy UI label',
+                  })}
                   name="min"
                   type="number"
                   value={localAxisRange.xMin}
                   onChange={(e) => updateXAxisScaleMin(e.target.value)}
                   max={localAxisRange.xMax}
-                  placeholder="Min"
+                  placeholder={sourceIntl.formatMessage({ defaultMessage: 'Min', description: 'Legacy UI label' })}
                 />
                 {invalidMessage(state.xAxisScaleType, localAxisRange.xMin)}
               </div>
               <div>
                 <Input
                   componentId="mlflow.charts.line_chart_configure.x_axis_max"
-                  aria-label="x-axis-max"
+                  aria-label={sourceIntl.formatMessage({
+                    defaultMessage: 'x-axis-max',
+                    description: 'Legacy UI label',
+                  })}
                   name="max"
                   type="number"
                   value={localAxisRange.xMax}
                   onChange={(e) => updateXAxisScaleMax(e.target.value)}
                   min={localAxisRange.xMin}
-                  placeholder="Max"
+                  placeholder={sourceIntl.formatMessage({ defaultMessage: 'Max', description: 'Legacy UI label' })}
                 />
                 {invalidMessage(state.xAxisScaleType, localAxisRange.xMax)}
               </div>
@@ -605,10 +620,10 @@ export const RunsChartsConfigureLineChart = ({
             <div style={{ padding: theme.spacing.xs }} />
             <Switch
               componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_config_runschartsconfigurelinechart.tsx_628"
-              aria-label="x-axis-log"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'x-axis-log', description: 'Legacy UI label' })}
               checked={state.xAxisScaleType === 'log'}
               onChange={updateXAxisScaleType}
-              label="Log scale"
+              label={sourceIntl.formatMessage({ defaultMessage: 'Log scale', description: 'Legacy UI label' })}
               activeLabel="On"
               inactiveLabel="Off"
               disabledLabel="Disabled"
@@ -617,7 +632,7 @@ export const RunsChartsConfigureLineChart = ({
         </>
       )}
       <Typography.Title level={4} color="secondary" css={{ paddingTop: theme.spacing.lg }}>
-        Y-axis
+        {sourceIntl.formatMessage({ defaultMessage: 'Y-axis', description: 'Legacy UI label' })}
       </Typography.Title>
       <RunsChartsYAxisMetricAndExpressionSelector
         state={state}
@@ -625,31 +640,34 @@ export const RunsChartsConfigureLineChart = ({
         metricKeyList={metricKeyList}
         updateSelectedMetrics={updateSelectedMetrics}
       />
-      <RunsChartsConfigureField title="Y-axis scale" compact>
+      <RunsChartsConfigureField
+        title={sourceIntl.formatMessage({ defaultMessage: 'Y-axis scale', description: 'Legacy UI label' })}
+        compact
+      >
         <div css={{ display: 'flex', gap: theme.spacing.sm }}>
           <div>
             <Input
               componentId="mlflow.charts.line_chart_configure.y_axis_min"
-              aria-label="y-axis-min"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'y-axis-min', description: 'Legacy UI label' })}
               name="min"
               type="number"
               value={localAxisRange.yMin}
               onChange={(e) => updateYAxisScaleMin(e.target.value)}
               max={localAxisRange.yMax}
-              placeholder="Min"
+              placeholder={sourceIntl.formatMessage({ defaultMessage: 'Min', description: 'Legacy UI label' })}
             />
             {invalidMessage(state.scaleType, localAxisRange.yMin)}
           </div>
           <div>
             <Input
               componentId="mlflow.charts.line_chart_configure.y_axis_max"
-              aria-label="y-axis-max"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'y-axis-max', description: 'Legacy UI label' })}
               name="max"
               type="number"
               value={localAxisRange.yMax}
               onChange={(e) => updateYAxisScaleMax(e.target.value)}
               min={localAxisRange.yMin}
-              placeholder="Max"
+              placeholder={sourceIntl.formatMessage({ defaultMessage: 'Max', description: 'Legacy UI label' })}
             />
             {invalidMessage(state.scaleType, localAxisRange.yMax)}
           </div>
@@ -657,10 +675,10 @@ export const RunsChartsConfigureLineChart = ({
         <Spacer size="xs" />
         <Switch
           componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_config_runschartsconfigurelinechart.tsx_682"
-          aria-label="y-axis-log"
+          aria-label={sourceIntl.formatMessage({ defaultMessage: 'y-axis-log', description: 'Legacy UI label' })}
           checked={state.scaleType === 'log'}
           onChange={updateYAxisType}
-          label="Log scale"
+          label={sourceIntl.formatMessage({ defaultMessage: 'Log scale', description: 'Legacy UI label' })}
           activeLabel="On"
           inactiveLabel="Off"
           disabledLabel="Disabled"
@@ -694,7 +712,10 @@ export const RunsChartsConfigureLineChart = ({
           </div>
           <Switch
             componentId="codegen_mlflow_app_src_experiment-tracking_components_runs-charts_components_config_runschartsconfigurelinechart.tsx_716"
-            aria-label="y-axis-ignore-outliers"
+            aria-label={sourceIntl.formatMessage({
+              defaultMessage: 'y-axis-ignore-outliers',
+              description: 'Legacy UI label',
+            })}
             checked={state.ignoreOutliers}
             onChange={updateIgnoreOutliers}
             // Empty label so that the active/inactive labels are actually displayed
@@ -715,7 +736,7 @@ export const RunsChartsConfigureLineChart = ({
         </div>
       </RunsChartsConfigureField>
       <Typography.Title level={4} color="secondary" css={{ paddingTop: theme.spacing.lg }}>
-        Advanced
+        {sourceIntl.formatMessage({ defaultMessage: 'Advanced', description: 'Legacy UI label' })}
       </Typography.Title>
       <RunsChartsConfigureField
         title={intl.formatMessage({
@@ -827,8 +848,12 @@ export const RunsChartsConfigureLineChart = ({
             }));
           }}
         >
-          <Radio value>Use workspace settings</Radio>
-          <Radio value={false}>Custom</Radio>
+          <Radio value>
+            {sourceIntl.formatMessage({ defaultMessage: 'Use workspace settings', description: 'Legacy UI label' })}
+          </Radio>
+          <Radio value={false}>
+            {sourceIntl.formatMessage({ defaultMessage: 'Custom', description: 'Legacy UI label' })}
+          </Radio>
         </Radio.Group>
 
         <LineSmoothSlider

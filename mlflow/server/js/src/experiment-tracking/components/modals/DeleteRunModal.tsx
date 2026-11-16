@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -122,7 +123,7 @@ export class DeleteRunModalImpl extends Component<Props, State> {
         loading={isDeletingSelected}
         type="primary"
       >
-        Delete selected
+        {sourceIntl.formatMessage({ defaultMessage: 'Delete selected', description: 'Legacy UI label' })}
       </Button>
     );
 
@@ -135,13 +136,13 @@ export class DeleteRunModalImpl extends Component<Props, State> {
         disabled={isDeletingSelected}
         loading={isDeletingWithChildren}
       >
-        Delete selected and children
+        {sourceIntl.formatMessage({ defaultMessage: 'Delete selected and children', description: 'Legacy UI label' })}
       </Button>
     ) : null;
 
     const footerButtons = [
       <Button componentId="cancel" key="cancel" onClick={this.onRequestClose} disabled={Boolean(deletingMode)}>
-        Cancel
+        {sourceIntl.formatMessage({ defaultMessage: 'Cancel', description: 'Legacy UI label' })}
       </Button>,
       deleteSelectedButton,
       ...(deleteSelectedAndChildrenButton ? [deleteSelectedAndChildrenButton] : []),
@@ -151,7 +152,10 @@ export class DeleteRunModalImpl extends Component<Props, State> {
       <Modal
         componentId="delete-run-modal"
         data-testid="delete-run-modal"
-        title={`Delete Experiment ${Utils.pluralize('Run', number)}`}
+        title={sourceIntl.formatMessage(
+          { defaultMessage: 'Delete {count, plural, one {run} other {runs}}', description: 'Delete runs dialog title' },
+          { count: number },
+        )}
         visible={this.props.isOpen}
         onCancel={this.onRequestClose}
         footer={footerButtons}
@@ -159,20 +163,34 @@ export class DeleteRunModalImpl extends Component<Props, State> {
         <div className="modal-explanatory-text">
           <p>
             <b>
-              Selected {number} experiment {Utils.pluralize('run', number)}.
+              {sourceIntl.formatMessage(
+                {
+                  defaultMessage: '{count, plural, one {# run selected.} other {# runs selected.}}',
+                  description: 'Delete runs selection count',
+                },
+                { count: number },
+              )}
             </b>
           </p>
           {hasChildRuns ? (
             <p>
-              The selected run has {childRunCount} child {Utils.pluralize('run', childRunCount)}. Delete this run alone
-              or all {totalRunsWithChildren}?
+              {sourceIntl.formatMessage(
+                {
+                  defaultMessage: 'This run has {children} child runs. Delete this run alone or all {total} runs?',
+                  description: 'Delete runs with children confirmation',
+                },
+                { children: childRunCount, total: totalRunsWithChildren },
+              )}
             </p>
           ) : null}
           {/* @ts-expect-error TS(4111): Property 'MLFLOW_SHOW_GDPR_PURGING_MESSAGES' comes from a... Remove this comment to see the full error message */}
           {process.env.MLFLOW_SHOW_GDPR_PURGING_MESSAGES === 'true' ? (
             <p>
-              Deleted runs are restorable for 30 days, after which they are purged along with associated metrics,
-              params, tags, and artifacts.
+              {sourceIntl.formatMessage({
+                defaultMessage:
+                  'Deleted runs are restorable for 30 days, after which they are purged along with associated metrics, params, tags, and artifacts.',
+                description: 'Legacy UI label',
+              })}
             </p>
           ) : (
             ''

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   DialogCombobox,
   DialogComboboxContent,
@@ -63,7 +64,13 @@ export const ModelConfigForm = () => {
           />
         </Typography.Title>
         <Popover.Root componentId="mlflow.prompts.model_config.help">
-          <Popover.Trigger aria-label="Model configuration help" css={{ border: 0, background: 'none', padding: 0 }}>
+          <Popover.Trigger
+            aria-label={sourceIntl.formatMessage({
+              defaultMessage: 'Model configuration help',
+              description: 'Legacy UI label',
+            })}
+            css={{ border: 0, background: 'none', padding: 0 }}
+          >
             <InfoSmallIcon />
           </Popover.Trigger>
           <Popover.Content align="start">

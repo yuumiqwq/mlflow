@@ -1,3 +1,4 @@
+import { sourceIntl } from '../i18n/SourceMessages';
 /**
  * Assistant Chat Panel component.
  * Displays the chat interface for the Assistant.
@@ -228,7 +229,7 @@ const ChatMessageBubble = ({
               color: theme.colors.textSecondary,
             }}
           >
-            Interrupted by user
+            {sourceIntl.formatMessage({ defaultMessage: 'Interrupted by user', description: 'Legacy UI label' })}
           </span>
         )}
         {/* Loading indicator */}
@@ -294,7 +295,10 @@ const PromptSuggestions = ({ onSelect }: { onSelect: (prompt: string) => void })
           maxWidth: 400,
         }}
       >
-        Ask questions about your experiments, traces, evaluations, and more.
+        {sourceIntl.formatMessage({
+          defaultMessage: 'Ask questions about your experiments, traces, evaluations, and more.',
+          description: 'Legacy UI label',
+        })}
       </Typography.Text>
 
       {/* Suggestion cards */}
@@ -653,7 +657,10 @@ const ChatPanelContent = ({ onOpenSettings }: { onOpenSettings: () => void }) =>
           <AssistantContextTags />
           <textarea
             ref={textareaRef}
-            placeholder="Ask a question..."
+            placeholder={sourceIntl.formatMessage({
+              defaultMessage: 'Ask a question...',
+              description: 'Legacy UI label',
+            })}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -762,7 +769,7 @@ const ChatPanelContent = ({ onOpenSettings }: { onOpenSettings: () => void }) =>
               onClick={isStreaming ? cancelSession : handleSend}
               disabled={!isStreaming && !inputValue.trim()}
               icon={isStreaming ? <StopIcon /> : <SendIcon />}
-              aria-label="Send message"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'Send message', description: 'Legacy UI label' })}
             />
           </div>
         </div>
@@ -789,7 +796,9 @@ const SetupLoadingState = () => {
       }}
     >
       <Spinner size="default" />
-      <Typography.Text color="secondary">Loading...</Typography.Text>
+      <Typography.Text color="secondary">
+        {sourceIntl.formatMessage({ defaultMessage: 'Loading...', description: 'Legacy UI label' })}
+      </Typography.Text>
     </div>
   );
 };
@@ -1015,7 +1024,7 @@ export const AssistantChatPanel = () => {
           <SparkleDoubleIcon color="ai" css={{ fontSize: 20 }} />
           <FormattedMessage defaultMessage="MLflow Assistant" description="Title for the global Assistant chat panel" />
           <Tag componentId="mlflow.assistant.chat_panel.beta" color="turquoise">
-            Beta
+            {sourceIntl.formatMessage({ defaultMessage: 'Beta', description: 'Legacy UI label' })}
           </Tag>
         </span>
         <div css={{ display: 'flex', gap: theme.spacing.xs }}>
@@ -1027,7 +1036,7 @@ export const AssistantChatPanel = () => {
                   size="small"
                   icon={<RefreshIcon />}
                   onClick={handleReset}
-                  aria-label="New Chat"
+                  aria-label={sourceIntl.formatMessage({ defaultMessage: 'New Chat', description: 'Legacy UI label' })}
                 />
               </Tooltip>
               <Tooltip
@@ -1052,7 +1061,7 @@ export const AssistantChatPanel = () => {
                   size="small"
                   icon={<GearIcon />}
                   onClick={handleOpenSettings}
-                  aria-label="Settings"
+                  aria-label={sourceIntl.formatMessage({ defaultMessage: 'Settings', description: 'Legacy UI label' })}
                   disabled={!canUseAssistant}
                 />
               </Tooltip>
@@ -1064,7 +1073,7 @@ export const AssistantChatPanel = () => {
               size="small"
               icon={<CloseIcon />}
               onClick={handleClose}
-              aria-label="Close"
+              aria-label={sourceIntl.formatMessage({ defaultMessage: 'Close', description: 'Legacy UI label' })}
             />
           </Tooltip>
         </div>

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 /**
  * NOTE: this code file was automatically migrated to TypeScript using ts-migrate and
  * may contain multiple `any` type annotations and `@ts-expect-error` directives.
@@ -95,14 +96,20 @@ export class RegisterModelForm extends React.Component<Props, State> {
       <LegacyForm ref={innerRef} layout="vertical" className="mlflow-register-model-form">
         {/* "+ Create new model" OR "Select existing model" */}
         <LegacyForm.Item
-          label={isCopy ? <b>Copy to model</b> : 'Model'}
+          label={
+            isCopy ? (
+              <b>{sourceIntl.formatMessage({ defaultMessage: 'Copy to model', description: 'Legacy UI label' })}</b>
+            ) : (
+              'Model'
+            )
+          }
           name={SELECTED_MODEL_FIELD}
           rules={[{ required: true, message: 'Please select a model or create a new one.' }]}
         >
           <LegacySelect
             dropdownClassName="mlflow-model-select-dropdown"
             onChange={this.handleModelSelectChange}
-            placeholder="Select a model"
+            placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select a model', description: 'Legacy UI label' })}
             filterOption={this.handleFilterOption}
             onSearch={this.props.onSearchRegisteredModels}
             // @ts-expect-error TS(2769): No overload matches this call.
@@ -111,14 +118,16 @@ export class RegisterModelForm extends React.Component<Props, State> {
             <Option value={CREATE_NEW_MODEL_OPTION_VALUE} className="mlflow-create-new-model-option">
               <i className="fa fa-plus fa-fw" style={{ fontSize: 13 }} /> {CREATE_NEW_MODEL_LABEL}
             </Option>
-            <OptGroup label="Models">{Object.values(modelByName).map((model) => this.renderModel(model))}</OptGroup>
+            <OptGroup label={sourceIntl.formatMessage({ defaultMessage: 'Models', description: 'Legacy UI label' })}>
+              {Object.values(modelByName).map((model) => this.renderModel(model))}
+            </OptGroup>
           </LegacySelect>
         </LegacyForm.Item>
 
         {/* Name the new model when "+ Create new model" is selected */}
         {creatingNewModel ? (
           <LegacyForm.Item
-            label="Model Name"
+            label={sourceIntl.formatMessage({ defaultMessage: 'Model Name', description: 'Legacy UI label' })}
             name={MODEL_NAME_FIELD}
             rules={[
               { required: true, message: 'Please input a name for the new model.' },
@@ -127,7 +136,10 @@ export class RegisterModelForm extends React.Component<Props, State> {
           >
             <Input
               componentId="codegen_mlflow_app_src_model-registry_components_registermodelform.tsx_132"
-              placeholder="Input a model name"
+              placeholder={sourceIntl.formatMessage({
+                defaultMessage: 'Input a model name',
+                description: 'Legacy UI label',
+              })}
             />
           </LegacyForm.Item>
         ) : null}

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { useMemo } from 'react';
 import type { RunsChartsRunData } from '../RunsCharts.common';
 import type { RunsChartsScatterCardConfig } from '../../runs-charts.types';
@@ -52,7 +53,9 @@ export const RunsChartsScatterChartCard = ({
             )}
             {config.xaxis.key}
           </Typography.Text>
-          <Typography.Text>vs</Typography.Text>
+          <Typography.Text>
+            {sourceIntl.formatMessage({ defaultMessage: 'vs', description: 'Legacy UI label' })}
+          </Typography.Text>
           <Typography.Text title={config.xaxis.key} ellipsis bold>
             {config.yaxis.datasetName && (
               <>

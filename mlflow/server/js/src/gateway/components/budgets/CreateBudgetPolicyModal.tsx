@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { useState, useCallback, useMemo } from 'react';
 import {
   Alert,
@@ -195,9 +196,15 @@ export const CreateBudgetPolicyModal = ({ open, onClose, onSuccess }: CreateBudg
             value={formData.duration}
             onChange={({ target }) => handleFieldChange('duration', target.value as DurationPreset)}
           >
-            <SimpleSelectOption value="DAILY">Daily</SimpleSelectOption>
-            <SimpleSelectOption value="WEEKLY">Weekly</SimpleSelectOption>
-            <SimpleSelectOption value="MONTHLY">Monthly</SimpleSelectOption>
+            <SimpleSelectOption value="DAILY">
+              {sourceIntl.formatMessage({ defaultMessage: 'Daily', description: 'Legacy UI label' })}
+            </SimpleSelectOption>
+            <SimpleSelectOption value="WEEKLY">
+              {sourceIntl.formatMessage({ defaultMessage: 'Weekly', description: 'Legacy UI label' })}
+            </SimpleSelectOption>
+            <SimpleSelectOption value="MONTHLY">
+              {sourceIntl.formatMessage({ defaultMessage: 'Monthly', description: 'Legacy UI label' })}
+            </SimpleSelectOption>
           </SimpleSelect>
         </div>
 
@@ -211,8 +218,12 @@ export const CreateBudgetPolicyModal = ({ open, onClose, onSuccess }: CreateBudg
             value={formData.budgetAction}
             onChange={({ target }) => handleFieldChange('budgetAction', target.value as BudgetAction)}
           >
-            <SimpleSelectOption value="ALERT">Alert</SimpleSelectOption>
-            <SimpleSelectOption value="REJECT">Reject requests</SimpleSelectOption>
+            <SimpleSelectOption value="ALERT">
+              {sourceIntl.formatMessage({ defaultMessage: 'Alert', description: 'Legacy UI label' })}
+            </SimpleSelectOption>
+            <SimpleSelectOption value="REJECT">
+              {sourceIntl.formatMessage({ defaultMessage: 'Reject requests', description: 'Legacy UI label' })}
+            </SimpleSelectOption>
           </SimpleSelect>
           {formData.budgetAction === 'ALERT' && (
             <Alert

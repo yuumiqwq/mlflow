@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../i18n/SourceMessages';
 import type { ModalProps } from '@databricks/design-system';
 import {
   FormUI,
@@ -109,7 +110,9 @@ export const ModelStageTransitionFormModal = ({
     >
       {transitionDescription}
       <Spacer size="sm" />
-      <FormUI.Label htmlFor="mlflow.model_registry.stage_transition_modal_v2.comment">Comment</FormUI.Label>
+      <FormUI.Label htmlFor="mlflow.model_registry.stage_transition_modal_v2.comment">
+        {sourceIntl.formatMessage({ defaultMessage: 'Comment', description: 'Legacy UI label' })}
+      </FormUI.Label>
       <RHFControlledComponents.TextArea
         name="comment"
         id="mlflow.model_registry.stage_transition_modal_v2.comment"

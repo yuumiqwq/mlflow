@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   Alert,
   Button,
@@ -209,7 +210,9 @@ export const useCreatePromptModal = ({
         )}
         {isCreatingNewPrompt && (
           <>
-            <FormUI.Label htmlFor="mlflow.prompts.create.name">Name:</FormUI.Label>
+            <FormUI.Label htmlFor="mlflow.prompts.create.name">
+              {sourceIntl.formatMessage({ defaultMessage: 'Name:', description: 'Legacy UI label' })}
+            </FormUI.Label>
             <RHFControlledComponents.Input
               control={form.control}
               id="mlflow.prompts.create.name"
@@ -275,7 +278,9 @@ export const useCreatePromptModal = ({
           )}
         />
         <Spacer />
-        <FormUI.Label htmlFor="mlflow.prompts.create.content">Prompt:</FormUI.Label>
+        <FormUI.Label htmlFor="mlflow.prompts.create.content">
+          {sourceIntl.formatMessage({ defaultMessage: 'Prompt:', description: 'Legacy UI label' })}
+        </FormUI.Label>
         {form.watch('promptType') === PROMPT_TYPE_CHAT ? (
           <ChatMessageCreator name="chatMessages" />
         ) : (
@@ -305,7 +310,9 @@ export const useCreatePromptModal = ({
           <FormUI.Message type="error" message={form.formState.errors.draftValue.message} />
         )}
         <Spacer />
-        <FormUI.Label htmlFor="mlflow.prompts.create.commit_message">Commit message (optional):</FormUI.Label>
+        <FormUI.Label htmlFor="mlflow.prompts.create.commit_message">
+          {sourceIntl.formatMessage({ defaultMessage: 'Commit message (optional):', description: 'Legacy UI label' })}
+        </FormUI.Label>
         <RHFControlledComponents.Input
           control={form.control}
           id="mlflow.prompts.create.commit_message"

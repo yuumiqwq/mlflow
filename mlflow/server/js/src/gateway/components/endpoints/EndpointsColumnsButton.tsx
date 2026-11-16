@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import {
   Button,
   ChevronDownIcon,
@@ -54,7 +55,11 @@ export const EndpointsColumnsButton = ({ visibleColumns, onColumnsChange }: Endp
   };
 
   return (
-    <DialogCombobox componentId="mlflow.gateway.endpoints-list.columns-dropdown" label="Columns" multiSelect>
+    <DialogCombobox
+      componentId="mlflow.gateway.endpoints-list.columns-dropdown"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Columns', description: 'Legacy UI label' })}
+      multiSelect
+    >
       <DialogComboboxCustomButtonTriggerWrapper>
         <Button
           componentId="mlflow.gateway.endpoints-list.columns-button"

@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../i18n/SourceMessages';
 import { Button, DangerIcon, Empty, Modal, Spacer, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import versionsEmptyImg from '@mlflow/mlflow/src/common/static/versions-empty.svg';
 import { CodeSnippet } from '@databricks/web-shared/snippet';
@@ -225,7 +226,11 @@ export const ExperimentLoggedModelListPageTableEmpty = ({
               />
             )}
           </Typography.Paragraph>
-          <img css={{ maxWidth: 'min(100%, 600px)' }} src={versionsEmptyImg} alt="No models found" />
+          <img
+            css={{ maxWidth: 'min(100%, 600px)' }}
+            src={versionsEmptyImg}
+            alt={sourceIntl.formatMessage({ defaultMessage: 'No models found', description: 'Legacy UI label' })}
+          />
           <div css={{ display: 'flex', gap: theme.spacing.sm, marginTop: theme.spacing.md }}>
             <Button
               componentId="mlflow.logged_models.list.show_example_code"

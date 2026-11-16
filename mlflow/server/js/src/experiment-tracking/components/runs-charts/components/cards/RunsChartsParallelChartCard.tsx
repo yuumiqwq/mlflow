@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { Button, DropdownMenu, Typography, useDesignSystemTheme } from '@databricks/design-system';
 import { useCallback, useMemo } from 'react';
 import { ReactComponent as ParallelChartSvg } from '../../../../../common/static/parallel-chart-placeholder.svg';
@@ -237,7 +238,7 @@ export const RunsChartsParallelChartCard = ({
     <RunsChartCardWrapper
       onEdit={onEdit}
       onDelete={onDelete}
-      title="Parallel Coordinates"
+      title={sourceIntl.formatMessage({ defaultMessage: 'Parallel Coordinates', description: 'Legacy UI label' })}
       subtitle={displaySubtitle ? subtitle : null}
       uuid={config.uuid}
       tooltip={

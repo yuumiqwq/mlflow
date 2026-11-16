@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import {
   ChevronDownIcon,
   DialogCombobox,
@@ -45,7 +46,11 @@ export const EvaluationsOverviewColumnSelector = ({
   };
 
   return (
-    <DialogCombobox componentId="mlflow.evaluations_overview.column_selector_dropdown" label="Columns" multiSelect>
+    <DialogCombobox
+      componentId="mlflow.evaluations_overview.column_selector_dropdown"
+      label={sourceIntl.formatMessage({ defaultMessage: 'Columns', description: 'Legacy UI label' })}
+      multiSelect
+    >
       <DialogComboboxCustomButtonTriggerWrapper>
         <Button endIcon={<ChevronDownIcon />} componentId="mlflow.evaluations_review.table_ui.filter_button">
           <div

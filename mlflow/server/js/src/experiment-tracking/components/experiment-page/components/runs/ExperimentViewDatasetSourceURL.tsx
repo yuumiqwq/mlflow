@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../../i18n/SourceMessages';
 import { Typography, useDesignSystemTheme } from '@databricks/design-system';
 import type { RunDatasetWithTags } from '../../../../types';
 import { DatasetSourceTypes } from '../../../../types';
@@ -78,7 +79,8 @@ export const ExperimentViewDatasetSourceURL = ({ datasetWithTags }: ExperimentVi
               textOverflow: 'ellipsis',
             }}
           >
-            Path: {uri}
+            {sourceIntl.formatMessage({ defaultMessage: 'Path:', description: 'Legacy UI label' })}
+            {uri}
           </Typography.Hint>
         );
       }

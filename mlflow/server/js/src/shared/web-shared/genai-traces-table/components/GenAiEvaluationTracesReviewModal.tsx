@@ -1,3 +1,4 @@
+import { sourceIntl } from '../../../../i18n/SourceMessages';
 import { isNil } from 'lodash';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -207,7 +208,7 @@ export const GenAiEvaluationTracesReviewModal = React.memo(
           !currentTraceQueryResult.data &&
           currentTraceQueryResult.isLoading && (
             <GenericSkeleton
-              label="Loading trace..."
+              label={sourceIntl.formatMessage({ defaultMessage: 'Loading trace...', description: 'Legacy UI label' })}
               style={{
                 // Size the width and height to fit the modal content area
                 width: 'calc(100% - 45px)',

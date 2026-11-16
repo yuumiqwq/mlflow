@@ -1,6 +1,6 @@
+import { CursorPagination } from '../../../../common/components/CursorPagination';
 import {
   Button,
-  CursorPagination,
   DropdownMenu,
   OverflowIcon,
   Table,
