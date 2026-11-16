@@ -120,7 +120,11 @@ def main():
                     raise RuntimeError(f'Build file checksum mismatch: {name}')
             assets = json.loads((staging / 'asset-manifest.json').read_text())
             for resource in assets['files'].values():
-                relative = resource.removeprefix('./').removeprefix('static-files/')
+                relative = resource.removeprefix('./')
+                if relative.startswith('/static-files/'):
+                    relative = relative.removeprefix('/static-files/')
+                else:
+                    relative = relative.removeprefix('static-files/')
                 if relative.startswith('/') or '..' in PurePosixPath(relative).parts or not (staging / relative).is_file():
                     raise RuntimeError(f'Unsupported static asset layout: {resource}')
             release_id = manifest['release_id']
