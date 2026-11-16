@@ -26,6 +26,12 @@ import { useQueryClient } from '@mlflow/mlflow/src/common/utils/reactQueryHooks'
 import { useLocation, useNavigate, useSearchParams } from '../../common/utils/RoutingUtils';
 import Routes from '../../experiment-tracking/routes';
 import { useWorkspaces } from '../hooks/useWorkspaces';
+import type { Workspace } from '../types';
+
+const getWorkspaceLabel = (workspace?: Workspace) => {
+  const description = workspace?.description?.trim();
+  return description && [...description].length <= 32 ? description : workspace?.name;
+};
 
 export const WorkspaceSelector = () => {
   const workspacesEnabled = shouldEnableWorkspaces();
@@ -127,7 +133,11 @@ export const WorkspaceSelector = () => {
       return options;
     }
     const lowerSearch = typedWorkspace.toLowerCase();
-    return options.filter((workspace) => workspace.name.toLowerCase().includes(lowerSearch));
+    return options.filter(
+      (workspace) =>
+        workspace.name.toLowerCase().includes(lowerSearch) ||
+        workspace.description?.toLowerCase().includes(lowerSearch),
+    );
   }, [options, typedWorkspace]);
   const canSubmitTypedWorkspace = useMemo(
     () =>
@@ -176,7 +186,13 @@ export const WorkspaceSelector = () => {
       <DialogComboboxTrigger
         withInlineLabel={false}
         placeholder={sourceIntl.formatMessage({ defaultMessage: 'Select workspace', description: 'Legacy UI label' })}
-        renderDisplayedValue={() => currentWorkspace}
+        renderDisplayedValue={() => (
+          <span
+            css={{ display: 'block', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+          >
+            {getWorkspaceLabel(options.find((workspace) => workspace.name === currentWorkspace)) ?? currentWorkspace}
+          </span>
+        )}
         onClear={() => navigate(Routes.rootRoute)}
         width="100%"
       />
@@ -213,7 +229,9 @@ export const WorkspaceSelector = () => {
                       onChange={(value) => handleWorkspaceChange(value)}
                       checked={workspace.name === currentWorkspace}
                     >
-                      {workspace.name}
+                      <span css={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {getWorkspaceLabel(workspace)}
+                      </span>
                     </DialogComboboxOptionListSelectItem>
                   );
 
