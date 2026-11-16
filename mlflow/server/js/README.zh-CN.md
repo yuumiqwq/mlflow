@@ -55,6 +55,8 @@ python scripts/package-static-ui.py --build /path/to/build --output /path/to/ui-
 
 脚本从当前 Python 包定位真实静态目录，验证服务器版本、归档 SHA、全部文件 SHA 和资源路径。首次部署使用 Linux `renameat2(RENAME_EXCHANGE)` 原子交换原目录与新符号链接，并将官方目录保留为独立备份。后续部署原子替换符号链接。旧页面需要的内容寻址资源会保留，以支持部署前已打开的标签页。HTTP 校验失败时会自动恢复上一版本。
 
+首页 HTTP 验收要求返回 200，并引用该构建预期的主 JS 和 CSS；对应静态资源继续按 SHA-256 严格核验，允许后端为首页添加运行时内容。解包目录权限在切换前设为静态资源可读权限，并以现有服务用户检查首页可读性。
+
 发布回执位于新 release 的 `deployment-receipt.json`。回滚使用同一脚本：
 
 ```sh

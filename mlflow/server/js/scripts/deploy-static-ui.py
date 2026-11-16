@@ -9,6 +9,7 @@ import ctypes
 from datetime import datetime, timezone
 import fcntl
 import hashlib
+from html.parser import HTMLParser
 from importlib import metadata, util
 import json
 import os
@@ -18,6 +19,7 @@ import subprocess
 import tarfile
 import tempfile
 from urllib.request import urlopen
+from urllib.parse import urljoin, urlsplit
 
 
 def sha256(path):
@@ -55,16 +57,49 @@ def atomic_switch(target, destination, releases):
     return previous
 
 
+class AssetReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.references = []
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        value = values.get('src') if tag == 'script' else values.get('href') if tag == 'link' else None
+        if value:
+            self.references.append(value)
+
+
 def check_http(base, release):
-    for name, endpoint in [('index.html', ''), *[
-        (name, 'static-files/' + name)
-        for name in json.loads((release / 'release-manifest.json').read_text()).get('files', {})
-        if name.startswith(('static/js/main.', 'static/css/main.'))
-    ]] if (release / 'release-manifest.json').exists() else [('index.html', '')]:
-        with urlopen(base.rstrip('/') + '/' + endpoint, timeout=30) as response:
-            observed = hashlib.sha256(response.read()).hexdigest()
-        if observed != sha256(release / name):
+    expected = AssetReferences()
+    expected.feed((release / 'index.html').read_text())
+    names = []
+    for reference in expected.references:
+        name = urlsplit(reference).path.removeprefix('./').removeprefix('/').removeprefix('static-files/')
+        if name.startswith(('static/js/main.', 'static/css/main.')):
+            names.append(name)
+    if not any(name.endswith('.js') for name in names) or not any(name.endswith('.css') for name in names):
+        raise RuntimeError('Build index does not reference its main JavaScript and CSS assets.')
+    with urlopen(base.rstrip('/') + '/', timeout=30) as response:
+        if response.status != 200:
+            raise RuntimeError(f'Index HTTP status: {response.status}')
+        observed = AssetReferences()
+        observed.feed(response.read().decode('utf-8'))
+    verified = []
+    for name in names:
+        matches = [ref for ref in observed.references if urlsplit(ref).path.endswith('/' + name)]
+        if not matches:
+            raise RuntimeError(f'HTTP index does not reference the expected build asset: {name}')
+        endpoint = urljoin(base.rstrip('/') + '/', matches[0])
+        if urlsplit(endpoint).netloc != urlsplit(base).netloc:
+            raise RuntimeError(f'Unexpected asset host: {endpoint}')
+        with urlopen(endpoint, timeout=30) as response:
+            if response.status != 200:
+                raise RuntimeError(f'Asset HTTP status: {response.status}')
+            digest = hashlib.sha256(response.read()).hexdigest()
+        if digest != sha256(release / name):
             raise RuntimeError(f'HTTP checksum mismatch: {name}')
+        verified.append(name)
+    return {'index_status': 200, 'expected_build_references': True, 'sha256_verified_assets': verified}
 
 
 def main():
@@ -157,7 +192,7 @@ def main():
                     subprocess.run(['runuser', '-u', user, '--', 'test', '-r', str(destination / 'index.html')], check=True)
         previous = atomic_switch(target, destination, releases)
         try:
-            check_http(args.health_url, destination)
+            http_checks = check_http(args.health_url, destination)
             if args.service:
                 current_pid = subprocess.check_output(['systemctl', 'show', args.service, '-p', 'MainPID', '--value'], text=True).strip()
                 if current_pid != pid:
@@ -169,7 +204,7 @@ def main():
                    'source_commit': manifest['source_commit'], 'archive_sha256': args.sha256,
                    'index_sha256': sha256(destination / 'index.html'), 'verified_files': len(manifest['files']),
                    'carried_compatibility_files': carried, 'mlflow_version': version, 'pid': pid,
-                   'health_url': args.health_url, 'restarted': False}
+                   'health_url': args.health_url, 'http_checks': http_checks, 'restarted': False}
         (destination / 'deployment-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
         print(json.dumps(receipt, indent=2))
 
