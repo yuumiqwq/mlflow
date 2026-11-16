@@ -143,7 +143,18 @@ def main():
                         new.parent.mkdir(parents=True, exist_ok=True)
                         shutil.copy2(old, new)
                         carried += 1
+            # TemporaryDirectory starts at 0700; static assets must be readable by
+            # the existing unprivileged MLflow service after the atomic switch.
+            staging.chmod(0o755)
+            for path in staging.rglob('*'):
+                path.chmod(0o755 if path.is_dir() else 0o644)
             shutil.copytree(staging, destination)
+            if args.service:
+                user = subprocess.check_output(
+                    ['systemctl', 'show', args.service, '-p', 'User', '--value'], text=True
+                ).strip()
+                if user:
+                    subprocess.run(['runuser', '-u', user, '--', 'test', '-r', str(destination / 'index.html')], check=True)
         previous = atomic_switch(target, destination, releases)
         try:
             check_http(args.health_url, destination)
