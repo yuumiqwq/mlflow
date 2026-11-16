@@ -3,13 +3,13 @@ import {
   Avatar,
   BeakerIcon,
   Button,
+  Typography,
   CloudModelIcon,
   DropdownMenu,
   GearIcon,
   HomeIcon,
   ModelsIcon,
   SparkleDoubleIcon,
-  Typography,
   useDesignSystemTheme,
   SidebarCollapseIcon,
   SidebarExpandIcon,
@@ -35,7 +35,6 @@ import { SERVER_FEATURE_KEYS, useFeatureEnabled } from '../../experiment-trackin
 import { extractWorkspaceFromSearchParams, useActiveWorkspace } from '../../workspaces/utils/WorkspaceUtils';
 import { SETTINGS_RETURN_TO_PARAM, SETTINGS_SECTION_GENERAL } from '../../settings/settingsSectionConstants';
 import { getSidebarItemStyles, MlflowSidebarLink } from './MlflowSidebarLink';
-import { MlflowLogo } from './MlflowLogo';
 import { DOCS_ROOT, GenAIDocsUrl, MLDocsUrl, Version } from '../constants';
 import { WorkspaceSelector } from '../../workspaces/components/WorkspaceSelector';
 import { MlflowSidebarExperimentItems } from './MlflowSidebarExperimentItems';
@@ -302,56 +301,63 @@ export function MlflowSidebar({
           : {},
       }}
     >
-      <a
-        href="/"
-        aria-label="返回 11tiger 导航页"
-        title="返回导航页"
+      <div
         css={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          alignSelf: 'flex-start',
-          minHeight: showSidebar ? 34 : 27,
-          maxWidth: '100%',
-          gap: showSidebar ? 12 : 0,
-          fontFamily: 'Georgia, "Times New Roman", serif',
-          fontStyle: 'italic',
-          fontSize: showSidebar ? 27 : 18,
-          lineHeight: 1,
-          letterSpacing: '-1px',
-          whiteSpace: 'nowrap',
-          textDecoration: 'none',
-          color: theme.colors.textPrimary,
-          '&:hover': { textDecoration: 'underline', textUnderlineOffset: '4px' },
-          '&:focus-visible': { outline: '2px solid currentColor', outlineOffset: 3 },
+          display: 'flex',
+          flexDirection: showSidebar ? 'row' : 'column',
+          alignItems: showSidebar ? 'center' : 'flex-start',
+          justifyContent: 'space-between',
+          gap: showSidebar ? 2 : theme.spacing.xs,
+          minWidth: 0,
         }}
       >
-        <span>{showSidebar ? '11tiger' : '11t'}</span>
-        {showSidebar && (
-          <>
-            <span css={{ font: '300 18px/1 sans-serif', color: '#c2c4c8' }}>/</span>
-            <strong css={{ font: '500 15px/1 "Segoe UI", "Microsoft YaHei", sans-serif', letterSpacing: '1px' }}>
-              MLflow
-            </strong>
-          </>
-        )}
-      </a>
-      <div css={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-        {showSidebar && (
-          <div css={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
-            <Link componentId="mlflow.sidebar.logo_home_link" to={ExperimentTrackingRoutes.rootRoute}>
-              <MlflowLogo
+        <a
+          href="/"
+          aria-label="返回 11tiger 导航页"
+          title="返回导航页"
+          css={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            flexShrink: 1,
+            minWidth: 0,
+            maxWidth: '100%',
+            gap: showSidebar ? 6 : 0,
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontStyle: 'italic',
+            fontSize: showSidebar ? 25 : 18,
+            lineHeight: 1.2,
+            letterSpacing: '-1px',
+            whiteSpace: 'nowrap',
+            textDecoration: 'none',
+            color: theme.colors.textPrimary,
+            '&:hover': { textDecoration: 'underline', textUnderlineOffset: '4px' },
+            '&:focus-visible': { outline: '2px solid currentColor', outlineOffset: 3 },
+          }}
+        >
+          <span>{showSidebar ? '11tiger' : '11t'}</span>
+          {showSidebar && (
+            <>
+              <span css={{ font: '300 16px/1 sans-serif', color: '#c2c4c8' }}>/</span>
+              <strong
                 css={{
-                  display: 'block',
-                  height: theme.spacing.lg,
-                  color: theme.colors.textPrimary,
+                  font: '500 14px/1 "Segoe UI", "Microsoft YaHei", sans-serif',
+                  letterSpacing: '0.4px',
                 }}
-              />
-            </Link>
-            <Typography.Text size="sm" css={{ paddingLeft: theme.spacing.sm }} color="secondary">
-              {Version}
-            </Typography.Text>
-          </div>
-        )}
+              >
+                MLflow
+              </strong>
+              <span
+                css={{
+                  font: '400 11px/1.2 "Segoe UI", "Microsoft YaHei", sans-serif',
+                  letterSpacing: 0,
+                  color: theme.colors.textSecondary,
+                }}
+              >
+                {Version}
+              </span>
+            </>
+          )}
+        </a>
         <Button
           componentId="mlflow_header.toggle_sidebar_button"
           onClick={toggleSidebar}
