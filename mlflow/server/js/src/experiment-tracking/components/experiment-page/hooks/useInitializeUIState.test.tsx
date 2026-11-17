@@ -42,6 +42,50 @@ describe('useInitializeUIState', () => {
     expect(uiState).toEqual(initialUIState);
   });
 
+  test('migrates hydrated legacy defaults after metric keys arrive, independently for each experiment', () => {
+    jest.mocked(loadExperimentViewState).mockReturnValue({ ...initialUIState });
+    const { result, rerender } = renderHook(({ ids }) => useInitializeUIState(ids), {
+      initialProps: { ids: experimentIds },
+      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
+    });
+    const runs = { ...baseRunsData, runInfos: [runInfoEntity1] };
+    act(() => result.current[2]([experiment1], runs, true));
+    expect(result.current[0].bestMetricColumnsInitialized).toBeUndefined();
+    act(() => result.current[2]([experiment1], { ...runs, metricKeyList: ['best_OA'] }, true));
+    expect(result.current[0].selectedColumns).toEqual(['metrics.`best_OA`']);
+    rerender({ ids: ['experiment_2'] });
+    act(() => result.current[2]([experiment1], { ...runs, metricKeyList: ['best_OA'] }, true));
+    expect(result.current[0]).toEqual(initialUIState);
+    act(() =>
+      result.current[2](
+        [{ ...experiment1, experimentId: 'experiment_2' }],
+        {
+          ...runs,
+          runInfos: [{ ...runInfoEntity1, experimentId: 'experiment_2' }],
+          metricKeyList: ['best_instance_mIoU'],
+        },
+        true,
+      ),
+    );
+    expect(result.current[0].selectedColumns).toEqual(['metrics.`best_instance_mIoU`']);
+  });
+
+  test('does not migrate excluded product or shared-view contexts and restores its persisted marker', () => {
+    jest.mocked(loadExperimentViewState).mockReturnValue({ ...initialUIState });
+    const { result, unmount } = renderParametrizedHook();
+    act(() =>
+      result.current[2](
+        [experiment1],
+        { ...baseRunsData, runInfos: [runInfoEntity1], metricKeyList: ['best_OA'] },
+        false,
+      ),
+    );
+    expect(result.current[0]).toEqual(initialUIState);
+    unmount();
+    jest.mocked(loadExperimentViewState).mockReturnValue({ ...initialUIState, bestMetricColumnsInitialized: true });
+    expect(renderParametrizedHook().result.current[0].bestMetricColumnsInitialized).toBe(true);
+  });
+
   test('should return persisted UI state when present', () => {
     const persistedState = {
       ...createExperimentPageSearchFacetsState(),

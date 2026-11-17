@@ -43,6 +43,7 @@ import {
 } from '../components/runs/cells/DatasetsCellRenderer';
 import type { RunDatasetWithTags } from '../../../types';
 import { AggregateMetricValueCell } from '../components/runs/cells/AggregateMetricValueCell';
+import { MetricValueCellRenderer } from '../components/runs/cells/MetricValueCellRenderer';
 import { type RUNS_VISIBILITY_MODE } from '../models/ExperimentPageUIState';
 import { useMediaQuery } from '@databricks/web-shared/hooks';
 import { customMetricBehaviorDefs } from './customMetricBehaviorUtils';
@@ -114,6 +115,7 @@ export const getFrameworkComponents = () => ({
   RunNameCellRenderer,
   DatasetsCellRenderer,
   AggregateMetricValueCell,
+  MetricValueCellRenderer,
 });
 
 /**
@@ -474,18 +476,15 @@ export const useRunsColumnDefinitions = ({
             colId: canonicalSortKey,
             headerTooltip: tooltip,
             field: fieldName,
-            tooltipValueGetter: (params) => {
-              return params.data?.[fieldName];
-            },
-            initialWidth: customMetricColumnDef?.initialColumnWidth ?? 100,
+            initialWidth: customMetricColumnDef?.initialColumnWidth ?? (metricKey.startsWith('best_') ? 200 : 100),
             initialHide: true,
             sortable: true,
             headerComponentParams: {
               canonicalSortKey,
             },
-            valueFormatter: customMetricColumnDef?.valueFormatter,
-            cellRendererSelector: ({ data: { groupParentInfo } }) =>
-              groupParentInfo ? { component: 'AggregateMetricValueCell' } : undefined,
+            cellRenderer: 'MetricValueCellRenderer',
+            cellRendererParams: { metricKey },
+            suppressKeyboardEvent: defaultKeyboardNavigationSuppressor,
             cellClassRules: {
               'is-previewable-cell': () => true,
               'is-ordered-by': cellClassIsOrderedBy,

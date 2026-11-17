@@ -148,7 +148,7 @@ export const ExperimentViewRunsColumnSelector = React.memo(
         updateUIState((facets: ExperimentPageUIState) => {
           const newColumns = updateFn(facets.selectedColumns);
           const uniqueNewColumns = Array.from(new Set(newColumns));
-          return { ...facets, selectedColumns: uniqueNewColumns };
+          return { ...facets, selectedColumns: uniqueNewColumns, bestMetricColumnsInitialized: true };
         }),
       [updateUIState],
     );

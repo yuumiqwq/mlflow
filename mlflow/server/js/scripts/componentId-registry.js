@@ -10,6 +10,7 @@
  * component (blank by default, especially for generated entries)
  */
 module.exports = {
+  "mlflow.experiment_tracking.runs_table.metric_value": "",
   // -- Codegen (auto-generated) --
   "codegen_mlflow_app_src_common_components_darkthemeswitch.tsx_32": "",
   "codegen_mlflow_app_src_common_components_editablenote.tsx_114": "",

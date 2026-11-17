@@ -28,6 +28,8 @@ import { CreateNewRunContextProvider } from '../../hooks/useCreateNewRun';
 import { useExperimentPageViewMode } from '../../hooks/useExperimentPageViewMode';
 import type { ExperimentPageUIState } from '../../models/ExperimentPageUIState';
 import { getDefaultSelectedColumns } from '../../models/ExperimentPageUIState';
+import { initializeBestMetricColumns } from '../../utils/bestMetricColumns';
+import { useWorkflowType, WorkflowType } from '../../../../../common/contexts/WorkflowTypeContext';
 import { useUpdateExperimentViewUIState } from '../../contexts/ExperimentPageUIStateContext';
 import { RunsCompare } from '../../../runs-compare/RunsCompare';
 import type { ErrorWrapper } from '../../../../../common/utils/ErrorWrapper';
@@ -245,15 +247,22 @@ export const ExperimentViewRuns = React.memo((props: ExperimentViewRunsProps) =>
   // "Reset to defaults" can imperatively reset ag-grid's column state.
   const columnApiRef = useRef<ColumnApi | null>(null);
   const updateUIState = useUpdateExperimentViewUIState();
+  const { workflowType } = useWorkflowType();
   const resetColumns = useCallback(() => {
-    updateUIState((state) => ({
-      ...state,
-      selectedColumns: getDefaultSelectedColumns(),
-      columnOrder: [],
-      columnWidths: {},
-    }));
+    updateUIState((state) => {
+      const defaults = {
+        ...state,
+        selectedColumns: getDefaultSelectedColumns(),
+        columnOrder: [],
+        columnWidths: {},
+        bestMetricColumnsInitialized: undefined,
+      };
+      return workflowType === WorkflowType.MACHINE_LEARNING && experiments.length === 1
+        ? initializeBestMetricColumns(defaults, runsData.metricKeyList)
+        : defaults;
+    });
     columnApiRef.current?.resetColumnState();
-  }, [updateUIState]);
+  }, [updateUIState, workflowType, experiments.length, runsData.metricKeyList]);
 
   const tableElement =
     requestError instanceof Error && !isLoadingRuns ? (

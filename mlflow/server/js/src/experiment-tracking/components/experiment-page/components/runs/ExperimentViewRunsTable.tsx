@@ -283,7 +283,12 @@ export const ExperimentViewRunsTable = React.memo(
     useEffect(() => {
       const fn = debounce((api: ColumnApi) => {
         const { columnOrder, columnWidths } = columnStateToPrefs(api.getColumnState(), allColumnsRef.current);
-        updateUIState((state: ExperimentPageUIState) => ({ ...state, columnOrder, columnWidths }));
+        updateUIState((state: ExperimentPageUIState) => ({
+          ...state,
+          columnOrder,
+          columnWidths,
+          bestMetricColumnsInitialized: true,
+        }));
       }, 250);
       captureColumnStateRef.current = fn;
       // Cancel any pending capture on unmount so we don't write state after the grid is gone.

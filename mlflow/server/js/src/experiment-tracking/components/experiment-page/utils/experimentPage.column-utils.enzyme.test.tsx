@@ -106,6 +106,9 @@ describe('ExperimentViewRuns column utils', () => {
               expect.objectContaining({
                 colId: makeCanonicalSortKey(COLUMN_TYPES.METRICS, key),
                 field: `${EXPERIMENT_FIELD_PREFIX_METRIC}-${key}`,
+                cellRenderer: 'MetricValueCellRenderer',
+                cellRendererParams: { metricKey: key },
+                suppressKeyboardEvent: expect.any(Function),
               }),
             ),
           ),

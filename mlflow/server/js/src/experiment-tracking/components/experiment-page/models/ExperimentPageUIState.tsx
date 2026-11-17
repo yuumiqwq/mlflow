@@ -9,6 +9,7 @@ export const EXPERIMENT_PAGE_UI_STATE_FIELDS = [
   'selectedColumns',
   'columnOrder',
   'columnWidths',
+  'bestMetricColumnsInitialized',
   'runsExpanded',
   'runsPinned',
   'runsHidden',
@@ -35,6 +36,7 @@ export const EXPERIMENT_PAGE_UI_STATE_FIELDS = [
  * a legacy tag predating this filter) can't smuggle them back into the recipient's view.
  */
 export const NON_SHAREABLE_UI_STATE_FIELDS = [
+  'bestMetricColumnsInitialized',
   'runsExpanded',
   'runsPinned',
   'runsHidden',
@@ -106,6 +108,8 @@ export interface ExperimentRunsChartsUIConfiguration {
  * Defines model representing experiment page UI state.
  */
 export interface ExperimentPageUIState extends ExperimentRunsChartsUIConfiguration {
+  /** Local one-time migration of the legacy training-run column defaults. */
+  bestMetricColumnsInitialized?: boolean;
   /**
    * Currently selected visible columns
    */

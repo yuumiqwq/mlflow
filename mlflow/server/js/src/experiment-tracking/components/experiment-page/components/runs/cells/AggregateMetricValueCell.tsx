@@ -19,5 +19,5 @@ export const AggregateMetricValueCell = ({
       </Typography.Text>
     );
   }
-  return value;
+  return <>{value}</>;
 };

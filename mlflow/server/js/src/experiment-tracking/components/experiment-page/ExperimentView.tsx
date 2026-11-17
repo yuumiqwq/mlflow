@@ -42,10 +42,12 @@ import { canModifyExperiment } from './utils/experimentPage.common-utils';
 import { useInferExperimentKind } from './hooks/useInferExperimentKind';
 import { ExperimentViewInferredKindModal } from './components/header/ExperimentViewInferredKindModal';
 import { shouldEnableWorkflowBasedNavigation } from '../../../common/utils/FeatureUtils';
+import { useWorkflowType, WorkflowType } from '../../../common/contexts/WorkflowTypeContext';
 
 export const ExperimentView = ({ showHeader = true }: { showHeader?: boolean }) => {
   const dispatch = useDispatch<ThunkDispatch>();
   const { theme } = useDesignSystemTheme();
+  const { workflowType } = useWorkflowType();
 
   const [searchFacets, experimentIds, isPreview] = useExperimentPageSearchFacets();
   const [viewMode] = useExperimentPageViewMode();
@@ -125,8 +127,27 @@ export const ExperimentView = ({ showHeader = true }: { showHeader?: boolean }) 
   useEffect(() => {
     // Seed the initial UI state when the experiments and runs are loaded.
     // Should only run once.
-    seedInitialUIState(experiments, runsData);
-  }, [seedInitialUIState, experiments, runsData]);
+    seedInitialUIState(
+      experiments,
+      runsData,
+      workflowType === WorkflowType.MACHINE_LEARNING &&
+        !isLoadingRuns &&
+        !isLoadingExperiment &&
+        !isViewStateShared &&
+        !sharedViewActive &&
+        !isPreview,
+    );
+  }, [
+    seedInitialUIState,
+    experiments,
+    runsData,
+    workflowType,
+    isLoadingRuns,
+    isLoadingExperiment,
+    isViewStateShared,
+    sharedViewActive,
+    isPreview,
+  ]);
 
   useEffect(() => {
     const requestAction = searchDatasetsApi(experimentIds);

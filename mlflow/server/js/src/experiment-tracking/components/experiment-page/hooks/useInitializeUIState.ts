@@ -7,6 +7,7 @@ import type { ExperimentRunsSelectorResult } from '../utils/experimentRuns.selec
 import type { UseExperimentsResult } from './useExperiments';
 import { useUpdateExperimentPageSearchFacets } from './useExperimentPageSearchFacets';
 import { expandedEvaluationRunRowsUIStateInitializer } from '../utils/expandedRunsViewStateInitializer';
+import { initializeBestMetricColumns } from '../utils/bestMetricColumns';
 
 // prettier-ignore
 const uiStateInitializers = [
@@ -44,7 +45,7 @@ export const useInitializeUIState = (
 ): [
   ExperimentPageUIState,
   React.Dispatch<React.SetStateAction<ExperimentPageUIState>>,
-  (experiments: UseExperimentsResult, runs: ExperimentRunsSelectorResult) => void,
+  (experiments: UseExperimentsResult, runs: ExperimentRunsSelectorResult, initializeBestMetrics?: boolean) => void,
 ] => {
   const persistKey = useMemo(() => JSON.stringify(experimentIds.sort()), [experimentIds]);
 
@@ -103,7 +104,18 @@ export const useInitializeUIState = (
   );
 
   const seedInitialUIState = useCallback(
-    (experiments: UseExperimentsResult, runs: ExperimentRunsSelectorResult) => {
+    (experiments: UseExperimentsResult, runs: ExperimentRunsSelectorResult, initializeBestMetrics = false) => {
+      // Metric keys arrive after hydration, including for users with saved legacy defaults.
+      if (
+        initializeBestMetrics &&
+        experimentIds.length === 1 &&
+        experiments.length === 1 &&
+        experiments[0].experimentId === experimentIds[0] &&
+        runs.runInfos.length > 0 &&
+        runs.runInfos.every((run) => run.experimentId === experimentIds[0])
+      ) {
+        setUIState((state) => initializeBestMetricColumns(state, runs.metricKeyList));
+      }
       // Disable if there are no experiments/runs or if the state has already been persisted previously
       if (!isFirstVisit || experiments.length === 0 || runs.runInfos.length === 0) {
         return;
@@ -139,6 +151,7 @@ export const useInitializeUIState = (
       isFirstVisit,
       setUIState,
       experimentHash,
+      experimentIds,
     ],
   );
 
