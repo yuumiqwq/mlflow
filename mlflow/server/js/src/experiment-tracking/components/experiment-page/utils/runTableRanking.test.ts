@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 import type { RunEntity } from '../../../types';
-import { buildRunTableRanking, getRunModelFamily, getRankableExperimentIds } from './runTableRanking';
+import { buildRunTableRanking, getRankableExperimentIds } from './runTableRanking';
 
 const run = (
   id: string,
@@ -39,7 +39,7 @@ describe('run table rankings', () => {
     expect(buildRunTableRanking(rows)['course'].tone).toBe('gold');
     expect(buildRunTableRanking(rows)['changed'].tone).toBe('gold');
   });
-  test('ranks actual course metadata together, separates model families, and uses each column raw maximum', () => {
+  test('ranks actual course metadata together without model family awards and uses each column raw maximum', () => {
     const rows = [
       run('baseline', 'PointNet · 基线', 0.91472, {
         dataset: 'ModelNet40',
@@ -70,8 +70,8 @@ describe('run table rankings', () => {
     ];
     const ranking = buildRunTableRanking(rows);
     expect(ranking['pp'].tone).toBe('gold');
-    expect(ranking['baseline'].tone).toBe('green');
-    expect(ranking['next'].tone).toBe('green');
+    expect(ranking['baseline'].tone).toBeUndefined();
+    expect(ranking['next'].tone).toBeUndefined();
     expect(ranking['seed2'].tone).toBeUndefined();
     expect(ranking['empty']?.tone).toBeUndefined();
     expect(ranking['pp'].metricWinners['best_OA']).toBe(0.939086);
@@ -79,10 +79,10 @@ describe('run table rankings', () => {
     expect(ranking['pp'].metricWinners['best_mAcc']).toBeUndefined();
     rows[2].data.metrics[0].value = 0.95;
     expect(buildRunTableRanking(rows)['next'].tone).toBe('gold');
-    expect(buildRunTableRanking(rows)['pp'].tone).toBe('green');
+    expect(buildRunTableRanking(rows)['pp'].tone).toBeUndefined();
   });
 
-  test('allows tied gold and family champions but exactly one stable metric winner, without rounded ranking', () => {
+  test('allows tied gold but exactly one stable metric winner, without rounded ranking', () => {
     const rows = [
       run('b', 'PointNet', 0.939086),
       run('a', 'PointNet++', 0.939086),
@@ -90,7 +90,7 @@ describe('run table rankings', () => {
       run('d', 'PointNeXt', 0.939085),
     ];
     const ranks = buildRunTableRanking(rows);
-    expect(Object.values(ranks).map((r) => r.tone)).toEqual(['gold', 'gold', 'green', 'green']);
+    expect(Object.values(ranks).map((r) => r.tone)).toEqual(['gold', 'gold', undefined, undefined]);
     expect(Object.keys(ranks['b'].metricWinners)).toHaveLength(0);
     expect(ranks['a'].metricWinners['best_OA']).toBe(0.939086);
     expect(buildRunTableRanking([...rows].reverse())).toEqual(ranks);
@@ -132,7 +132,7 @@ describe('run table rankings', () => {
     d.info.experimentId = '5';
     const r = buildRunTableRanking([a, b, c, d]);
     expect(r['segB'].tone).toBe('gold');
-    expect(r['segA'].tone).toBe('green');
+    expect(r['segA'].tone).toBeUndefined();
     expect(r['segA'].metricWinners['best_class_mIoU']).toBe(0.86);
     expect(r['class'].tone).toBe('gold');
     expect(r['other'].tone).toBe('gold');
@@ -155,13 +155,13 @@ describe('run table rankings', () => {
     expect(buildRunTableRanking([])).toEqual({});
   });
 
-  test.each([
-    ['PointNet++ SSG · 基线', 'pointnet++'],
-    ['pointnet2_ssg', 'pointnet++'],
-    ['PointNet · 基线', 'pointnet'],
-    ['PointNeXt-S C64 · 复现', 'pointnext'],
-    ['ResNet50 seed=42', 'resnet50'],
-  ])('recognizes %s', (name, family) => {
-    expect(getRunModelFamily(run('a', name))).toBe(family);
+  test('does not award a lower scoring run based on architecture metadata or its name', () => {
+    const ranks = buildRunTableRanking([
+      run('a', 'PointNet seed1', 0.9, { model_family: 'pointnet' }),
+      run('b', 'PointNet++ SSG', 0.95, { model: 'pointnet2_ssg' }),
+      run('c', 'PointNeXt-S C64', 0.94, { architecture: 'pointnext' }),
+      run('d', 'ResNet50 seed42', 0.93, { model_family: 'resnet' }),
+    ]);
+    expect(Object.values(ranks).map((r) => r.tone)).toEqual([undefined, 'gold', undefined, undefined]);
   });
 });

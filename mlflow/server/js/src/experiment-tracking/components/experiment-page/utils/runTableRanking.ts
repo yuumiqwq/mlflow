@@ -1,7 +1,7 @@
 import type { RunEntity } from '../../../types';
 
 export type RunTableAward = {
-  tone?: 'gold' | 'green';
+  tone?: 'gold';
   metricWinners: Record<string, number>;
 };
 
@@ -9,22 +9,6 @@ const normalize = (value: string) => value.trim().toLowerCase();
 const metadata = (run: RunEntity) =>
   Object.fromEntries([...(run.data.params ?? []), ...(run.data.tags ?? [])].map(({ key, value }) => [key, value]));
 const first = (values: Record<string, string>, keys: string[]) => keys.map((key) => values[key]).find(Boolean) ?? '';
-
-export const getRunModelFamily = (run: RunEntity) => {
-  const values = metadata(run);
-  const name = normalize(
-    first(values, ['model_family', 'model.family', 'model', 'model_name', 'architecture']) || run.info.runName || '',
-  );
-  // Match the longer names first: PointNet++ must never join the PointNet family.
-  if (/^pointnet(?:\+\+|2|pp)(?:\b|[_\s-]|$)/.test(name)) return 'pointnet++';
-  if (/^pointnet(?:\b|[_\s-]|$)/.test(name)) return 'pointnet';
-  if (/^pointnext(?:\b|[_\s-]|$)/.test(name)) return 'pointnext';
-  const family = name
-    .split(/[·|]/)[0]
-    .replace(/(?:[_\s-]+seed[_\s=-]*\d+).*$/, '')
-    .trim();
-  return family || run.info.runUuid;
-};
 
 // Only higher-is-better quality metrics receive a maximum marker, never losses or counters.
 export const isAccuracyMetric = (key: string) =>
@@ -123,15 +107,12 @@ export const buildRunTableRanking = (runs: RunEntity[]): Record<string, RunTable
       [...keys].sort().find((key) => key.startsWith('best_') && isAccuracyMetric(key));
     if (!primary) continue;
     const winners = new Map<string, { id: string; value: number }>();
-    const familyMax = new Map<string, number>();
     let maximum = -Infinity;
     for (const { run, metrics } of members) {
       const id = run.info.runUuid;
       const score = metrics[primary];
       if (finiteMetric(score)) {
         maximum = Math.max(maximum, score);
-        const family = getRunModelFamily(run);
-        familyMax.set(family, Math.max(familyMax.get(family) ?? -Infinity, score));
       }
       for (const [key, value] of Object.entries(metrics)) {
         if (!isAccuracyMetric(key) || !finiteMetric(value)) continue;
@@ -146,8 +127,7 @@ export const buildRunTableRanking = (runs: RunEntity[]): Record<string, RunTable
     for (const { run, metrics } of members) {
       const score = metrics[primary];
       if (finiteMetric(score)) {
-        result[run.info.runUuid].tone =
-          score === maximum ? 'gold' : score === familyMax.get(getRunModelFamily(run)) ? 'green' : undefined;
+        result[run.info.runUuid].tone = score === maximum ? 'gold' : undefined;
       }
     }
     for (const [key, { id, value }] of winners) result[id].metricWinners[key] = value;

@@ -15,7 +15,7 @@ describe('ranked run names', () => {
     data: { runUuid: 'a', experimentId: '4', runName: 'PointNet', runDateAndNestInfo: { level: 0 } },
     onExpand: jest.fn(),
   } as unknown as RunNameCellRendererProps;
-  test.each(['gold', 'green', undefined] as const)('colors %s text without dots and preserves the run link', (tone) => {
+  test.each(['gold', undefined] as const)('colors %s text without dots and preserves the run link', (tone) => {
     const { container } = render(
       <DesignSystemProvider>
         <MemoryRouter>
@@ -28,10 +28,14 @@ describe('ranked run names', () => {
     const link = screen.getByRole('link', { name: 'PointNet' });
     expect(link).toHaveAttribute('href', expect.stringContaining('/runs/a'));
     expect(link).toHaveAttribute('tabindex', '0');
-    if (tone) expect(link).toHaveAttribute('data-run-rank', tone);
-    expect(link.style.color).toBe(
-      tone === 'gold' ? 'rgb(152, 101, 0)' : tone === 'green' ? 'rgb(33, 98, 62)' : link.style.color,
-    );
+    if (tone) {
+      expect(link).toHaveAttribute('data-run-rank', tone);
+      expect(link.style.color).toBe('rgb(152, 101, 0)');
+    } else {
+      expect(link).not.toHaveAttribute('data-run-rank');
+      expect(link.style.color).toBe('rgb(22, 22, 22)');
+      expect(link.style.fontWeight).toBe('');
+    }
     expect(container.querySelector('[data-testid="experiment-view-table-run-color"]')).toBeNull();
     expect(container.querySelector('input[type="color"]')).toBeNull();
   });

@@ -28,11 +28,7 @@ export const RunNameCellRenderer = React.memo((props: RunNameCellRendererProps) 
       ? theme.isDarkMode
         ? '#ffd166'
         : '#986500'
-      : tone === 'green'
-        ? theme.isDarkMode
-          ? '#82d6a0'
-          : '#21623e'
-        : theme.colors.textPrimary
+      : theme.colors.textPrimary
     : undefined;
 
   const saveRunColor = useSaveExperimentRunColor();
