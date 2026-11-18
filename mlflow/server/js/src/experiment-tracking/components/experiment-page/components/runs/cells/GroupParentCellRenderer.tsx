@@ -24,6 +24,7 @@ import { useExperimentViewRunsTableHeaderContext } from '../ExperimentViewRunsTa
 import type { To } from '../../../../../../common/utils/RoutingUtils';
 import { Link, useLocation } from '../../../../../../common/utils/RoutingUtils';
 import { EXPERIMENT_PAGE_QUERY_PARAM_IS_PREVIEW } from '../../../hooks/useExperimentPageSearchFacets';
+import { useRunTableRanking } from '../RunTableRankingContext';
 
 export interface GroupParentCellRendererProps extends ICellRendererParams {
   data: RunRowType;
@@ -35,6 +36,7 @@ export const GroupParentCellRenderer = ({ data, isComparingRuns }: GroupParentCe
   const hidden = data.hidden;
   invariant(groupParentInfo, 'groupParentInfo should be defined');
   const { theme } = useDesignSystemTheme();
+  const { enabled: rankedNames } = useRunTableRanking();
   const location = useLocation();
 
   const { useGroupedValuesInCharts } = useExperimentViewRunsTableHeaderContext();
@@ -89,8 +91,9 @@ export const GroupParentCellRenderer = ({ data, isComparingRuns }: GroupParentCe
         />
       )}
       {/* Display color pill only when it's displayed in chart area */}
-      {groupIsDisplayedInCharts && (
+      {groupIsDisplayedInCharts && (!rankedNames || isComparingRuns) && (
         <RunColorPill
+          asChartColorControl={rankedNames}
           color={getRunColor(groupParentInfo.groupId)}
           hidden={isComparingRuns && hidden}
           onChangeColor={(colorValue) => {

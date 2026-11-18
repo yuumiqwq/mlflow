@@ -3,7 +3,7 @@
 import { debounce } from 'lodash';
 import { useMemo, useState } from 'react';
 import { COLORS_PALETTE_DATALIST_ID } from '../../../../common/components/ColorsPaletteDatalist';
-import { visuallyHidden } from '@databricks/design-system';
+import { PencilIcon, visuallyHidden } from '@databricks/design-system';
 
 // and higher resolution values (e.g. Retina displays). 192 dpi is double the "default" historical 96 dpi.
 const HIGH_RESOLUTION_MEDIA_QUERY = '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
@@ -34,11 +34,13 @@ export const RunColorPill = ({
   color,
   hidden,
   onChangeColor,
+  asChartColorControl = false,
   ...props
 }: {
   color?: string;
   hidden?: boolean;
   onChangeColor?: (colorValue: string) => void;
+  asChartColorControl?: boolean;
 }) => {
   const [colorValue, setColorValue] = useState<string | undefined>(undefined);
 
@@ -73,9 +75,14 @@ export const RunColorPill = ({
           opacity: onChangeColor ? 0.8 : 1,
         },
       }}
-      style={{ backgroundColor: colorValue ?? color ?? 'transparent' }}
+      style={
+        asChartColorControl
+          ? { background: 'transparent', border: 0, color: 'inherit', width: 16, height: 16 }
+          : { backgroundColor: colorValue ?? color ?? 'transparent' }
+      }
       {...props}
     >
+      {asChartColorControl && <PencilIcon aria-hidden="true" />}
       <span
         css={[
           visuallyHidden,
@@ -90,6 +97,7 @@ export const RunColorPill = ({
         <input
           disabled={hidden}
           type="color"
+          aria-label={asChartColorControl ? '图表颜色' : undefined}
           value={colorValue ?? color}
           onChange={({ target }) => {
             setColorValue(target.value);
@@ -105,6 +113,16 @@ export const RunColorPill = ({
             position: 'absolute',
             bottom: 0,
             visibility: 'hidden',
+            ...(asChartColorControl
+              ? {
+                  width: '100%',
+                  height: '100%',
+                  visibility: 'visible' as const,
+                  opacity: 0,
+                  inset: 0,
+                  cursor: 'pointer',
+                }
+              : {}),
           }}
         />
       )}

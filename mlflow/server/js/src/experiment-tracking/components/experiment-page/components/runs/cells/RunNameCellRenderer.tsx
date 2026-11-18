@@ -1,7 +1,7 @@
 import type { ICellRendererParams } from '@ag-grid-community/core';
 import { Button, MinusSquareIcon, PlusSquareIcon, useDesignSystemTheme } from '@databricks/design-system';
 import type { Theme } from '@emotion/react';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from '../../../../../../common/utils/RoutingUtils';
 import Routes from '../../../../../routes';
 import type { RunRowType } from '../../../utils/experimentPage.row-types';
@@ -10,6 +10,7 @@ import invariant from 'invariant';
 import { RunColorPill } from '../../RunColorPill';
 import { useGetExperimentRunColor, useSaveExperimentRunColor } from '../../../hooks/useExperimentRunColor';
 import { useExperimentViewRunsTableHeaderContext } from '../ExperimentViewRunsTableHeaderContext';
+import { useRunTableRanking } from '../RunTableRankingContext';
 
 export interface RunNameCellRendererProps extends ICellRendererParams {
   data: RunRowType;
@@ -20,6 +21,19 @@ export interface RunNameCellRendererProps extends ICellRendererParams {
 // eslint-disable-next-line react-component-name/react-component-name -- TODO(FEINF-4716)
 export const RunNameCellRenderer = React.memo((props: RunNameCellRendererProps) => {
   const { theme } = useDesignSystemTheme();
+  const { enabled: rankedNames, awards } = useRunTableRanking(props.data.experimentId);
+  const tone = awards[props.data.runUuid]?.tone;
+  const nameColor = rankedNames
+    ? tone === 'gold'
+      ? theme.isDarkMode
+        ? '#ffd166'
+        : '#986500'
+      : tone === 'green'
+        ? theme.isDarkMode
+          ? '#82d6a0'
+          : '#21623e'
+        : theme.colors.textPrimary
+    : undefined;
 
   const saveRunColor = useSaveExperimentRunColor();
   const getRunColor = useGetExperimentRunColor();
@@ -67,7 +81,7 @@ export const RunNameCellRenderer = React.memo((props: RunNameCellRendererProps) 
         </div>
       </div>
       <div css={styles.runLink}>
-        {hideRunColorControl ? (
+        {rankedNames ? null : hideRunColorControl ? (
           // Render empty color pills for grouped runs
           <div css={{ width: 12, height: 12, flexShrink: 0 }} />
         ) : (
@@ -82,10 +96,20 @@ export const RunNameCellRenderer = React.memo((props: RunNameCellRendererProps) 
           componentId="mlflow.experiment_tracking.runs_table.run_name_link"
           to={Routes.getRunPageRoute(experimentId, runUuid)}
           css={styles.runLink}
+          style={{ color: nameColor, fontWeight: tone ? 600 : undefined }}
+          data-run-rank={tone}
           tabIndex={0}
         >
           <span css={styles.runName}>{runName}</span>
         </Link>
+        {rankedNames && props.isComparingRuns && !hideRunColorControl && (
+          <RunColorPill
+            asChartColorControl
+            color={getRunColor(runUuid)}
+            hidden={hidden}
+            onChangeColor={(colorValue) => saveRunColor({ runUuid, colorValue })}
+          />
+        )}
       </div>
     </div>
   );

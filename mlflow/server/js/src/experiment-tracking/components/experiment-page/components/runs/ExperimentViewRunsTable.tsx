@@ -54,6 +54,7 @@ import { ExperimentViewRunsTableHeaderContextProvider } from './ExperimentViewRu
 import { useRunsHighlightTableRow } from '../../../runs-charts/hooks/useRunsHighlightTableRow';
 import { debounce, isEmpty, isEqual } from 'lodash';
 import { columnStateToPrefs, getReorderCorrection, prefsToColumnState } from './agGridColumnPrefsAdapter';
+import { RunTableRankingProvider } from './RunTableRankingContext';
 
 const ROW_BUFFER = 101; // How many rows to keep rendered, even ones not visible
 const LARGE_COLUMN_COUNT_THRESHOLD = 1000; // Threshold to determine if we should optimize column rendering
@@ -522,52 +523,54 @@ export const ExperimentViewRunsTable = React.memo(
             css={[gridStyles, { display: displayRunsTable ? 'block' : 'hidden', height: '100%' }]}
             aria-hidden={!displayRunsTable}
           >
-            <ExperimentViewRunsTableHeaderContextProvider
-              runsHiddenMode={uiState.runsHiddenMode}
-              usingCustomVisibility={usingCustomVisibility}
-              useGroupedValuesInCharts={Boolean(uiState.groupBy) && uiState.useGroupedValuesInCharts}
-              allRunsHidden={allRunsHidden}
-            >
-              <MLFlowAgGridLoader
-                context={tableContext}
-                defaultColDef={EXPERIMENTS_DEFAULT_COLUMN_SETUP}
-                columnDefs={columnDefs}
-                rowSelection="multiple"
-                maintainColumnOrder
-                suppressDragLeaveHidesColumns
-                onGridReady={gridReadyHandler}
-                onColumnMoved={handleColumnMoved}
-                onColumnResized={handleColumnResized}
-                onSelectionChanged={onSelectionChange}
-                getRowHeight={rowHeightGetterFn}
-                headerHeight={EXPERIMENT_RUNS_TABLE_ROW_HEIGHT}
-                onRowSelected={handleRowSelected}
-                suppressRowClickSelection
-                suppressColumnMoveAnimation
-                suppressScrollOnNewData
-                isFullWidthRow={getRowIsLoadMore}
-                fullWidthCellRenderer="LoadMoreRowRenderer"
-                fullWidthCellRendererParams={{ loadMoreRunsFunc }}
-                suppressFieldDotNotation
-                enableCellTextSelection
-                components={getFrameworkComponents()}
-                suppressNoRowsOverlay
-                loadingOverlayComponent="loadingOverlayComponent"
-                getRowId={getRowId}
-                rowBuffer={ROW_BUFFER}
-                onCellClicked={handleCellClicked}
-                onGridSizeChanged={({ api }) => gridSizeHandler(api)}
-                onCellMouseOver={cellMouseOverHandler}
-                onCellMouseOut={cellMouseOutHandler}
-                maxBlocksInCache={20} // Increased from 10
-                cacheBlockSize={100}
-                maxConcurrentDatasourceRequests={2} // Increased from 1
-                immutableData // Added for better performance
-                getRowNodeId={(data) => data.rowUuid} // Added for better row identification
-                suppressPropertyNamesCheck // Added to reduce overhead
-                suppressAnimationFrame // Added to reduce rendering overhead
-              />
-            </ExperimentViewRunsTableHeaderContextProvider>
+            <RunTableRankingProvider experiments={experiments}>
+              <ExperimentViewRunsTableHeaderContextProvider
+                runsHiddenMode={uiState.runsHiddenMode}
+                usingCustomVisibility={usingCustomVisibility}
+                useGroupedValuesInCharts={Boolean(uiState.groupBy) && uiState.useGroupedValuesInCharts}
+                allRunsHidden={allRunsHidden}
+              >
+                <MLFlowAgGridLoader
+                  context={tableContext}
+                  defaultColDef={EXPERIMENTS_DEFAULT_COLUMN_SETUP}
+                  columnDefs={columnDefs}
+                  rowSelection="multiple"
+                  maintainColumnOrder
+                  suppressDragLeaveHidesColumns
+                  onGridReady={gridReadyHandler}
+                  onColumnMoved={handleColumnMoved}
+                  onColumnResized={handleColumnResized}
+                  onSelectionChanged={onSelectionChange}
+                  getRowHeight={rowHeightGetterFn}
+                  headerHeight={EXPERIMENT_RUNS_TABLE_ROW_HEIGHT}
+                  onRowSelected={handleRowSelected}
+                  suppressRowClickSelection
+                  suppressColumnMoveAnimation
+                  suppressScrollOnNewData
+                  isFullWidthRow={getRowIsLoadMore}
+                  fullWidthCellRenderer="LoadMoreRowRenderer"
+                  fullWidthCellRendererParams={{ loadMoreRunsFunc }}
+                  suppressFieldDotNotation
+                  enableCellTextSelection
+                  components={getFrameworkComponents()}
+                  suppressNoRowsOverlay
+                  loadingOverlayComponent="loadingOverlayComponent"
+                  getRowId={getRowId}
+                  rowBuffer={ROW_BUFFER}
+                  onCellClicked={handleCellClicked}
+                  onGridSizeChanged={({ api }) => gridSizeHandler(api)}
+                  onCellMouseOver={cellMouseOverHandler}
+                  onCellMouseOut={cellMouseOutHandler}
+                  maxBlocksInCache={20} // Increased from 10
+                  cacheBlockSize={100}
+                  maxConcurrentDatasourceRequests={2} // Increased from 1
+                  immutableData // Added for better performance
+                  getRowNodeId={(data) => data.rowUuid} // Added for better row identification
+                  suppressPropertyNamesCheck // Added to reduce overhead
+                  suppressAnimationFrame // Added to reduce rendering overhead
+                />
+              </ExperimentViewRunsTableHeaderContextProvider>
+            </RunTableRankingProvider>
             {displayAddColumnsCTA && (
               <ExperimentViewRunsTableAddColumnCTA
                 gridContainerElement={containerElement.current}
